@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News - EcoBridge</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Firebase JS -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav style="display: flex; justify-content: space-between;">
+        <div style="flex-grow: 1; display: flex;">
+            <button onclick="location.href='index.html'">Home</button>
+            <button onclick="location.href='aboutUs.html'">About Us</button>
+            <button onclick="location.href='news.html'">News</button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        EcoBridge - Latest News and Updates
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="news-container">
+            <h1>Latest News</h1>
+            <article>
+                <h2>[#insert date here] Beta Launch!</h2>
+                <p>
+                    We are happy to announce that EcoBridge has launched! More features will be coming soon such as:
+                    <ul>
+                        <li>The ability to submit your own locations (this is mostly developed!)</li>
+                        <li>User accounts (this too!)</li>
+                        <li>Multi-language support</li>
+                        <li>A custom domain</li>
+                        <li>Community blogs</li>
+                    </ul>
+                </p>
+            </article>
+        </section>
+    </main>
+
+    <!-- Sidebar for user information -->
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+        <h2>User Profile</h2>
+        <p id="sidebarUsername">Username: N/A</p>
+        <p id="sidebarEmail">Email: N/A</p>
+        <p id="authStatus">Not Authenticated</p>
+        <button class="sign-out-btn" onclick="signOut()">Sign Out</button>
+    </div>
+
+    <script src="newsScript.js"></script>
+</body>
+</html>
