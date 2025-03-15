@@ -4,7 +4,7 @@
       "Address": "No. 15, Baishu Hutong, Xicheng District, Beijing 100009, China",
       "Latitude": 39.930580,
       "Longitude": 116.379780,
-      "Description": "Support conservation projects focusing on protecting critical habitats and promoting sustainable practices."
+      "Description": "Support conservation projects focusing on protecting critical habitats and promoting sustainable practices. Website at https://www.nature.org/en-us/about-us/where-we-work/asia-pacific/china/"
     },
     {
       "Name": "Greenpeace East Asia – Beijing Office",
@@ -25,7 +25,7 @@
       "Address": "Room 401, Unit 1, Building 1, No. 15, Tianshuiyuan Street, Chaoyang District, Beijing 100026, China",
       "Latitude": 39.921480,
       "Longitude": 116.475990,
-      "Description": "Participate in environmental education, policy advocacy, and conservation projects."
+      "Description": "Participate in environmental education, policy advocacy, and conservation projects. Website at http://www.fonchina.org/"
     },
     {
       "Name": "China Mangrove Conservation Network (CMCN)",
@@ -130,7 +130,7 @@
         "Address": "16th Floor, Block B, Focus Square, No. 6 Futong East Avenue, Chaoyang District, Beijing, China",
         "Latitude": 39.985250,
         "Longitude": 116.495100,
-        "Description": "Donate to support environmental conservation activities and charity programs."
+        "Description": "Donate to support environmental conservation activities and charity programs. Website at http://www.cepf.org.cn/"
       },
       {
         "Name": "Environmental Defense Fund (EDF) China Program",
@@ -144,14 +144,14 @@
         "Address": "3-303, Wen Hua Gong, Working People's Culture Palace, Beijing, China",
         "Latitude": 39.904690,
         "Longitude": 116.403930,
-        "Description": "Support wildlife protection efforts through donations."
+        "Description": "Support wildlife protection efforts through donations. Website at https://china.wcs.org/"
       },
       {
         "Name": "Global Village of Beijing (GVB)",
         "Address": "Room 301, Unit 2, Building 1, Hepingli West Street, Dongcheng District, Beijing, China",
         "Latitude": 39.954390,
         "Longitude": 116.423930,
-        "Description": "Contribute funds to support environmental education and advocacy programs."
+        "Description": "Contribute funds to support environmental education and advocacy programs. Website at http://www.gvbchina.org/"
       },
       {
         "Name": "Shanghai Oasis Green Food Bank",
@@ -187,5 +187,75 @@
         "Latitude": 22.295000,
         "Longitude": 114.167000,
         "Description": "Support environmental campaigns in China through donations."
+      },
+      {
+        "Name": "Korean Federation for Environmental Movement (KFEM)",
+        "Address": "251 Nuha-dong, Jongno-gu, Seoul, South Korea",
+        "Latitude": 37.5766,
+        "Longitude": 126.9686,
+        "Description": "Participate in environmental campaigns, volunteer for conservation projects, and support policy advocacy efforts. Website at http://kfem.or.kr/"
+      },
+      {
+        "Name": "Korea Green Foundation",
+        "Address": "66 Mapo-daero, Mapo-gu, Seoul, South Korea",
+        "Latitude": 37.5394,
+        "Longitude": 126.9469,
+        "Description": "Donate to environmental projects, engage in educational programs, and promote eco-friendly initiatives. Website at http://greenfund.org/"
+      },
+      {
+        "Name": "Green Korea United",
+        "Address": "19-3, Gwancheol-dong, Jongno-gu, Seoul, South Korea",
+        "Latitude": 37.5704,
+        "Longitude": 126.9881,
+        "Description": "Volunteer in environmental conservation activities, participate in awareness campaigns, and support policy advocacy. Website at http://greenkorea.org/"
+      },
+      {
+        "Name": "Korea Zero Waste Movement Network",
+        "Address": "5-1, Gwancheol-dong, Jongno-gu, Seoul, South Korea",
+        "Latitude": 37.5704,
+        "Longitude": 126.9881,
+        "Description": "Engage in zero-waste initiatives, participate in educational workshops, and promote waste reduction practices. Website at http://zerowaste.or.kr/"
+      },
+      {
+        "Name": "Korea Environmental Education Network",
+        "Address": "16-4, Jeong-dong, Jung-gu, Seoul, South Korea",
+        "Latitude": 37.5663,
+        "Longitude": 126.9686,
+        "Description": "Support environmental education programs, volunteer as an educator, and participate in community outreach. Website at http://environmentedu.or.kr/"
+      },
+      {
+        "Name": "Sierra Club",
+        "Address": "2101 Webster Street, Suite 1300, Oakland, CA 94612, USA",
+        "Latitude": 37.8126,
+        "Longitude": -122.2665,
+        "Description": "Join local chapters, participate in conservation projects, and support environmental campaigns. Website at http://www.sierraclub.org/"
+      },
+      {
+        "Name": "Natural Resources Defense Council (NRDC)",
+        "Address": "40 West 20th Street, New York, NY 10011, USA",
+        "Latitude": 40.7419,
+        "Longitude": -73.9934,
+        "Description": "Support legal actions through donations, participate in advocacy campaigns, and promote sustainable policies. Website at http://www.nrdc.org/"
+      },
+      {
+        "Name": "The Nature Conservancy",
+        "Address": "4245 North Fairfax Drive, Suite 100, Arlington, VA 22203, USA",
+        "Latitude": 38.8823,
+        "Longitude": -77.1106,
+        "Description": "Volunteer for conservation projects, donate to support habitat preservation, and engage in community science programs. Website at http://www.nature.org/"
+      },
+      {
+        "Name": "Environmental Defense Fund (EDF)",
+        "Address": "257 Park Avenue South, New York, NY 10010, USA",
+        "Latitude": 40.7383,
+        "Longitude": -73.9864,
+        "Description": "Participate in climate action initiatives, support policy advocacy, and promote sustainable practices. Website at http://www.edf.org/"
+      },
+      {
+        "Name": "Wildlife Conservation Society (WCS)",
+        "Address": "2300 Southern Boulevard, Bronx, NY 10460, USA",
+        "Latitude": 40.8506,
+        "Longitude": -73.8770,
+        "Description": "Support wildlife protection programs, volunteer at zoos and conservation sites, and engage in educational outreach. Website at http://www.wcs.org/"
       }
 ]
