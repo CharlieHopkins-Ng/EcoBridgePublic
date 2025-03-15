@@ -13,7 +13,7 @@ const AboutUs = () => {
         <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
       </Head>
       <nav className="nav">
-        <Link href="/map" legacyBehavior>
+        <Link href="/" legacyBehavior>
           <button>Home</button>
         </Link>
         <Link href="/about-us" legacyBehavior>
