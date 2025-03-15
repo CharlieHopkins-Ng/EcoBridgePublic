@@ -81,10 +81,9 @@ nav button:hover {
 /* Header */
 header {
     width: 100%;
-    background: linear-gradient(to right, #4CAF50, #2E7D32);
     color: white;
     text-align: center;
-    padding: 20px 0;
+    padding: 10px 0; /* Increase padding to ensure it covers the full screen */
     font-size: 1.8rem;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -152,6 +151,7 @@ main {
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 60px; /* Add margin to ensure it is not covered by the nav bar */
 }
 
 /* Map Container */
@@ -234,7 +234,7 @@ input:focus, textarea:focus, select:focus {
 
 /* About Page Container */
 .about-container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 40px auto;
     padding: 20px;
     background: white;
@@ -384,7 +384,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 .map {
-    width: 1000px;
+    max-width: 1000px;
     height: 500px;
     margin: 20px 0;
     border-radius: 10px;
