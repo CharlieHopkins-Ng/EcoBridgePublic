@@ -1,0 +1,191 @@
+[
+    {
+      "Name": "The Nature Conservancy – China Program",
+      "Address": "No. 15, Baishu Hutong, Xicheng District, Beijing 100009, China",
+      "Latitude": 39.930580,
+      "Longitude": 116.379780,
+      "Description": "Support conservation projects focusing on protecting critical habitats and promoting sustainable practices."
+    },
+    {
+      "Name": "Greenpeace East Asia – Beijing Office",
+      "Address": "No. 19, Donghuangchenggen North Street, Dongcheng District, Beijing 100011, China",
+      "Latitude": 39.940780,
+      "Longitude": 116.409110,
+      "Description": "Participate in campaigns addressing climate change, pollution, and biodiversity conservation."
+    },
+    {
+      "Name": "International Ecological Economy Promotion Association (IEEPA)",
+      "Address": "Room 1008, Building 1, No. 16, Xinyuanli, Chaoyang District, Beijing 100027, China",
+      "Latitude": 39.945020,
+      "Longitude": 116.459060,
+      "Description": "Engage in initiatives promoting ecological economy, energy conservation, and environmental protection."
+    },
+    {
+      "Name": "Friends of Nature (FON)",
+      "Address": "Room 401, Unit 1, Building 1, No. 15, Tianshuiyuan Street, Chaoyang District, Beijing 100026, China",
+      "Latitude": 39.921480,
+      "Longitude": 116.475990,
+      "Description": "Participate in environmental education, policy advocacy, and conservation projects."
+    },
+    {
+      "Name": "China Mangrove Conservation Network (CMCN)",
+      "Address": "Room 402, Building 2, No. 36, Shaoyaoju Beili, Chaoyang District, Beijing 100029, China",
+      "Latitude": 39.977600,
+      "Longitude": 116.443950,
+      "Description": "Support mangrove restoration projects and coastal ecosystem conservation efforts."
+    },
+    {
+      "Name": "Shanshui Conservation Center",
+      "Address": "Room 120, Building 1, No. 19, Chegongzhuang West Road, Haidian District, Beijing 100048, China",
+      "Latitude": 39.923650,
+      "Longitude": 116.341550,
+      "Description": "Engage in biodiversity conservation projects and community-based environmental initiatives."
+    },
+    {
+      "Name": "Global Environmental Institute (GEI)",
+      "Address": "Room 701, Building A, No. 12, Yuyuantan South Road, Haidian District, Beijing 100038, China",
+      "Latitude": 39.913980,
+      "Longitude": 116.316410,
+      "Description": "Participate in sustainable development projects and policy research."
+    },
+    {
+      "Name": "Beijing Energy Network (BEN)",
+      "Address": "No. 46, Liangmaqiao Road, Chaoyang District, Beijing 100125, China",
+      "Latitude": 39.953160,
+      "Longitude": 116.467140,
+      "Description": "Join discussions and events focused on energy and environmental issues."
+    },
+    {
+        "Name": "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
+        "Address": "No. 15, Baishiqiao Road, Haidian District, Beijing 100081, China",
+        "Latitude": 39.966920,
+        "Longitude": 116.341760,
+        "Description": "Support biodiversity conservation projects and green development initiatives."
+      },
+      {
+        "Name": "Greenovation Hub",
+        "Address": "Room 1008, Building 1, No. 16, Xinyuanli, Chaoyang District, Beijing 100027, China",
+        "Latitude": 39.945020,
+        "Longitude": 116.459060,
+        "Description": "Engage in climate action, ocean conservation, and sustainable finance projects."
+      },
+      {
+        "Name": "Shanghai Roots & Shoots",
+        "Address": "Room 201, Building 1, No. 76, 3rd East Zhongshan Road, Huangpu District, Shanghai 200002, China",
+        "Latitude": 31.227040,
+        "Longitude": 121.492500,
+        "Description": "Participate in youth-led environmental education and community service projects."
+      },
+      {
+        "Name": "EcoAction",
+        "Address": "Room 501, Building 5, No. 195, Guanghua Road, Chaoyang District, Beijing 100020, China",
+        "Latitude": 39.917340,
+        "Longitude": 116.460870,
+        "Description": "Join initiatives promoting low-carbon lifestyles and sustainable urban development."
+      },
+      {
+        "Name": "Green Zhejiang",
+        "Address": "Room 1201, Building 1, No. 198, Tianmushan Road, Xihu District, Hangzhou, Zhejiang 310007, China",
+        "Latitude": 30.269810,
+        "Longitude": 120.143440,
+        "Description": "Participate in water protection projects and environmental advocacy."
+      },
+      {
+        "Name": "Friends of Green Environment (FOGE)",
+        "Address": "Room 302, Building 2, No. 8, Xingsheng Road, Tianhe District, Guangzhou, Guangdong 510623, China",
+        "Latitude": 23.129450,
+        "Longitude": 113.361670,
+        "Description": "Engage in environmental education and community-based conservation projects."
+      },
+      {
+        "Name": "Green Kunming",
+        "Address": "Room 401, Building 3, No. 5, Xuefu Road, Wuhua District, Kunming, Yunnan 650223, China",
+        "Latitude": 25.043840,
+        "Longitude": 102.705800,
+        "Description": "Support initiatives focused on biodiversity conservation and sustainable development."
+      },
+      {
+        "Name": "Chengdu Urban Rivers Association (CURA)",
+        "Address": "Room 502, Building 2, No. 12, South Renmin Road, Wuhou District, Chengdu, Sichuan 610041, China",
+        "Latitude": 30.633640,
+        "Longitude": 104.065930,
+        "Description": "Participate in urban river restoration and water quality monitoring projects."
+      },
+      {
+        "Name": "Green Hunan",
+        "Address": "Room 803, Building 1, No. 36, Wuyi Avenue, Furong District, Changsha, Hunan 410011, China",
+        "Latitude": 28.194400,
+        "Longitude": 112.979350,
+        "Description": "Engage in water pollution prevention and environmental monitoring activities."
+      },
+      {
+        "Name": "Guangxi Biodiversity Research and Conservation Association",
+        "Address": "No. 25, Fengling North Road, Qingxiu District, Nanning, Guangxi 530022, China",
+        "Latitude": 22.813480,
+        "Longitude": 108.327540,
+        "Description": "Support biodiversity research and conservation programs in Guangxi province."
+      },
+      {
+        "Name": "China Environmental Protection Foundation (CEPF)",
+        "Address": "16th Floor, Block B, Focus Square, No. 6 Futong East Avenue, Chaoyang District, Beijing, China",
+        "Latitude": 39.985250,
+        "Longitude": 116.495100,
+        "Description": "Donate to support environmental conservation activities and charity programs."
+      },
+      {
+        "Name": "Environmental Defense Fund (EDF) China Program",
+        "Address": "22nd Floor, Building A, Gateway Plaza, No. 18 Xiaguangli, East Third Ring North Road, Chaoyang District, Beijing, China",
+        "Latitude": 39.941560,
+        "Longitude": 116.461820,
+        "Description": "Provide financial support to aid EDF's environmental initiatives in China."
+      },
+      {
+        "Name": "Wildlife Conservation Society (WCS) China",
+        "Address": "3-303, Wen Hua Gong, Working People's Culture Palace, Beijing, China",
+        "Latitude": 39.904690,
+        "Longitude": 116.403930,
+        "Description": "Support wildlife protection efforts through donations."
+      },
+      {
+        "Name": "Global Village of Beijing (GVB)",
+        "Address": "Room 301, Unit 2, Building 1, Hepingli West Street, Dongcheng District, Beijing, China",
+        "Latitude": 39.954390,
+        "Longitude": 116.423930,
+        "Description": "Contribute funds to support environmental education and advocacy programs."
+      },
+      {
+        "Name": "Shanghai Oasis Green Food Bank",
+        "Address": "Room 101, Building 5, No. 1958, Guangfu West Road, Putuo District, Shanghai, China",
+        "Latitude": 31.247880,
+        "Longitude": 121.399350,
+        "Description": "Donate to help reduce food waste and provide food to low-income families."
+      },
+      {
+        "Name": "China Youth Development Foundation (CYDF)",
+        "Address": "No. 12, Taipingzhuang Road, Haidian District, Beijing, China",
+        "Latitude": 39.970380,
+        "Longitude": 116.355170,
+        "Description": "Support environmental projects like the 'Mother River Protection Project' through donations."
+      },
+      {
+        "Name": "The Zigen Fund",
+        "Address": "39-01 Main Street, Suite 506, Flushing, NY 11354, USA (U.S. Office)",
+        "Latitude": 40.759050,
+        "Longitude": -73.830160,
+        "Description": "Provide financial support for sustainable development and environmental education projects in rural China."
+      },
+      {
+        "Name": "Friends of the Earth (HK)",
+        "Address": "2/F, 8 Observatory Road, Tsim Sha Tsui, Kowloon, Hong Kong",
+        "Latitude": 22.300000,
+        "Longitude": 114.172200,
+        "Description": "Donate to support various environmental campaigns and educational programs."
+      },
+      {
+        "Name": "Greenpeace East Asia",
+        "Address": "19/F, Tower 3, China Hong Kong City, 33 Canton Road, Tsim Sha Tsui, Kowloon, Hong Kong",
+        "Latitude": 22.295000,
+        "Longitude": 114.167000,
+        "Description": "Support environmental campaigns in China through donations."
+      }
+]
