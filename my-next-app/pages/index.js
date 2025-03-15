@@ -1,10 +1,51 @@
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
+import "leaflet/dist/leaflet.css";
+import { db } from "../firebaseConfig";
+import { ref, onValue } from "firebase/database";
+import React from "react";
 
-export default function Home() {
+const MapContainer = dynamic(() => import("react-leaflet").then(mod => mod.MapContainer), { ssr: false });
+const TileLayer = dynamic(() => import("react-leaflet").then(mod => mod.TileLayer), { ssr: false });
+const Marker = dynamic(() => import("react-leaflet").then(mod => mod.Marker), { ssr: false });
+const Popup = dynamic(() => import("react-leaflet").then(mod => mod.Popup), { ssr: false });
+
+const MapPage = () => {
+  const [locations, setLocations] = useState([]);
+  const [treeIcon, setTreeIcon] = useState(null);
+
+  useEffect(() => {
+    const locationsRef = ref(db, "locations");
+    onValue(locationsRef, (snapshot) => {
+      const data = snapshot.val();
+      const locationsData = data ? Object.values(data) : [];
+      setLocations(locationsData);
+    });
+
+    const loadIcon = async () => {
+      const L = await import("leaflet");
+      const icon = new L.Icon({
+        iconUrl: "/treeIcon.png",
+        iconSize: [48, 48], // Adjust the size as needed
+        iconAnchor: [16, 32], // Adjust the anchor as needed
+        popupAnchor: [0, -32], // Adjust the popup anchor as needed
+      });
+      setTreeIcon(icon);
+    };
+
+    loadIcon();
+  }, []);
+
+  if (!treeIcon) {
+    return null; // Render nothing until the icon is loaded
+  }
+
+  console.log("Map is loaded");
+
   return (
-    <div className="container">
-      <h1 className="title">Welcome to EcoBridge</h1>
-      <nav className="nav">
+    <div>
+      <nav className="nav" style={{ textAlign: "left" }}>
         <Link href="/" legacyBehavior>
           <button>Home</button>
         </Link>
@@ -15,6 +56,25 @@ export default function Home() {
           <button>News</button>
         </Link>
       </nav>
+      <div className="map-container">
+        <MapContainer center={[39.9042, 116.4074]} zoom={5} className="map">
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          {locations.map((location, index) => (
+            <Marker key={index} position={[location.Latitude, location.Longitude]} icon={treeIcon}>
+              <Popup>
+                <strong>{location.Name}</strong><br />
+                {location.Address}<br />
+                {location.Description}
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      </div>
     </div>
   );
-}
+};
+
+export default MapPage;
