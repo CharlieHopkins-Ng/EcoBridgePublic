@@ -36,7 +36,7 @@ const News = () => {
               <ul>
                 <li>The ability to submit your own locations (this is mostly developed!)</li>
                 <li>User accounts (this too!)</li>
-                <li>Multi-language support</li>
+                <li>Multi-language support (feel free to contact us if you want to help with this)</li>
                 <li>A custom domain</li>
                 <li>Community blogs</li>
               </ul>
