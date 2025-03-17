@@ -45,35 +45,6 @@ const MapPage = () => {
     loadIcon();
   }, []);
 
-  //**Force geolocation to re-run whenever page is mounted**
-  useEffect(() => {
-    console.log("Geolocation effect triggered.");
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const userCoords = [position.coords.latitude, position.coords.longitude];
-          console.log("User location found:", userCoords);
-
-          // Update center state
-          setCenter(userCoords);
-          setZoomLevel(15);
-
-          // Ensure the map updates immediately
-          setTimeout(() => {
-            if (mapRef.current) {
-              console.log("Updating map view to user location:", userCoords);
-              mapRef.current.setView(userCoords, 15);
-            }
-          }, 1000);
-        },
-        (error) => {
-          console.warn("Geolocation error:", error.message);
-        }
-      );
-    }
-  }, []); //**Run this effect every time the component mounts**
-
   if (isLoading || !treeIcon) {
     return <div>Loading...</div>;
   }
