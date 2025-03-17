@@ -434,3 +434,27 @@ input:focus, textarea:focus, select:focus {
     font-size: 1.1rem;
     padding: 8px 0;
 }
+
+/* Custom styles for icon and popup anchors */
+.custom-icon::before,
+.custom-icon::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 1000;
+}
+
+.custom-icon::before {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+.custom-icon::after {
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}

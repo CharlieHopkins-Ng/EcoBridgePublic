@@ -35,8 +35,9 @@ const MapPage = () => {
       const icon = new L.Icon({
         iconUrl: "/treeIcon.png",
         iconSize: [48, 48],
-        iconAnchor: [16, 0],
-        popupAnchor: [24, -32],
+        iconAnchor: [24, 48], // Bottom middle of the icon
+        popupAnchor: [0, -48], // Top middle of the icon
+        className: 'custom-icon' // Add custom class for styling
       });
       setTreeIcon(icon);
       console.log("Tree icon loaded successfully.");
