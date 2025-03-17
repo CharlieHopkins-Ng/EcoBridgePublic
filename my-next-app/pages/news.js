@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Head from "next/head";
+import Script from "next/script";
 import React from "react";
 
 const News = () => {
@@ -8,10 +9,10 @@ const News = () => {
       <Head>
         <title>News - EcoBridge</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
       </Head>
+      <Script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js" strategy="beforeInteractive" />
+      <Script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js" strategy="beforeInteractive" />
+      <Script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js" strategy="beforeInteractive" />
       <nav className="nav">
         <Link href="/" legacyBehavior>
           <button>Home</button>
@@ -33,6 +34,7 @@ const News = () => {
             <h2>[#insert date here] Beta Launch!</h2>
             <p>
               We are happy to announce that EcoBridge has launched! More features will be coming soon such as:
+            </p>
               <ul>
                 <li>The ability to submit your own locations (this is mostly developed!)</li>
                 <li>User accounts (this too!)</li>
@@ -40,7 +42,6 @@ const News = () => {
                 <li>A custom domain</li>
                 <li>Community blogs</li>
               </ul>
-            </p>
           </article>
         </section>
       </main>
@@ -52,7 +53,7 @@ const News = () => {
         <p id="authStatus">Not Authenticated</p>
         <button className="sign-out-btn" onClick={() => signOut()}>Sign Out</button>
       </div>
-      <script src="/newsScript.js"></script>
+      <Script src="/newsScript.js" strategy="lazyOnload" />
     </div>
   );
 };
