@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Head from "next/head";
-import Script from "next/script";
 import React from "react";
 
 const AboutUs = () => {
@@ -10,9 +9,6 @@ const AboutUs = () => {
         <title>About Us - EcoBridge</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <Script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js" strategy="beforeInteractive" />
-      <Script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js" strategy="beforeInteractive" />
-      <Script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js" strategy="beforeInteractive" />
       <nav className="nav">
         <Link href="/" legacyBehavior>
           <button>Home</button>
