@@ -40,17 +40,17 @@ const AboutUs = () => {
             <h2>Meet the Team</h2>
             <p>
             We are a team of environmental enthusiasts, coders, and volunteers passionate about making a difference.
-            If you'd like to contribute, get in touch with us at supp0rtecobridge@gmail.com (we do not have a domain yet)! We are completely open source, and our repository is <a href="https://github.com/NoAyeBeardo/EcoBridgePublic">here</a>.
+            If you&apos;d like to contribute, get in touch with us at supp0rtecobridge@gmail.com (we do not have a domain yet)! We are completely open source, and our repository is <a href="https://github.com/NoAyeBeardo/EcoBridgePublic">here</a>.
             All of our icons are from <a href="https://icons8.com/icons">Icons8</a>
             </p>
             <div style={{ textAlign: 'left' }}>
             <p>
                 <strong>Siyeong Park (Founder):</strong><br />
-                Hi! I am Siyeong Park, the founder of Ecobridge. I am a freshman at Shanghai American School. The LA wildfire that occurred at the start of 2025 inspired me to make this platform by thinking: “How can I help environmental crises like the LA wildfire when I am living at the other side of the world?” Combining this with my prior interests for the environment, this inspired me to create a platform where people can easily access opportunities to donate various items, volunteer for the environment, and work for a local sustainability project. Through Ecobridge, I hope this can facilitate the community to make it more accessible to help the environment regardless of where we are and who we are.
+                Hi! I am Siyeong Park, the founder of Ecobridge. I am a freshman at Shanghai American School. The LA wildfire that occurred at the start of 2025 inspired me to make this platform by thinking: &ldquo;How can I help environmental crises like the LA wildfire when I am living at the other side of the world?&rdquo; Combining this with my prior interests for the environment, this inspired me to create a platform where people can easily access opportunities to donate various items, volunteer for the environment, and work for a local sustainability project. Through Ecobridge, I hope this can facilitate the community to make it more accessible to help the environment regardless of where we are and who we are.
             </p>
             <p>
                 <strong>Charlie Hopkins-Ng (Website Developer & Co-Founder):</strong><br />
-                Hi! I am Charlie Hopkins-Ng, Ecobridge's website developer. I am in third year at Jordanhill Secondary School. I have always been passionate about the environment, and have been to multiple protests about the environment. I met Siyeong at a maths competition in December 2024, and when Siyeong contacted me, I gladly accepted!
+                Hi! I am Charlie Hopkins-Ng, Ecobridge&apos;s website developer. I am in third year at Jordanhill Secondary School. I have always been passionate about the environment, and have been to multiple protests about the environment. I met Siyeong at a maths competition in December 2024, and when Siyeong contacted me, I gladly accepted!
             </p>
           </div>
         </section>
