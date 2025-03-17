@@ -53,7 +53,6 @@ const News = () => {
         <p id="authStatus">Not Authenticated</p>
         <button className="sign-out-btn" onClick={() => signOut()}>Sign Out</button>
       </div>
-      <Script src="/newsScript.js" strategy="lazyOnload" />
     </div>
   );
 };

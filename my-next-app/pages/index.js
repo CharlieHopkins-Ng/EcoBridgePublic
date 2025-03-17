@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import "leaflet/dist/leaflet.css";
@@ -6,7 +6,7 @@ import { db } from "../firebaseConfig";
 import { ref, onValue } from "firebase/database";
 import React from "react";
 
-// Dynamically import the components
+// Dynamically import Leaflet components
 const MapContainer = dynamic(() => import("react-leaflet").then(mod => mod.MapContainer), { ssr: false });
 const TileLayer = dynamic(() => import("react-leaflet").then(mod => mod.TileLayer), { ssr: false });
 const Marker = dynamic(() => import("react-leaflet").then(mod => mod.Marker), { ssr: false });
@@ -16,6 +16,9 @@ const MapPage = () => {
   const [locations, setLocations] = useState([]);
   const [treeIcon, setTreeIcon] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [center, setCenter] = useState([12.3686, -1.5275]); // Default: Ouagadougou
+  const [zoomLevel, setZoomLevel] = useState(11); // Default zoom level
+  const mapRef = useRef(null); // Store map instance
 
   useEffect(() => {
     const locationsRef = ref(db, "locations");
@@ -24,26 +27,55 @@ const MapPage = () => {
       const locationsData = data ? Object.values(data) : [];
       setLocations(locationsData);
       setIsLoading(false);
-      console.log("Locations data fetched:", locationsData); // Debugging log
+      console.log("Locations data fetched:", locationsData);
     });
 
     const loadIcon = async () => {
       const L = await import("leaflet");
       const icon = new L.Icon({
         iconUrl: "/treeIcon.png",
-        iconSize: [48, 48], // Adjust the size as needed
-        iconAnchor: [16, 32], // Adjust the anchor as needed
-        popupAnchor: [0, -32], // Adjust the popup anchor as needed
+        iconSize: [48, 48],
+        iconAnchor: [16, 0],
+        popupAnchor: [24, -32],
       });
       setTreeIcon(icon);
-      console.log("Tree icon loaded successfully."); // Debugging log
+      console.log("Tree icon loaded successfully.");
     };
 
     loadIcon();
   }, []);
 
+  //**Force geolocation to re-run whenever page is mounted**
+  useEffect(() => {
+    console.log("Geolocation effect triggered.");
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userCoords = [position.coords.latitude, position.coords.longitude];
+          console.log("User location found:", userCoords);
+
+          // Update center state
+          setCenter(userCoords);
+          setZoomLevel(15);
+
+          // Ensure the map updates immediately
+          setTimeout(() => {
+            if (mapRef.current) {
+              console.log("Updating map view to user location:", userCoords);
+              mapRef.current.setView(userCoords, 15);
+            }
+          }, 1000);
+        },
+        (error) => {
+          console.warn("Geolocation error:", error.message);
+        }
+      );
+    }
+  }, []); //**Run this effect every time the component mounts**
+
   if (isLoading || !treeIcon) {
-    return <div>Loading...</div>; // Display loading message while data is being fetched
+    return <div>Loading...</div>;
   }
 
   return (
@@ -60,15 +92,23 @@ const MapPage = () => {
         </Link>
       </nav>
       <div className="map-container" style={{ height: "100vh" }}>
-        <MapContainer center={[39.9042, 116.4074]} zoom={5} className="map">
+        <MapContainer
+          center={center}
+          zoom={zoomLevel}
+          className="map"
+          whenCreated={(map) => {
+            mapRef.current = map; // Assign map instance
+            console.log("Map instance created.");
+          }}
+        >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           {locations.map((location, index) => {
             if (!location.Latitude || !location.Longitude) {
-              console.log("Missing coordinates for location", location); // Debugging missing coordinates
-              return null; // Skip if coordinates are missing
+              console.log("Missing coordinates for location", location);
+              return null;
             }
             return (
               <Marker
