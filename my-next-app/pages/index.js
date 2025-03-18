@@ -69,7 +69,7 @@ const MapPage = () => {
         <Link href="/" legacyBehavior>
           <button>Home</button>
         </Link>
-        <Link href="/about-us" legacyBehavior>
+        <Link href="/aboutUs" legacyBehavior>
           <button>About Us</button>
         </Link>
         <Link href="/news" legacyBehavior>
