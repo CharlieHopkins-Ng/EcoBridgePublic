@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import "leaflet/dist/leaflet.css";
@@ -11,14 +11,14 @@ const MapContainer = dynamic(() => import("react-leaflet").then(mod => mod.MapCo
 const TileLayer = dynamic(() => import("react-leaflet").then(mod => mod.TileLayer), { ssr: false });
 const Marker = dynamic(() => import("react-leaflet").then(mod => mod.Marker), { ssr: false });
 const Popup = dynamic(() => import("react-leaflet").then(mod => mod.Popup), { ssr: false });
+const UpdateMapView = dynamic(() => import("../components/UpdateMapView"), { ssr: false });
 
 const MapPage = () => {
   const [locations, setLocations] = useState([]);
   const [treeIcon, setTreeIcon] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [center, setCenter] = useState([12.3686, -1.5275]); // Default: Ouagadougou
-  const [zoomLevel, setZoomLevel] = useState(11); // Default zoom level
-  const mapRef = useRef(null); // Store map instance
+  const [zoomLevel, setZoomLevel] = useState(2); // Default zoom level
 
   useEffect(() => {
     const locationsRef = ref(db, "locations");
@@ -27,7 +27,6 @@ const MapPage = () => {
       const locationsData = data ? Object.values(data) : [];
       setLocations(locationsData);
       setIsLoading(false);
-      console.log("Locations data fetched:", locationsData);
     });
 
     const loadIcon = async () => {
@@ -37,13 +36,27 @@ const MapPage = () => {
         iconSize: [48, 48],
         iconAnchor: [24, 48], // Bottom middle of the icon
         popupAnchor: [0, -48], // Top middle of the icon
-        className: 'custom-icon' // Add custom class for styling
       });
       setTreeIcon(icon);
-      console.log("Tree icon loaded successfully.");
     };
 
     loadIcon();
+
+    // Get user's location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userCoords = [position.coords.latitude, position.coords.longitude];
+
+          // Update center state
+          setCenter(userCoords);
+          setZoomLevel(12);
+        },
+        (error) => {
+          console.warn("Geolocation error:", error.message);
+        }
+      );
+    }
   }, []);
 
   if (isLoading || !treeIcon) {
@@ -68,10 +81,6 @@ const MapPage = () => {
           center={center}
           zoom={zoomLevel}
           className="map"
-          whenCreated={(map) => {
-            mapRef.current = map; // Assign map instance
-            console.log("Map instance created.");
-          }}
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -96,6 +105,7 @@ const MapPage = () => {
               </Marker>
             );
           })}
+          <UpdateMapView center={center} zoom={zoomLevel} />
         </MapContainer>
       </div>
     </div>
