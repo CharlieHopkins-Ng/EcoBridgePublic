@@ -18,7 +18,7 @@ const MapPage = () => {
   const [treeIcon, setTreeIcon] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [center, setCenter] = useState([12.3686, -1.5275]); // Default: Ouagadougou
-  const [zoomLevel, setZoomLevel] = useState(2); // Default zoom level
+  const [zoomLevel, setZoomLevel] = useState(2);
 
   useEffect(() => {
     const locationsRef = ref(db, "locations");
