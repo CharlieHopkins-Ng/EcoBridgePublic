@@ -6,6 +6,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <link rel="icon" href="/favicon.png" />
           <Script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js" strategy="beforeInteractive" />
           <Script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js" strategy="beforeInteractive" />
           <Script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js" strategy="beforeInteractive" />
