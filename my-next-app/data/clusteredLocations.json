@@ -1,0 +1,1220 @@
+[
+  {
+    "Name": "16 locations",
+    "UUID": "44c8dd7b-fdf2-47fd-9ee6-8cd448855904",
+    "Address": "",
+    "Latitude": 39.9432375,
+    "Longitude": 116.41841437499998,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 0,
+    "LocationNames": [
+      "The Nature Conservancy – China Program",
+      "Greenpeace East Asia – Beijing Office",
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Friends of Nature (FON)",
+      "China Mangrove Conservation Network (CMCN)",
+      "Shanshui Conservation Center",
+      "Global Environmental Institute (GEI)",
+      "Beijing Energy Network (BEN)",
+      "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
+      "Greenovation Hub",
+      "EcoAction",
+      "China Environmental Protection Foundation (CEPF)",
+      "Environmental Defense Fund (EDF) China Program",
+      "Wildlife Conservation Society (WCS) China",
+      "Global Village of Beijing (GVB)",
+      "China Youth Development Foundation (CYDF)"
+    ]
+  },
+  {
+    "Name": "3 locations",
+    "UUID": "2264946b-4d93-4cb2-b622-8810d2d08395",
+    "Address": "",
+    "Latitude": 30.914909999999995,
+    "Longitude": 121.01176333333335,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 0,
+    "LocationNames": [
+      "Shanghai Roots & Shoots",
+      "Green Zhejiang",
+      "Shanghai Oasis Green Food Bank"
+    ]
+  },
+  {
+    "Name": "5 locations",
+    "UUID": "a9eafd11-b7de-4162-a9d4-5e143547ecb7",
+    "Address": "",
+    "Latitude": 23.746465999999998,
+    "Longitude": 112.60155200000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 0,
+    "LocationNames": [
+      "Friends of Green Environment (FOGE)",
+      "Green Hunan",
+      "Guangxi Biodiversity Research and Conservation Association",
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "58afdaed-7aee-4f4b-b0f0-0cdc04a36ca7",
+    "Address": "",
+    "Latitude": 27.83874,
+    "Longitude": 103.385865,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 0,
+    "LocationNames": [
+      "Green Kunming",
+      "Chengdu Urban Rivers Association (CURA)"
+    ]
+  },
+  {
+    "Name": "5 locations",
+    "UUID": "21e58204-a8f1-4955-9d94-f6dae136b982",
+    "Address": "",
+    "Latitude": 40.39443,
+    "Longitude": -74.55951200000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 0,
+    "LocationNames": [
+      "The Zigen Fund",
+      "Natural Resources Defense Council (NRDC)",
+      "The Nature Conservancy",
+      "Environmental Defense Fund (EDF)",
+      "Wildlife Conservation Society (WCS)"
+    ]
+  },
+  {
+    "Name": "5 locations",
+    "UUID": "87ac78c3-09a1-40e2-a7ef-25460eed32a7",
+    "Address": "",
+    "Latitude": 37.564620000000005,
+    "Longitude": 126.97206000000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 0,
+    "LocationNames": [
+      "Korean Federation for Environmental Movement (KFEM)",
+      "Korea Green Foundation",
+      "Green Korea United",
+      "Korea Zero Waste Movement Network",
+      "Korea Environmental Education Network"
+    ]
+  },
+  {
+    "Name": "16 locations",
+    "UUID": "082be265-321f-4dda-a838-565386a8c4ff",
+    "Address": "",
+    "Latitude": 39.9432375,
+    "Longitude": 116.41841437499998,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 1,
+    "LocationNames": [
+      "The Nature Conservancy – China Program",
+      "Greenpeace East Asia – Beijing Office",
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Friends of Nature (FON)",
+      "China Mangrove Conservation Network (CMCN)",
+      "Shanshui Conservation Center",
+      "Global Environmental Institute (GEI)",
+      "Beijing Energy Network (BEN)",
+      "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
+      "Greenovation Hub",
+      "EcoAction",
+      "China Environmental Protection Foundation (CEPF)",
+      "Environmental Defense Fund (EDF) China Program",
+      "Wildlife Conservation Society (WCS) China",
+      "Global Village of Beijing (GVB)",
+      "China Youth Development Foundation (CYDF)"
+    ]
+  },
+  {
+    "Name": "3 locations",
+    "UUID": "443077f4-e708-4ea8-97a1-7839a3f9ad2d",
+    "Address": "",
+    "Latitude": 30.914909999999995,
+    "Longitude": 121.01176333333335,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 1,
+    "LocationNames": [
+      "Shanghai Roots & Shoots",
+      "Green Zhejiang",
+      "Shanghai Oasis Green Food Bank"
+    ]
+  },
+  {
+    "Name": "3 locations",
+    "UUID": "05ac87e0-8ce8-40be-9c19-0c72e77da319",
+    "Address": "",
+    "Latitude": 22.574816666666667,
+    "Longitude": 113.90029,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 1,
+    "LocationNames": [
+      "Friends of Green Environment (FOGE)",
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
+    "Name": "5 locations",
+    "UUID": "ca550d2c-1dba-44fd-be76-ee0cccc66c84",
+    "Address": "",
+    "Latitude": 40.39443,
+    "Longitude": -74.55951200000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 1,
+    "LocationNames": [
+      "The Zigen Fund",
+      "Natural Resources Defense Council (NRDC)",
+      "The Nature Conservancy",
+      "Environmental Defense Fund (EDF)",
+      "Wildlife Conservation Society (WCS)"
+    ]
+  },
+  {
+    "Name": "5 locations",
+    "UUID": "a4dde550-6777-4110-b741-1a2725e18ee2",
+    "Address": "",
+    "Latitude": 37.564620000000005,
+    "Longitude": 126.97206000000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 1,
+    "LocationNames": [
+      "Korean Federation for Environmental Movement (KFEM)",
+      "Korea Green Foundation",
+      "Green Korea United",
+      "Korea Zero Waste Movement Network",
+      "Korea Environmental Education Network"
+    ]
+  },
+  {
+    "Name": "16 locations",
+    "UUID": "ce33b5c7-167f-458c-890a-48208777e486",
+    "Address": "",
+    "Latitude": 39.9432375,
+    "Longitude": 116.41841437499998,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 2,
+    "LocationNames": [
+      "The Nature Conservancy – China Program",
+      "Greenpeace East Asia – Beijing Office",
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Friends of Nature (FON)",
+      "China Mangrove Conservation Network (CMCN)",
+      "Shanshui Conservation Center",
+      "Global Environmental Institute (GEI)",
+      "Beijing Energy Network (BEN)",
+      "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
+      "Greenovation Hub",
+      "EcoAction",
+      "China Environmental Protection Foundation (CEPF)",
+      "Environmental Defense Fund (EDF) China Program",
+      "Wildlife Conservation Society (WCS) China",
+      "Global Village of Beijing (GVB)",
+      "China Youth Development Foundation (CYDF)"
+    ]
+  },
+  {
+    "Name": "3 locations",
+    "UUID": "b35735d8-fa53-4307-8c55-f4179c5c2fed",
+    "Address": "",
+    "Latitude": 30.914909999999995,
+    "Longitude": 121.01176333333335,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 2,
+    "LocationNames": [
+      "Shanghai Roots & Shoots",
+      "Green Zhejiang",
+      "Shanghai Oasis Green Food Bank"
+    ]
+  },
+  {
+    "Name": "3 locations",
+    "UUID": "9ceeedfd-a1b6-46fe-9f76-31c1b371cdc2",
+    "Address": "",
+    "Latitude": 22.574816666666667,
+    "Longitude": 113.90029,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 2,
+    "LocationNames": [
+      "Friends of Green Environment (FOGE)",
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
+    "Name": "4 locations",
+    "UUID": "a3a3f9ee-5899-4c26-9d70-fa93737292e0",
+    "Address": "",
+    "Latitude": 40.7724625,
+    "Longitude": -73.92174,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 2,
+    "LocationNames": [
+      "The Zigen Fund",
+      "Natural Resources Defense Council (NRDC)",
+      "Environmental Defense Fund (EDF)",
+      "Wildlife Conservation Society (WCS)"
+    ]
+  },
+  {
+    "Name": "5 locations",
+    "UUID": "e02e9fbf-c397-40a8-858b-0eabaabc5e0c",
+    "Address": "",
+    "Latitude": 37.564620000000005,
+    "Longitude": 126.97206000000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 2,
+    "LocationNames": [
+      "Korean Federation for Environmental Movement (KFEM)",
+      "Korea Green Foundation",
+      "Green Korea United",
+      "Korea Zero Waste Movement Network",
+      "Korea Environmental Education Network"
+    ]
+  },
+  {
+    "Name": "16 locations",
+    "UUID": "62ec7b97-44bf-4ff3-9ece-7de7e3c3dfe0",
+    "Address": "",
+    "Latitude": 39.9432375,
+    "Longitude": 116.41841437499998,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 3,
+    "LocationNames": [
+      "The Nature Conservancy – China Program",
+      "Greenpeace East Asia – Beijing Office",
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Friends of Nature (FON)",
+      "China Mangrove Conservation Network (CMCN)",
+      "Shanshui Conservation Center",
+      "Global Environmental Institute (GEI)",
+      "Beijing Energy Network (BEN)",
+      "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
+      "Greenovation Hub",
+      "EcoAction",
+      "China Environmental Protection Foundation (CEPF)",
+      "Environmental Defense Fund (EDF) China Program",
+      "Wildlife Conservation Society (WCS) China",
+      "Global Village of Beijing (GVB)",
+      "China Youth Development Foundation (CYDF)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "eeca05bb-f30e-442b-af8e-61b34c4d3c45",
+    "Address": "",
+    "Latitude": 31.23746,
+    "Longitude": 121.445925,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 3,
+    "LocationNames": [
+      "Shanghai Roots & Shoots",
+      "Shanghai Oasis Green Food Bank"
+    ]
+  },
+  {
+    "Name": "4 locations",
+    "UUID": "f1a721bf-477f-4021-bc08-46277db585c2",
+    "Address": "",
+    "Latitude": 40.7724625,
+    "Longitude": -73.92174,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 3,
+    "LocationNames": [
+      "The Zigen Fund",
+      "Natural Resources Defense Council (NRDC)",
+      "Environmental Defense Fund (EDF)",
+      "Wildlife Conservation Society (WCS)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "a0aaa443-fbeb-44eb-9088-ada7b3116fed",
+    "Address": "",
+    "Latitude": 22.2975,
+    "Longitude": 114.1696,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 3,
+    "LocationNames": [
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
+    "Name": "5 locations",
+    "UUID": "b2bba687-685f-4c57-91a1-5ac1f2fa41ba",
+    "Address": "",
+    "Latitude": 37.564620000000005,
+    "Longitude": 126.97206000000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 3,
+    "LocationNames": [
+      "Korean Federation for Environmental Movement (KFEM)",
+      "Korea Green Foundation",
+      "Green Korea United",
+      "Korea Zero Waste Movement Network",
+      "Korea Environmental Education Network"
+    ]
+  },
+  {
+    "Name": "16 locations",
+    "UUID": "19314918-eab0-4c23-9bb9-3b5d3a712027",
+    "Address": "",
+    "Latitude": 39.9432375,
+    "Longitude": 116.41841437499998,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 4,
+    "LocationNames": [
+      "The Nature Conservancy – China Program",
+      "Greenpeace East Asia – Beijing Office",
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Friends of Nature (FON)",
+      "China Mangrove Conservation Network (CMCN)",
+      "Shanshui Conservation Center",
+      "Global Environmental Institute (GEI)",
+      "Beijing Energy Network (BEN)",
+      "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
+      "Greenovation Hub",
+      "EcoAction",
+      "China Environmental Protection Foundation (CEPF)",
+      "Environmental Defense Fund (EDF) China Program",
+      "Wildlife Conservation Society (WCS) China",
+      "Global Village of Beijing (GVB)",
+      "China Youth Development Foundation (CYDF)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "1dc29c38-b605-4a39-a38a-eca93b05fb83",
+    "Address": "",
+    "Latitude": 31.23746,
+    "Longitude": 121.445925,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 4,
+    "LocationNames": [
+      "Shanghai Roots & Shoots",
+      "Shanghai Oasis Green Food Bank"
+    ]
+  },
+  {
+    "Name": "4 locations",
+    "UUID": "76507578-5408-4620-bfbf-dbc3997bede3",
+    "Address": "",
+    "Latitude": 40.7724625,
+    "Longitude": -73.92174,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 4,
+    "LocationNames": [
+      "The Zigen Fund",
+      "Natural Resources Defense Council (NRDC)",
+      "Environmental Defense Fund (EDF)",
+      "Wildlife Conservation Society (WCS)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "f9ee2a89-7337-4d19-b2b5-febc188ad787",
+    "Address": "",
+    "Latitude": 22.2975,
+    "Longitude": 114.1696,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 4,
+    "LocationNames": [
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
+    "Name": "5 locations",
+    "UUID": "74503e9d-c756-494c-9623-a81f6bea6fea",
+    "Address": "",
+    "Latitude": 37.564620000000005,
+    "Longitude": 126.97206000000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 4,
+    "LocationNames": [
+      "Korean Federation for Environmental Movement (KFEM)",
+      "Korea Green Foundation",
+      "Green Korea United",
+      "Korea Zero Waste Movement Network",
+      "Korea Environmental Education Network"
+    ]
+  },
+  {
+    "Name": "16 locations",
+    "UUID": "04e276ca-63ea-4747-b0da-62b55b041bb6",
+    "Address": "",
+    "Latitude": 39.9432375,
+    "Longitude": 116.41841437499998,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 5,
+    "LocationNames": [
+      "The Nature Conservancy – China Program",
+      "Greenpeace East Asia – Beijing Office",
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Friends of Nature (FON)",
+      "China Mangrove Conservation Network (CMCN)",
+      "Shanshui Conservation Center",
+      "Global Environmental Institute (GEI)",
+      "Beijing Energy Network (BEN)",
+      "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
+      "Greenovation Hub",
+      "EcoAction",
+      "China Environmental Protection Foundation (CEPF)",
+      "Environmental Defense Fund (EDF) China Program",
+      "Wildlife Conservation Society (WCS) China",
+      "Global Village of Beijing (GVB)",
+      "China Youth Development Foundation (CYDF)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "92978f04-a830-4ed7-8bb9-3b8984a18647",
+    "Address": "",
+    "Latitude": 31.23746,
+    "Longitude": 121.445925,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 5,
+    "LocationNames": [
+      "Shanghai Roots & Shoots",
+      "Shanghai Oasis Green Food Bank"
+    ]
+  },
+  {
+    "Name": "4 locations",
+    "UUID": "d6aa24c9-c1b6-4f80-9aa6-e5b6f82a8c7d",
+    "Address": "",
+    "Latitude": 40.7724625,
+    "Longitude": -73.92174,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 5,
+    "LocationNames": [
+      "The Zigen Fund",
+      "Natural Resources Defense Council (NRDC)",
+      "Environmental Defense Fund (EDF)",
+      "Wildlife Conservation Society (WCS)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "ce453e90-f026-4742-9ca9-8d22d03d5b11",
+    "Address": "",
+    "Latitude": 22.2975,
+    "Longitude": 114.1696,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 5,
+    "LocationNames": [
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
+    "Name": "5 locations",
+    "UUID": "1e635c61-b9ac-4115-b252-9fe33b9e83e1",
+    "Address": "",
+    "Latitude": 37.564620000000005,
+    "Longitude": 126.97206000000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 5,
+    "LocationNames": [
+      "Korean Federation for Environmental Movement (KFEM)",
+      "Korea Green Foundation",
+      "Green Korea United",
+      "Korea Zero Waste Movement Network",
+      "Korea Environmental Education Network"
+    ]
+  },
+  {
+    "Name": "16 locations",
+    "UUID": "41da55b3-9c17-4817-9ccd-0010e5a7e834",
+    "Address": "",
+    "Latitude": 39.9432375,
+    "Longitude": 116.41841437499998,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 6,
+    "LocationNames": [
+      "The Nature Conservancy – China Program",
+      "Greenpeace East Asia – Beijing Office",
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Friends of Nature (FON)",
+      "China Mangrove Conservation Network (CMCN)",
+      "Shanshui Conservation Center",
+      "Global Environmental Institute (GEI)",
+      "Beijing Energy Network (BEN)",
+      "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
+      "Greenovation Hub",
+      "EcoAction",
+      "China Environmental Protection Foundation (CEPF)",
+      "Environmental Defense Fund (EDF) China Program",
+      "Wildlife Conservation Society (WCS) China",
+      "Global Village of Beijing (GVB)",
+      "China Youth Development Foundation (CYDF)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "873d58ac-b9a7-4e99-a406-f01c50ec77ef",
+    "Address": "",
+    "Latitude": 31.23746,
+    "Longitude": 121.445925,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 6,
+    "LocationNames": [
+      "Shanghai Roots & Shoots",
+      "Shanghai Oasis Green Food Bank"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "12dc0451-3fe4-4014-a438-cde204383f44",
+    "Address": "",
+    "Latitude": 40.804825,
+    "Longitude": -73.85358,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 6,
+    "LocationNames": [
+      "The Zigen Fund",
+      "Wildlife Conservation Society (WCS)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "faa659c5-3fc5-4b39-9867-09f8821de848",
+    "Address": "",
+    "Latitude": 22.2975,
+    "Longitude": 114.1696,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 6,
+    "LocationNames": [
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
+    "Name": "5 locations",
+    "UUID": "d1199a1a-7fcf-4f54-8ebc-e50206f82cab",
+    "Address": "",
+    "Latitude": 37.564620000000005,
+    "Longitude": 126.97206000000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 6,
+    "LocationNames": [
+      "Korean Federation for Environmental Movement (KFEM)",
+      "Korea Green Foundation",
+      "Green Korea United",
+      "Korea Zero Waste Movement Network",
+      "Korea Environmental Education Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "d7a13497-6a84-4b6a-8722-d4cbaf11ed89",
+    "Address": "",
+    "Latitude": 40.7401,
+    "Longitude": -73.9899,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 6,
+    "LocationNames": [
+      "Natural Resources Defense Council (NRDC)",
+      "Environmental Defense Fund (EDF)"
+    ]
+  },
+  {
+    "Name": "8 locations",
+    "UUID": "5707defd-fca2-49b6-9b33-bc231c3357a7",
+    "Address": "",
+    "Latitude": 39.938171249999996,
+    "Longitude": 116.37145500000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 7,
+    "LocationNames": [
+      "The Nature Conservancy – China Program",
+      "Greenpeace East Asia – Beijing Office",
+      "Shanshui Conservation Center",
+      "Global Environmental Institute (GEI)",
+      "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
+      "Wildlife Conservation Society (WCS) China",
+      "Global Village of Beijing (GVB)",
+      "China Youth Development Foundation (CYDF)"
+    ]
+  },
+  {
+    "Name": "8 locations",
+    "UUID": "bb479c41-ce1e-49f4-bd1b-944925661969",
+    "Address": "",
+    "Latitude": 39.948303749999994,
+    "Longitude": 116.46537375,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 7,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Friends of Nature (FON)",
+      "China Mangrove Conservation Network (CMCN)",
+      "Beijing Energy Network (BEN)",
+      "Greenovation Hub",
+      "EcoAction",
+      "China Environmental Protection Foundation (CEPF)",
+      "Environmental Defense Fund (EDF) China Program"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "140dfe53-51f0-4284-a4d6-fe542f0aa7a3",
+    "Address": "",
+    "Latitude": 22.2975,
+    "Longitude": 114.1696,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 7,
+    "LocationNames": [
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
+    "Name": "5 locations",
+    "UUID": "fbd86b03-ea4e-450c-9fa2-6b72a6a4d3a1",
+    "Address": "",
+    "Latitude": 37.564620000000005,
+    "Longitude": 126.97206000000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 7,
+    "LocationNames": [
+      "Korean Federation for Environmental Movement (KFEM)",
+      "Korea Green Foundation",
+      "Green Korea United",
+      "Korea Zero Waste Movement Network",
+      "Korea Environmental Education Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "f7780f32-e500-4181-8600-80a165c6dc3e",
+    "Address": "",
+    "Latitude": 40.7401,
+    "Longitude": -73.9899,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 7,
+    "LocationNames": [
+      "Natural Resources Defense Council (NRDC)",
+      "Environmental Defense Fund (EDF)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "cae6496f-188a-4cc8-b1a3-80e5128965ad",
+    "Address": "",
+    "Latitude": 39.93568,
+    "Longitude": 116.39444499999999,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 8,
+    "LocationNames": [
+      "The Nature Conservancy – China Program",
+      "Greenpeace East Asia – Beijing Office"
+    ]
+  },
+  {
+    "Name": "6 locations",
+    "UUID": "8cee9c2d-b764-4f5c-97b7-561149d39659",
+    "Address": "",
+    "Latitude": 39.937263333333334,
+    "Longitude": 116.46399000000001,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 8,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Friends of Nature (FON)",
+      "Beijing Energy Network (BEN)",
+      "Greenovation Hub",
+      "EcoAction",
+      "Environmental Defense Fund (EDF) China Program"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "8f9bd543-6f94-4893-9224-6cc8126af2c3",
+    "Address": "",
+    "Latitude": 39.965995,
+    "Longitude": 116.43394,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 8,
+    "LocationNames": [
+      "China Mangrove Conservation Network (CMCN)",
+      "Global Village of Beijing (GVB)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "bf9e4051-320a-4fd8-a985-d1c7ab38815d",
+    "Address": "",
+    "Latitude": 39.918815,
+    "Longitude": 116.32898,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 8,
+    "LocationNames": [
+      "Shanshui Conservation Center",
+      "Global Environmental Institute (GEI)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "9248aebd-4dd7-45f1-8864-f552df8d02df",
+    "Address": "",
+    "Latitude": 39.96865,
+    "Longitude": 116.348465,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 8,
+    "LocationNames": [
+      "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
+      "China Youth Development Foundation (CYDF)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "16dbd1f8-dfb7-40b2-8607-a8f087d54678",
+    "Address": "",
+    "Latitude": 22.2975,
+    "Longitude": 114.1696,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 8,
+    "LocationNames": [
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
+    "Name": "4 locations",
+    "UUID": "357dc9b7-e7b2-4a44-9257-68ad21afd6fe",
+    "Address": "",
+    "Latitude": 37.570925,
+    "Longitude": 126.97834999999999,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 8,
+    "LocationNames": [
+      "Korean Federation for Environmental Movement (KFEM)",
+      "Green Korea United",
+      "Korea Zero Waste Movement Network",
+      "Korea Environmental Education Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "a5f07847-1732-4a1c-bc76-b688cdd3220b",
+    "Address": "",
+    "Latitude": 40.7401,
+    "Longitude": -73.9899,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 8,
+    "LocationNames": [
+      "Natural Resources Defense Council (NRDC)",
+      "Environmental Defense Fund (EDF)"
+    ]
+  },
+  {
+    "Name": "4 locations",
+    "UUID": "d9f8a84e-bd41-470f-9974-2d06d184597a",
+    "Address": "",
+    "Latitude": 39.94619,
+    "Longitude": 116.46177,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 9,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Beijing Energy Network (BEN)",
+      "Greenovation Hub",
+      "Environmental Defense Fund (EDF) China Program"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "964bd231-e081-4bde-a0c9-ccfc199a4fcb",
+    "Address": "",
+    "Latitude": 39.91941,
+    "Longitude": 116.46843,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 9,
+    "LocationNames": [
+      "Friends of Nature (FON)",
+      "EcoAction"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "3452f246-86f1-4348-9b4e-e4c265a4de62",
+    "Address": "",
+    "Latitude": 39.96865,
+    "Longitude": 116.348465,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 9,
+    "LocationNames": [
+      "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
+      "China Youth Development Foundation (CYDF)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "a91c6626-de18-4944-9730-bff983074e87",
+    "Address": "",
+    "Latitude": 22.2975,
+    "Longitude": 114.1696,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 9,
+    "LocationNames": [
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "7eb99080-492e-48b9-9eb8-3461e2d5f5be",
+    "Address": "",
+    "Latitude": 37.57145,
+    "Longitude": 126.9686,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 9,
+    "LocationNames": [
+      "Korean Federation for Environmental Movement (KFEM)",
+      "Korea Environmental Education Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "9bcd7db4-2090-4ab2-a977-b6463d9cd084",
+    "Address": "",
+    "Latitude": 37.5704,
+    "Longitude": 126.9881,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 9,
+    "LocationNames": [
+      "Green Korea United",
+      "Korea Zero Waste Movement Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "eeb6ac9a-5361-4690-896b-77f48ddf6702",
+    "Address": "",
+    "Latitude": 40.7401,
+    "Longitude": -73.9899,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 9,
+    "LocationNames": [
+      "Natural Resources Defense Council (NRDC)",
+      "Environmental Defense Fund (EDF)"
+    ]
+  },
+  {
+    "Name": "3 locations",
+    "UUID": "0da9e6ca-ae12-4138-b78a-77c3f6eb1162",
+    "Address": "",
+    "Latitude": 39.94386666666667,
+    "Longitude": 116.45997999999999,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 10,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Greenovation Hub",
+      "Environmental Defense Fund (EDF) China Program"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "a7a097b5-2f2e-4579-89bf-671d830f2bf2",
+    "Address": "",
+    "Latitude": 22.2975,
+    "Longitude": 114.1696,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 10,
+    "LocationNames": [
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "ebe0230d-0c9b-4c65-ad96-4f0930951061",
+    "Address": "",
+    "Latitude": 37.5704,
+    "Longitude": 126.9881,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 10,
+    "LocationNames": [
+      "Green Korea United",
+      "Korea Zero Waste Movement Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "5544cd41-ac04-4949-a881-19a9371e2c3f",
+    "Address": "",
+    "Latitude": 40.7401,
+    "Longitude": -73.9899,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 10,
+    "LocationNames": [
+      "Natural Resources Defense Council (NRDC)",
+      "Environmental Defense Fund (EDF)"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "e12b13a9-c53e-4fc0-8dad-c59a55b2e813",
+    "Address": "",
+    "Latitude": 39.94502,
+    "Longitude": 116.45906,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 11,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Greenovation Hub"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "f1f2f114-c5fe-4c5e-be5f-ab2e9184430c",
+    "Address": "",
+    "Latitude": 37.5704,
+    "Longitude": 126.9881,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 11,
+    "LocationNames": [
+      "Green Korea United",
+      "Korea Zero Waste Movement Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "83e7b892-7306-4693-8550-6b271d0b94ba",
+    "Address": "",
+    "Latitude": 39.94502,
+    "Longitude": 116.45906,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 12,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Greenovation Hub"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "d2f1c32e-bc8b-4ecc-a41b-8063a9fe3ef3",
+    "Address": "",
+    "Latitude": 37.5704,
+    "Longitude": 126.9881,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 12,
+    "LocationNames": [
+      "Green Korea United",
+      "Korea Zero Waste Movement Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "c3452673-beea-4fc9-a85f-bdfa09ded9b7",
+    "Address": "",
+    "Latitude": 39.94502,
+    "Longitude": 116.45906,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 13,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Greenovation Hub"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "92ac844f-19f0-4e87-b765-269af992a42a",
+    "Address": "",
+    "Latitude": 37.5704,
+    "Longitude": 126.9881,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 13,
+    "LocationNames": [
+      "Green Korea United",
+      "Korea Zero Waste Movement Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "9dade90c-c8cb-49de-918e-fdcb34cc6b6e",
+    "Address": "",
+    "Latitude": 39.94502,
+    "Longitude": 116.45906,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 14,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Greenovation Hub"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "5e63c9d5-2bc0-4590-8f67-145899577eaa",
+    "Address": "",
+    "Latitude": 37.5704,
+    "Longitude": 126.9881,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 14,
+    "LocationNames": [
+      "Green Korea United",
+      "Korea Zero Waste Movement Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "fc24f6ec-7fa4-44bc-a6e1-1ac18858583e",
+    "Address": "",
+    "Latitude": 39.94502,
+    "Longitude": 116.45906,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 15,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Greenovation Hub"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "98155bf2-b7f1-4318-a67b-5a6a56dd4cf0",
+    "Address": "",
+    "Latitude": 37.5704,
+    "Longitude": 126.9881,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 15,
+    "LocationNames": [
+      "Green Korea United",
+      "Korea Zero Waste Movement Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "ba93fdb6-1bb0-4cc7-bd43-c1f57789d67a",
+    "Address": "",
+    "Latitude": 39.94502,
+    "Longitude": 116.45906,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 16,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Greenovation Hub"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "99a0b502-ae9f-4f4b-8a62-aa1a3169f1a9",
+    "Address": "",
+    "Latitude": 37.5704,
+    "Longitude": 126.9881,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 16,
+    "LocationNames": [
+      "Green Korea United",
+      "Korea Zero Waste Movement Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "6e892f4a-6bb7-4215-9d75-663885c464e1",
+    "Address": "",
+    "Latitude": 39.94502,
+    "Longitude": 116.45906,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 17,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Greenovation Hub"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "879a1346-7cb6-4959-bf12-65eaa88ce6cd",
+    "Address": "",
+    "Latitude": 37.5704,
+    "Longitude": 126.9881,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 17,
+    "LocationNames": [
+      "Green Korea United",
+      "Korea Zero Waste Movement Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "580d613f-71c9-4b3c-b287-caaf70009dd5",
+    "Address": "",
+    "Latitude": 39.94502,
+    "Longitude": 116.45906,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 18,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Greenovation Hub"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "3e794d6e-4d52-4f04-9d9b-076406a9ccc6",
+    "Address": "",
+    "Latitude": 37.5704,
+    "Longitude": 126.9881,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 18,
+    "LocationNames": [
+      "Green Korea United",
+      "Korea Zero Waste Movement Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "13d6a511-c29d-4357-9f75-c747754d9ae0",
+    "Address": "",
+    "Latitude": 39.94502,
+    "Longitude": 116.45906,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 19,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Greenovation Hub"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "3e7e2cff-9475-403b-889a-03bb3cf633a5",
+    "Address": "",
+    "Latitude": 37.5704,
+    "Longitude": 126.9881,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 19,
+    "LocationNames": [
+      "Green Korea United",
+      "Korea Zero Waste Movement Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "ea65e8f5-8104-4037-8a7a-543e72fcc889",
+    "Address": "",
+    "Latitude": 39.94502,
+    "Longitude": 116.45906,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 20,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Greenovation Hub"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "b345a531-ca9d-4bed-a154-313a88d178a3",
+    "Address": "",
+    "Latitude": 37.5704,
+    "Longitude": 126.9881,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 20,
+    "LocationNames": [
+      "Green Korea United",
+      "Korea Zero Waste Movement Network"
+    ]
+  }
+]
