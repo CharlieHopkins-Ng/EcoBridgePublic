@@ -18,7 +18,7 @@ const UpdateMapView = ({ center, zoom, onZoomChange }) => {
     if (map) {
       const handleZoomEnd = () => {
         const newZoom = map.getZoom();
-        console.log("🔍 [UpdateMapView] Zoom changed:", newZoom);
+        //console.log(" [UpdateMapView] Zoom changed:", newZoom);
         onZoomChange(newZoom); // Call the parent function to update zoom level
       };
 
