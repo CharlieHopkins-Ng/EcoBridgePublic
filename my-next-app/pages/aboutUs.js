@@ -46,7 +46,7 @@ const AboutUs = () => {
             </p>
             <p>
                 <strong>Charlie Hopkins-Ng (Website Developer & Co-Founder):</strong><br />
-                Hi! I am Charlie Hopkins-Ng, Ecobridge&apos;s website developer. I am in third year at Jordanhill Secondary School. I have always been passionate about the environment, and have been to multiple protests about the environment. I met Siyeong at a maths competition in December 2024, and when Siyeong contacted me, I gladly accepted!
+                Hi! I am Charlie Hopkins-Ng, Ecobridge&apos;s website developer. I have always been passionate about the environment, and have been to multiple protests about the environment, the biggest one being the Glasgow school strike during COP26. I met Siyeong at a maths competition in December 2024, and when Siyeong contacted me, I gladly accepted!
             </p>
           </div>
         </section>

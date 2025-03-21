@@ -26,18 +26,18 @@ if (!getApps().length) {
 
 const db = getDatabase(app);
 
-const addLocationsToFirebase = async () => {
-  const locationsPath = path.resolve("d:/Projects/EcoBridgePublic/my-next-app/data/locations.json");
-  const locations = JSON.parse(fs.readFileSync(locationsPath, "utf-8"));
-  const locationsRef = ref(db, "locations");
+const addClustersToFirebase = async () => {
+  const clustersPath = path.resolve("d:/Projects/EcoBridgePublic/my-next-app/data/clusteredLocations.json");
+  const clusters = JSON.parse(fs.readFileSync(clustersPath, "utf-8"));
+  const clustersRef = ref(db, "clusteredLocations");
   try {
-    await set(locationsRef, locations);
-    console.log(`Locations added to Firebase successfully. Total locations: ${locations.length}`);
+    await set(clustersRef, clusters);
+    console.log(`Clusters added to Firebase successfully. Total clusters: ${clusters.length}`);
   } catch (error) {
-    console.error("Error adding locations to Firebase:", error);
+    console.error("Error adding clusters to Firebase:", error);
   } finally {
     process.exit();
   }
 };
 
-addLocationsToFirebase();
+addClustersToFirebase();
