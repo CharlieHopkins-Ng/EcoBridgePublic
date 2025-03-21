@@ -3,6 +3,7 @@ import { getDatabase, ref, set } from "firebase/database";
 import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
+import { v4 as uuidv4 } from "uuid";
 
 dotenv.config();
 
@@ -29,10 +30,17 @@ const db = getDatabase(app);
 const addLocationsToFirebase = async () => {
   const locationsPath = path.resolve("d:/Projects/EcoBridgePublic/my-next-app/data/locations.json");
   const locations = JSON.parse(fs.readFileSync(locationsPath, "utf-8"));
+
+  // Ensure each location has a UUID
+  const locationsWithUUIDs = locations.map(location => ({
+    ...location,
+    UUID: location.UUID || uuidv4()
+  }));
+
   const locationsRef = ref(db, "locations");
   try {
-    await set(locationsRef, locations);
-    console.log(`Locations added to Firebase successfully. Total locations: ${locations.length}`);
+    await set(locationsRef, locationsWithUUIDs);
+    console.log(`Locations added to Firebase successfully. Total locations: ${locationsWithUUIDs.length}`);
   } catch (error) {
     console.error("Error adding locations to Firebase:", error);
   } finally {
