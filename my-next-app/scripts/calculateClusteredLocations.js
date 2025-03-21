@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { initializeApp, getApps } = require('firebase/app');
-const { getDatabase, ref, get } = require('firebase/database');
+const { getDatabase, ref, get, set } = require('firebase/database');
 const { v4: uuidv4 } = require('uuid');
 const dotenv = require('dotenv');
 
@@ -40,7 +40,7 @@ const haversineDistance = (lat1, lon1, lat2, lon2) => {
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c; // Distance in kilometers
 };
-const zoomMult = 2;
+const zoomMult = 2.5;
 // Define zoom levels and corresponding indistinguishability distances (in kilometers)
 const zoomLevels = {
   0: 400 * zoomMult,
@@ -60,10 +60,7 @@ const zoomLevels = {
   14: 0.0244140625 * zoomMult,
   15: 0.01220703125 * zoomMult,
   16: 0.006103515625 * zoomMult,
-  17: 0.0030517578125 * zoomMult,
-  18: 0.00152587890625 * zoomMult,
-  19: 0.000762939453125 * zoomMult,
-  20: 0.0003814697265625  * zoomMult
+  17: 0.0030517578125 * zoomMult
 };
 
 // Fetch locations from Firebase and calculate clustered locations
@@ -124,6 +121,15 @@ const calculateClusteredLocations = async () => {
   fs.writeFileSync(outputPath, JSON.stringify(clusteredLocations, null, 2), 'utf-8');
 
   console.log(`Clustered locations calculated and saved to ${outputPath}`);
+
+  // Save clustered locations to Firebase
+  const clustersRef = ref(db, "clusteredLocations");
+  try {
+    await set(clustersRef, clusteredLocations);
+    console.log(`Clusters added to Firebase successfully. Total clusters: ${clusteredLocations.length}`);
+  } catch (error) {
+    console.error("Error adding clusters to Firebase:", error);
+  }
 };
 
 calculateClusteredLocations();

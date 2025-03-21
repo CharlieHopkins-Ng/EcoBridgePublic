@@ -33,13 +33,13 @@ const MapPage = () => {
       const data = snapshot.val();
       setLocations(data ? Object.values(data) : []);
       setIsLoading(false);
-      console.log("Fetched locations from Firebase:", data);
+      //console.log("Fetched locations from Firebase:", data);
     });
 
     const unsubscribeClusters = onValue(clustersRef, (snapshot) => {
       const data = snapshot.val();
       setClusters(data ? Object.values(data) : []);
-      console.log("Fetched clusters from Firebase:", data);
+      //console.log("Fetched clusters from Firebase:", data);
     });
 
     return () => {
@@ -77,7 +77,7 @@ const MapPage = () => {
         }
 
         setIcons(loadedIcons);
-        console.log("Icons loaded:", loadedIcons);
+        //console.log("Icons loaded:", loadedIcons);
       }
     };
 
@@ -101,24 +101,24 @@ const MapPage = () => {
 
   // Update clusters when zoom changes
   useEffect(() => {
-    console.log("Zoom level changed:", zoomLevel);
+    //console.log("Zoom level changed:", zoomLevel);
     const filtered = clusters.filter(cluster => cluster.ZoomLevel === zoomLevel);
     setFilteredClusters(filtered);
-    console.log("Filtered clusters:", filtered);
+    //console.log("Filtered clusters:", filtered);
   }, [zoomLevel, clusters]);
 
   // Attach zoom event listener
   useEffect(() => {
     if (mapInstance) {
-      console.log("Map instance detected! Attaching zoomend listener...");
+      //console.log("Map instance detected! Attaching zoomend listener...");
 
       const handleZoomEnd = () => {
         const newZoom = mapInstance.getZoom();
-        console.log("Zoom changed! New zoom level:", newZoom);
+        //console.log("Zoom changed! New zoom level:", newZoom);
 
         setZoomLevel((prevZoom) => {
           if (prevZoom !== newZoom) {
-            console.log("Updating zoom level:", newZoom);
+            //console.log("Updating zoom level:", newZoom);
             return newZoom;
           }
           return prevZoom;
@@ -128,7 +128,7 @@ const MapPage = () => {
       mapInstance.on("zoomend", handleZoomEnd);
 
       return () => {
-        console.log("Cleaning up zoomend listener...");
+        //console.log("Cleaning up zoomend listener...");
         mapInstance.off("zoomend", handleZoomEnd);
       };
     }
@@ -175,7 +175,7 @@ const MapPage = () => {
           zoom={zoomLevel}
           className="map"
           whenCreated={(map) => {
-            console.log("Map instance created:", map);
+            //console.log("Map instance created:", map);
             mapRef.current = map;
             setMapInstance(map);
           }}
