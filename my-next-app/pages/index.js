@@ -23,6 +23,7 @@ const MapPage = () => {
   const [zoomLevel, setZoomLevel] = useState(2);
   const [mapInstance, setMapInstance] = useState(null);
   const mapRef = useRef(null);
+  const [selectedMarker, setSelectedMarker] = useState(null);
 
   // Load location data from Firebase
   useEffect(() => {
@@ -33,13 +34,11 @@ const MapPage = () => {
       const data = snapshot.val();
       setLocations(data ? Object.values(data) : []);
       setIsLoading(false);
-      //console.log("Fetched locations from Firebase:", data);
     });
 
     const unsubscribeClusters = onValue(clustersRef, (snapshot) => {
       const data = snapshot.val();
       setClusters(data ? Object.values(data) : []);
-      //console.log("Fetched clusters from Firebase:", data);
     });
 
     return () => {
@@ -77,7 +76,6 @@ const MapPage = () => {
         }
 
         setIcons(loadedIcons);
-        //console.log("Icons loaded:", loadedIcons);
       }
     };
 
@@ -101,34 +99,21 @@ const MapPage = () => {
 
   // Update clusters when zoom changes
   useEffect(() => {
-    //console.log("Zoom level changed:", zoomLevel);
     const filtered = clusters.filter(cluster => cluster.ZoomLevel === zoomLevel);
     setFilteredClusters(filtered);
-    //console.log("Filtered clusters:", filtered);
   }, [zoomLevel, clusters]);
 
   // Attach zoom event listener
   useEffect(() => {
     if (mapInstance) {
-      //console.log("Map instance detected! Attaching zoomend listener...");
-
       const handleZoomEnd = () => {
         const newZoom = mapInstance.getZoom();
-        //console.log("Zoom changed! New zoom level:", newZoom);
-
-        setZoomLevel((prevZoom) => {
-          if (prevZoom !== newZoom) {
-            //console.log("Updating zoom level:", newZoom);
-            return newZoom;
-          }
-          return prevZoom;
-        });
+        setZoomLevel(newZoom);
       };
 
       mapInstance.on("zoomend", handleZoomEnd);
 
       return () => {
-        //console.log("Cleaning up zoomend listener...");
         mapInstance.off("zoomend", handleZoomEnd);
       };
     }
@@ -155,6 +140,12 @@ const MapPage = () => {
     return !filteredClusters.some(cluster => cluster.LocationNames.includes(location.Name));
   });
 
+  const MemoizedMarker = React.memo(({ position, icon, onClick, popupContent }) => (
+    <Marker position={position} icon={icon} eventHandlers={{ click: onClick }}>
+      <Popup>{popupContent}</Popup>
+    </Marker>
+  ));
+
   return (
     <div>
       <nav className="nav" style={{ textAlign: "left" }}>
@@ -175,7 +166,6 @@ const MapPage = () => {
           zoom={zoomLevel}
           className="map"
           whenCreated={(map) => {
-            //console.log("Map instance created:", map);
             mapRef.current = map;
             setMapInstance(map);
           }}
@@ -187,24 +177,24 @@ const MapPage = () => {
           {filteredClusters.map((cluster, index) => {
             const icon = getClusterIcon(cluster.LocationNames.length);
             return (
-              <Marker key={index} position={[cluster.Latitude, cluster.Longitude]} icon={icon}>
-                <Popup>
-                  <strong>{cluster.Name}</strong>
-                  <br />
-                  {cluster.Description}
-                </Popup>
-              </Marker>
+              <MemoizedMarker
+                key={index}
+                position={[cluster.Latitude, cluster.Longitude]}
+                icon={icon}
+                onClick={() => setSelectedMarker(cluster.UUID)}
+                popupContent={<><strong>{cluster.Name}</strong><br />{cluster.Description}</>}
+              />
             );
           })}
           {nonClusteredLocations.map((location, index) => {
             return (
-              <Marker key={index} position={[location.Latitude, location.Longitude]} icon={icons[0]}>
-                <Popup>
-                  <strong>{location.Name}</strong>
-                  <br />
-                  {location.Description}
-                </Popup>
-              </Marker>
+              <MemoizedMarker
+                key={index}
+                position={[location.Latitude, location.Longitude]}
+                icon={icons[0]}
+                onClick={() => setSelectedMarker(location.UUID)}
+                popupContent={<><strong>{location.Name}</strong><br />{location.Description}</>}
+              />
             );
           })}
           <UpdateMapView center={center} zoom={zoomLevel} onZoomChange={setZoomLevel} />
