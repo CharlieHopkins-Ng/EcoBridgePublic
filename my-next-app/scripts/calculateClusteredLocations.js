@@ -40,7 +40,7 @@ const haversineDistance = (lat1, lon1, lat2, lon2) => {
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c; // Distance in kilometers
 };
-const zoomMult = 2.5;
+const zoomMult = 2.25;
 // Define zoom levels and corresponding indistinguishability distances (in kilometers)
 const zoomLevels = {
   0: 400 * zoomMult,

@@ -2,8 +2,10 @@ import { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import "leaflet/dist/leaflet.css";
-import { db } from "../firebaseConfig";
+import { db, auth } from "../firebaseConfig";
 import { ref, onValue } from "firebase/database";
+import { useRouter } from "next/router";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import React from "react";
 
 // Dynamically import Leaflet components
@@ -24,6 +26,35 @@ const MapPage = () => {
   const [mapInstance, setMapInstance] = useState(null);
   const mapRef = useRef(null);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminEmails, setAdminEmails] = useState([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchAdminEmails = async () => {
+      const adminEmailsRef = ref(db, "adminEmails");
+      onValue(adminEmailsRef, (snapshot) => {
+        const data = snapshot.val();
+        setAdminEmails(data ? Object.values(data) : []);
+      });
+    };
+
+    fetchAdminEmails();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user);
+      setIsAdmin(user && adminEmails.includes(user.email));
+    });
+    return () => unsubscribe();
+  }, [auth, adminEmails]);
+
+  const handleSignOut = async () => {
+    await signOut(auth);
+    router.push("/login");
+  };
 
   // Load location data from Firebase
   useEffect(() => {
@@ -148,16 +179,41 @@ const MapPage = () => {
 
   return (
     <div>
-      <nav className="nav" style={{ textAlign: "left" }}>
-        <Link href="/" legacyBehavior>
-          <button>Home</button>
-        </Link>
-        <Link href="/aboutUs" legacyBehavior>
-          <button>About Us</button>
-        </Link>
-        <Link href="/news" legacyBehavior>
-          <button>News</button>
-        </Link>
+      <nav className="nav">
+        <div className="nav-left">
+          <Link href="/" legacyBehavior>
+            <button>Home</button>
+          </Link>
+          <Link href="/aboutUs" legacyBehavior>
+            <button>About Us</button>
+          </Link>
+          <Link href="/news" legacyBehavior>
+            <button>News</button>
+          </Link>
+          <Link href="/submitLocation" legacyBehavior>
+            <button>{isAdmin ? "Add Location" : "Submit Location"}</button>
+          </Link>
+          {isAdmin && (
+            <Link href="/admin" legacyBehavior>
+              <button>Admin</button>
+            </Link>
+          )}
+        </div>
+        <div className="nav-right">
+          {!isAuthenticated && (
+            <>
+              <Link href="/signup" legacyBehavior>
+                <button>Sign Up</button>
+              </Link>
+              <Link href="/login" legacyBehavior>
+                <button>Log In</button>
+              </Link>
+            </>
+          )}
+          {isAuthenticated && (
+            <button onClick={handleSignOut}>Sign Out</button>
+          )}
+        </div>
       </nav>
 
       <div className="map-container" style={{ height: "100vh" }}>

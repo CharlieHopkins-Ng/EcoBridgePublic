@@ -1,14 +1,19 @@
+import { useState, useEffect } from "react";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { ref, onValue } from "firebase/database";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { ref, onValue } from "firebase/database";
 import { app, db } from "../firebaseConfig";
 
-const News = () => {
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminEmails, setAdminEmails] = useState([]);
+  const router = useRouter();
   const auth = getAuth(app);
 
   useEffect(() => {
@@ -36,14 +41,25 @@ const News = () => {
     return () => unsubscribe();
   }, [auth, adminEmails]);
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      router.push("/");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   const handleSignOut = async () => {
     await signOut(auth);
+    router.push("/login");
   };
 
   return (
     <div>
       <Head>
-        <title>News - EcoBridge</title>
+        <title>Login - EcoBridge</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <nav className="nav">
@@ -82,37 +98,32 @@ const News = () => {
           )}
         </div>
       </nav>
-      <header className="header">
-        EcoBridge - Latest News and Updates
-      </header>
-      <main className="main">
-        <section className="news-container">
-          <h1>Latest News</h1>
-          <article>
-            <h2>[#insert date here] Beta Launch!</h2>
-            <p>
-              We are happy to announce that EcoBridge has launched! More features will be coming soon such as:
-            </p>
-              <ul>
-                <li>The ability to submit your own locations (this is mostly developed!)</li>
-                <li>User accounts (this too!)</li>
-                <li>Multi-language support (feel free to contact us if you want to help with this)</li>
-                <li>A custom domain</li>
-                <li>Community blogs</li>
-              </ul>
-          </article>
-        </section>
-      </main>
-      <div id="sidebar" className="sidebar">
-        <button className="close-btn" onClick={() => toggleSidebar()}>×</button>
-        <h2>User Profile</h2>
-        <p id="sidebarUsername">Username: N/A</p>
-        <p id="sidebarEmail">Email: N/A</p>
-        <p id="authStatus">Not Authenticated</p>
-        <button className="sign-out-btn" onClick={() => signOut()}>Sign Out</button>
+      <div className="container" style={{ maxWidth: "900px", width: "100%" }}>
+        <h1>Login</h1>
+        <form onSubmit={handleLogin} style={{ textAlign: "left", width: "100%" }}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          <button type="submit">Login</button>
+        </form>
+        <p>
+          Don't have an account? <Link href="/signup">Sign up</Link>
+        </p>
       </div>
     </div>
   );
 };
 
-export default News;
+export default Login;

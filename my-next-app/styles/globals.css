@@ -45,63 +45,24 @@ body {
     margin-bottom: 1rem;
 }
 
-nav {
-  width: 100%;
-  background: #4CAF50;
-  padding: 10px 0;
-  display: flex;
-  justify-content: flex-start; /* Align items to the left */
-  gap: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-}
-
-nav button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background 0.3s ease-in-out;
-  text-decoration: none; /* Remove underline from button text */
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-nav button:hover {
-  background-color: #2E7D32;
-}
-
-
-/* Header */
-header {
-    width: 100%;
-    color: white;
-    text-align: center;
-    padding: 10px 0; /* Increase padding to ensure it covers the full screen */
-    font-size: 1.8rem;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
 /* Navigation Bar */
 nav {
     width: 100%;
     background: #4CAF50;
     padding: 10px 0;
     display: flex;
-    justify-content: flex-start; /* Align items to the left */
-    gap: 20px;
+    justify-content: space-between; /* Distribute space between left and right sections */
+    align-items: center; /* Align items vertically in the center */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    gap: 20px;
 }
 
 nav button {
@@ -120,6 +81,17 @@ nav button {
 
 nav button:hover {
     background-color: #2E7D32;
+}
+
+/* Header */
+header {
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 10px 0; /* Increase padding to ensure it covers the full screen */
+    font-size: 1.8rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Profile Icon */
@@ -193,7 +165,7 @@ button:hover {
 /* Form Styling */
 form {
     max-width: 500px; /* Increased from 500px to 700px */
-    width: 100%;
+    width: 90%;
     margin: 30px auto;
     padding: 20px;
     background: white;
@@ -205,7 +177,7 @@ form {
 }
 
 input, textarea, select {
-    width: 100%;
+    width: 90%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -228,7 +200,7 @@ input:focus, textarea:focus, select:focus {
     }
 
     form {
-        width: 100%;
+        width: 90%;
     }
 }
 
