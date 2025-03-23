@@ -1,5 +1,6 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getDatabase } from "firebase/database";
+import { getAuth } from "firebase/auth";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -23,5 +24,6 @@ if (!getApps().length) {
 }
 
 const db = getDatabase(app);
+const auth = getAuth(app);
 
-export { db };
+export { db, auth, app };
