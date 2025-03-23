@@ -142,6 +142,7 @@ const SubmitLocation = () => {
               onChange={(e) => setAddress(e.target.value)}
               required
             />
+            <p style={{fontSize: "12px", margin:"0px"}}>Use <a href = "https://www.latlong.net/convert-address-to-lat-long.html">this website</a> if you want to convert an address into latitude and longitude</p>
             <input
               type="text"
               placeholder="Latitude"
