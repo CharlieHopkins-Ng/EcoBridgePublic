@@ -120,6 +120,7 @@ const Admin = () => {
                   <p><strong>Latitude:</strong> {location.Latitude}</p>
                   <p><strong>Longitude:</strong> {location.Longitude}</p>
                   <p><strong>Description:</strong> {location.Description}</p>
+                  <p><strong>Submitted by:</strong> {location.Username} ({location.Email})</p>
                   <button onClick={() => handleApprove(id, location)}>Approve</button>
                   <button onClick={() => handleDeny(id)}>Deny</button>
                 </div>
