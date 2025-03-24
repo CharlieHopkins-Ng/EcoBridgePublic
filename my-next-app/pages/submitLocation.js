@@ -16,6 +16,8 @@ const SubmitLocation = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminEmails, setAdminEmails] = useState([]);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const router = useRouter();
   const auth = getAuth(app);
   const db = getDatabase(app);
@@ -37,6 +39,8 @@ const SubmitLocation = () => {
       if (user) {
         setIsAuthenticated(true);
         setIsAdmin(adminEmails.includes(user.email));
+        setUsername(user.displayName || "Anonymous");
+        setEmail(user.email);
       } else {
         setIsAuthenticated(false);
         setIsAdmin(false);
@@ -52,24 +56,21 @@ const SubmitLocation = () => {
       return;
     }
     try {
+      const locationData = {
+        Name: name,
+        Address: address,
+        Latitude: parseFloat(latitude),
+        Longitude: parseFloat(longitude),
+        Description: description,
+        Username: username,
+        Email: email,
+      };
       if (isAdmin) {
         const locationsRef = ref(db, "locations");
-        await push(locationsRef, {
-          Name: name,
-          Address: address,
-          Latitude: parseFloat(latitude),
-          Longitude: parseFloat(longitude),
-          Description: description,
-        });
+        await push(locationsRef, locationData);
       } else {
         const pendingLocationsRef = ref(db, "pendingLocations");
-        await push(pendingLocationsRef, {
-          Name: name,
-          Address: address,
-          Latitude: parseFloat(latitude),
-          Longitude: parseFloat(longitude),
-          Description: description,
-        });
+        await push(pendingLocationsRef, locationData);
       }
       router.push("/");
     } catch (error) {
