@@ -29,6 +29,7 @@ const MapPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminEmails, setAdminEmails] = useState([]);
+  const [adminUids, setAdminUids] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -44,12 +45,24 @@ const MapPage = () => {
   }, []);
 
   useEffect(() => {
+    const fetchAdminUids = async () => {
+      const adminUidsRef = ref(db, "adminUids");
+      onValue(adminUidsRef, (snapshot) => {
+        const data = snapshot.val();
+        setAdminUids(data ? Object.keys(data) : []);
+      });
+    };
+
+    fetchAdminUids();
+  }, []);
+
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsAuthenticated(!!user);
-      setIsAdmin(user && adminEmails.includes(user.email));
+      setIsAdmin(user && adminUids.includes(user.uid));
     });
     return () => unsubscribe();
-  }, [auth, adminEmails]);
+  }, [auth, adminUids]);
 
   const handleSignOut = async () => {
     await signOut(auth);
@@ -197,6 +210,16 @@ const MapPage = () => {
             <Link href="/admin" legacyBehavior>
               <button>Admin</button>
             </Link>
+          )}
+          {isAuthenticated && (
+            <>
+              <Link href="/yourLocations" legacyBehavior>
+                <button>Your Locations</button>
+              </Link>
+              <Link href="/yourProfile" legacyBehavior>
+                <button>Your Profile</button>
+              </Link>
+            </>
           )}
         </div>
         <div className="nav-right">
