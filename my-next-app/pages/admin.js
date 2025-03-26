@@ -15,6 +15,14 @@ const Admin = () => {
 	const [searchResults, setSearchResults] = useState([]);
 	const [adminUids, setAdminUids] = useState([]);
 	const [allUsers, setAllUsers] = useState([]);
+	const [showUnverifiedOnly, setShowUnverifiedOnly] = useState(false); // New state for filtering unverified users
+	const [editingLocation, setEditingLocation] = useState(null);
+	const [editName, setEditName] = useState("");
+	const [editAddress, setEditAddress] = useState("");
+	const [editLatitude, setEditLatitude] = useState("");
+	const [editLongitude, setEditLongitude] = useState("");
+	const [editDescription, setEditDescription] = useState("");
+	const [editError, setEditError] = useState("");
 	const auth = getAuth(app);
 	const db = getDatabase(app);
 	const router = useRouter();
@@ -24,7 +32,6 @@ const Admin = () => {
 			const adminUidsRef = ref(db, "adminUids");
 			onValue(adminUidsRef, (snapshot) => {
 				const data = snapshot.val();
-				console.log("Admin UIDs fetched:", data); // Debugging check
 				setAdminUids(data ? Object.keys(data) : []);
 			});
 		};
@@ -34,7 +41,6 @@ const Admin = () => {
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			console.log("Auth state changed:", user); // Debugging check
 			if (user) {
 				setIsAuthenticated(true);
 				setIsAdmin(adminUids.includes(user.uid));
@@ -51,14 +57,12 @@ const Admin = () => {
 			const pendingLocationsRef = ref(db, "pendingLocations");
 			onValue(pendingLocationsRef, (snapshot) => {
 				const data = snapshot.val();
-				console.log("Pending locations fetched:", data); // Debugging check
 				setPendingLocations(data ? Object.entries(data) : []);
 			});
 
 			const allLocationsRef = ref(db, "locations");
 			onValue(allLocationsRef, (snapshot) => {
 				const data = snapshot.val();
-				console.log("All locations fetched:", data); // Debugging check
 				setAllLocations(data ? Object.entries(data) : []);
 			});
 
@@ -67,7 +71,6 @@ const Admin = () => {
 			onValue(usersRef, (snapshot) => {
 				if (snapshot.exists()) {
 					const data = snapshot.val();
-					console.log("Users raw data fetched:", data); // Debugging check for raw data
 					const users = Object.entries(data).map(([id, user]) => ({
 						id,
 						username: user.username || "N/A",
@@ -75,10 +78,8 @@ const Admin = () => {
 						createdAt: user.createdAt || "N/A",
 						emailVerified: user.emailVerified || false,
 					}));
-					console.log("Processed users:", users); // Debugging check for processed users
 					setAllUsers(users);
 				} else {
-					console.log("No users found in the database."); // Debugging check for empty data
 					setAllUsers([]); // Clear the list if no users are found
 				}
 			}, (error) => {
@@ -86,6 +87,10 @@ const Admin = () => {
 			});
 		}
 	}, [isAdmin, db]);
+
+	const filteredUsers = showUnverifiedOnly
+		? allUsers.filter(user => !user.emailVerified)
+		: allUsers;
 
 	const handleSignOut = async () => {
 		await signOut(auth);
@@ -120,14 +125,44 @@ const Admin = () => {
 
 	const handleDeleteUser = async (userId) => {
 		try {
-			console.log("Deleting user with ID:", userId); // Debugging check
 			await remove(ref(db, `users/${userId}`));
 			await remove(ref(db, `usernames/${allUsers.find(user => user.id === userId)?.username}`));
 			setAllUsers(allUsers.filter(user => user.id !== userId));
 			alert("User deleted successfully.");
 		} catch (error) {
-			console.error("Error deleting user:", error.message); // Debugging check
 			alert("Failed to delete user: " + error.message);
+		}
+	};
+
+	const handleEdit = (locationId, locationData) => {
+		setEditingLocation(locationId);
+		setEditName(locationData.Name);
+		setEditAddress(locationData.Address);
+		setEditLatitude(locationData.Latitude);
+		setEditLongitude(locationData.Longitude);
+		setEditDescription(locationData.Description);
+	};
+
+	const handleUpdateLocation = async (e) => {
+		e.preventDefault();
+		if (!editName || !editAddress || !editLatitude || !editLongitude || !editDescription) {
+			setEditError("All fields are required");
+			return;
+		}
+		try {
+			const updatedLocation = {
+				Name: editName,
+				Address: editAddress,
+				Latitude: parseFloat(editLatitude),
+				Longitude: parseFloat(editLongitude),
+				Description: editDescription,
+			};
+			await set(ref(db, `locations/${editingLocation}`), updatedLocation);
+			alert("Location updated successfully.");
+			setEditingLocation(null);
+			setSearchResults(searchResults.map(([id, loc]) => id === editingLocation ? [id, updatedLocation] : [id, loc]));
+		} catch (error) {
+			setEditError(error.message);
 		}
 	};
 
@@ -188,8 +223,17 @@ const Admin = () => {
 				{isAdmin ? (
 					<div>
 						<h2>All Users</h2>
-						{allUsers.length > 0 ? (
-							allUsers.map((user) => (
+						<div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+							<input
+								type="checkbox"
+								checked={showUnverifiedOnly}
+								onChange={(e) => setShowUnverifiedOnly(e.target.checked)}
+								style={{ marginRight: "5px" }}
+							/>
+							<label>Show only unverified users</label>
+						</div>
+						{filteredUsers.length > 0 ? (
+							filteredUsers.map((user) => (
 								<div key={user.id} className="location">
 									<h3>{user.username}</h3>
 									<p><strong>Email:</strong> {user.email}</p>
@@ -220,7 +264,7 @@ const Admin = () => {
 							<p>No pending locations.</p>
 						)}
 
-						<h2>Search and Delete Locations</h2>
+						<h2>Search and Edit Locations</h2>
 						<input
 							type="text"
 							placeholder="Search by location name"
@@ -236,11 +280,54 @@ const Admin = () => {
 									<p><strong>Latitude:</strong> {location.Latitude}</p>
 									<p><strong>Longitude:</strong> {location.Longitude}</p>
 									<p><strong>Description:</strong> {location.Description}</p>
+									<button onClick={() => handleEdit(id, location)}>Edit</button>
 									<button onClick={() => handleDeleteLocation(id)}>Delete</button>
 								</div>
 							))
 						) : (
 							<p>No locations found.</p>
+						)}
+						{editingLocation && (
+							<form onSubmit={handleUpdateLocation} style={{ textAlign: "left", width: "100%" }}>
+								<h3>Edit Location</h3>
+								<input
+									type="text"
+									placeholder="Name"
+									value={editName}
+									onChange={(e) => setEditName(e.target.value)}
+									required
+								/>
+								<input
+									type="text"
+									placeholder="Address"
+									value={editAddress}
+									onChange={(e) => setEditAddress(e.target.value)}
+									required
+								/>
+								<input
+									type="text"
+									placeholder="Latitude"
+									value={editLatitude}
+									onChange={(e) => setEditLatitude(e.target.value)}
+									required
+								/>
+								<input
+									type="text"
+									placeholder="Longitude"
+									value={editLongitude}
+									onChange={(e) => setEditLongitude(e.target.value)}
+									required
+								/>
+								<textarea
+									placeholder="Description"
+									value={editDescription}
+									onChange={(e) => setEditDescription(e.target.value)}
+									required
+								/>
+								{editError && <p style={{ color: "red" }}>{editError}</p>}
+								<button type="submit">Update Location</button>
+								<button type="button" onClick={() => setEditingLocation(null)}>Cancel</button>
+							</form>
 						)}
 					</div>
 				) : (

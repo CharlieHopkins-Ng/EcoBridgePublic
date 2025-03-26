@@ -13,13 +13,17 @@
 				"emailVerified": {
 					".validate": "newData.isBoolean()"
 				}
-			}
+			},
+			".read": "auth != null && root.child('adminUids').child(auth.uid).exists()",
+        ".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
 		},
 		"usernames": {
 			"$username": {
 				".read": "auth != null",
 				".write": "auth != null && !data.exists()"
-			}
+			},
+            ".read": "auth != null && root.child('adminUids').child(auth.uid).exists()",
+            ".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
 		},
 		"adminUids": {
 			".read": true,
@@ -29,7 +33,9 @@
 			"$locationId": {
 				".read": true,
 				".write": "auth != null && data.child('Uid').val() === auth.uid"
-			}
+			},
+        ".read": true,
+        ".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
 		},
 		"clusteredLocations": {
 			".read": true,
