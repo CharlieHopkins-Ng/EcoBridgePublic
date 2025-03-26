@@ -1,0 +1,39 @@
+{
+	"rules": {
+		"users": {
+			"$uid": {
+				".write": "auth != null && auth.uid == $uid",
+				".read": "auth != null",
+				"username": {
+					".validate": "newData.isString() && newData.val().length > 0 && !root.child('usernames').child(newData.val()).exists()"
+				}
+			}
+		},
+		"usernames": {
+			"$username": {
+				".write": "auth != null && !data.exists()",
+				".read": "auth != null"
+			}
+		},
+		"adminUids": {
+			".read": true,
+			".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
+		},
+		"locations": {
+			"$locationId": {
+				".read": true,
+				".write": "auth != null && data.child('Uid').val() === auth.uid"
+			},
+        ".read": true,
+        ".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
+		},
+		"clusteredLocations": {
+			".read": true,
+			".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
+		},
+		"pendingLocations": {
+			".read": "auth != null",
+			".write": "auth != null"
+		}
+	}
+}
