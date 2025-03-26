@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "firebase/auth";
-import { ref, get } from "firebase/database";
+import { ref, get, update } from "firebase/database";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
@@ -72,6 +72,11 @@ const Login = () => {
 			}
 
 			const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+			// Update email verification status in the database
+			const userRef = ref(db, `users/${userCredential.user.uid}`);
+			await update(userRef, { emailVerified: userCredential.user.emailVerified });
+
 			if (userCredential.user.emailVerified) {
 				router.push("/");
 			} else {

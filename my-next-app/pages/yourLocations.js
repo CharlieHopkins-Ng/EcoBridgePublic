@@ -38,6 +38,7 @@ const YourLocations = () => {
             if (user) {
                 setIsAuthenticated(true);
                 setUid(user.uid);
+                setIsAdmin(adminUids.includes(user.uid)); // Ensure admin check includes UIDs
                 fetchUserLocations(user.uid);
             } else {
                 setIsAuthenticated(false);
@@ -45,7 +46,7 @@ const YourLocations = () => {
             }
         });
         return () => unsubscribe();
-    }, [auth, router]);
+    }, [auth, adminUids, router]);
 
     const fetchUserLocations = (uid) => {
         const locationsRef = ref(db, "locations");

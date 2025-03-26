@@ -16,6 +16,7 @@ const SubmitLocation = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [adminEmails, setAdminEmails] = useState([]); // Add missing state
+	const [adminUids, setAdminUids] = useState([]); // Add missing state
 	const [uid, setUid] = useState("");
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
@@ -45,7 +46,7 @@ const SubmitLocation = () => {
 				}
 				setIsAuthenticated(true);
 				setUid(user.uid);
-				setIsAdmin(adminEmails.includes(user.email));
+				setIsAdmin(adminEmails.includes(user.email) || adminUids.includes(user.uid)); // Ensure admin check includes UIDs
 				setUsername(user.displayName || "Anonymous");
 				setEmail(user.email);
 			} else {
@@ -54,14 +55,14 @@ const SubmitLocation = () => {
 			}
 		});
 		return () => unsubscribe();
-	}, [auth, adminEmails, router]);
+	}, [auth, adminEmails, adminUids, router]);
 
 	useEffect(() => {
 		const fetchAdminUids = async () => {
 			const adminUidsRef = ref(db, "adminUids");
 			onValue(adminUidsRef, (snapshot) => {
 				const data = snapshot.val();
-				setIsAdmin(data ? Object.keys(data).includes(auth.currentUser?.uid) : false);
+				setAdminUids(data ? Object.keys(data) : []);
 			});
 		};
 

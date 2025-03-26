@@ -14,6 +14,7 @@ const Admin = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
 	const [adminUids, setAdminUids] = useState([]);
+	const [allUsers, setAllUsers] = useState([]);
 	const auth = getAuth(app);
 	const db = getDatabase(app);
 	const router = useRouter();
@@ -23,6 +24,7 @@ const Admin = () => {
 			const adminUidsRef = ref(db, "adminUids");
 			onValue(adminUidsRef, (snapshot) => {
 				const data = snapshot.val();
+				console.log("Admin UIDs fetched:", data); // Debugging check
 				setAdminUids(data ? Object.keys(data) : []);
 			});
 		};
@@ -32,6 +34,7 @@ const Admin = () => {
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			console.log("Auth state changed:", user); // Debugging check
 			if (user) {
 				setIsAuthenticated(true);
 				setIsAdmin(adminUids.includes(user.uid));
@@ -48,13 +51,38 @@ const Admin = () => {
 			const pendingLocationsRef = ref(db, "pendingLocations");
 			onValue(pendingLocationsRef, (snapshot) => {
 				const data = snapshot.val();
+				console.log("Pending locations fetched:", data); // Debugging check
 				setPendingLocations(data ? Object.entries(data) : []);
 			});
 
 			const allLocationsRef = ref(db, "locations");
 			onValue(allLocationsRef, (snapshot) => {
 				const data = snapshot.val();
+				console.log("All locations fetched:", data); // Debugging check
 				setAllLocations(data ? Object.entries(data) : []);
+			});
+
+			// Fetch all users
+			const usersRef = ref(db, "users");
+			onValue(usersRef, (snapshot) => {
+				if (snapshot.exists()) {
+					const data = snapshot.val();
+					console.log("Users raw data fetched:", data); // Debugging check for raw data
+					const users = Object.entries(data).map(([id, user]) => ({
+						id,
+						username: user.username || "N/A",
+						email: user.email || "N/A",
+						createdAt: user.createdAt || "N/A",
+						emailVerified: user.emailVerified || false,
+					}));
+					console.log("Processed users:", users); // Debugging check for processed users
+					setAllUsers(users);
+				} else {
+					console.log("No users found in the database."); // Debugging check for empty data
+					setAllUsers([]); // Clear the list if no users are found
+				}
+			}, (error) => {
+				console.error("Error fetching users:", error); // Debugging check for errors
 			});
 		}
 	}, [isAdmin, db]);
@@ -87,6 +115,19 @@ const Admin = () => {
 			setSearchResults(searchResults.filter(([id]) => id !== locationId));
 		} catch (error) {
 			alert("Failed to delete location: " + error.message);
+		}
+	};
+
+	const handleDeleteUser = async (userId) => {
+		try {
+			console.log("Deleting user with ID:", userId); // Debugging check
+			await remove(ref(db, `users/${userId}`));
+			await remove(ref(db, `usernames/${allUsers.find(user => user.id === userId)?.username}`));
+			setAllUsers(allUsers.filter(user => user.id !== userId));
+			alert("User deleted successfully.");
+		} catch (error) {
+			console.error("Error deleting user:", error.message); // Debugging check
+			alert("Failed to delete user: " + error.message);
 		}
 	};
 
@@ -146,6 +187,21 @@ const Admin = () => {
 				<h1>Admin Panel</h1>
 				{isAdmin ? (
 					<div>
+						<h2>All Users</h2>
+						{allUsers.length > 0 ? (
+							allUsers.map((user) => (
+								<div key={user.id} className="location">
+									<h3>{user.username}</h3>
+									<p><strong>Email:</strong> {user.email}</p>
+									<p><strong>Account Created:</strong> {new Date(user.createdAt).toLocaleString()}</p>
+									<p><strong>Email Verified:</strong> {user.emailVerified ? "Yes" : "No"}</p>
+									<button onClick={() => handleDeleteUser(user.id)}>Delete User</button>
+								</div>
+							))
+						) : (
+							<p>No users found.</p>
+						)}
+
 						<h2>Pending Locations</h2>
 						{pendingLocations.length > 0 ? (
 							pendingLocations.map(([id, location]) => (

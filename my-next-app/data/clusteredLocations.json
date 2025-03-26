@@ -1,10 +1,10 @@
 [
   {
-    "Name": "16 locations",
-    "UUID": "bc3bc1f5-35d5-4cf6-b479-34d0246e760b",
+    "Name": "24 locations",
+    "UUID": "347015eb-85ee-4037-8323-9d0d84d523c0",
     "Address": "",
-    "Latitude": 39.94355,
-    "Longitude": 116.41841437499998,
+    "Latitude": 38.319363749999994,
+    "Longitude": 119.19125916666667,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 0,
     "LocationNames": [
@@ -18,27 +18,15 @@
       "Beijing Energy Network (BEN)",
       "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
       "Greenovation Hub",
+      "Shanghai Roots & Shoots",
       "EcoAction",
+      "Green Zhejiang",
       "China Environmental Protection Foundation (CEPF)",
       "Environmental Defense Fund (EDF) China Program",
       "Wildlife Conservation Society (WCS) China",
       "Global Village of Beijing (GVB)",
-      "China Youth Development Foundation (CYDF)"
-    ]
-  },
-  {
-    "Name": "9 locations",
-    "UUID": "2040aca8-9763-4026-aaf0-29ea18e78dc3",
-    "Address": "",
-    "Latitude": 34.30692555555556,
-    "Longitude": 123.43054888888891,
-    "Description": "Zoom in to find more locations",
-    "ZoomLevel": 0,
-    "LocationNames": [
-      "Shanghai Roots & Shoots",
-      "Green Zhejiang",
-      "Green Hunan",
       "Shanghai Oasis Green Food Bank",
+      "China Youth Development Foundation (CYDF)",
       "Korean Federation for Environmental Movement (KFEM)",
       "Korea Green Foundation",
       "Green Korea United",
@@ -47,36 +35,25 @@
     ]
   },
   {
-    "Name": "4 locations",
-    "UUID": "307f32d7-6832-4ebe-801a-d61de84a8cff",
+    "Name": "6 locations",
+    "UUID": "c918694c-6ffc-4224-be24-96217645978f",
     "Address": "",
-    "Latitude": 22.6344825,
-    "Longitude": 112.5071025,
+    "Latitude": 23.962694999999997,
+    "Longitude": 110.95226000000001,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 0,
     "LocationNames": [
       "Friends of Green Environment (FOGE)",
+      "Green Kunming",
+      "Green Hunan",
       "Guangxi Biodiversity Research and Conservation Association",
       "Friends of the Earth (HK)",
       "Greenpeace East Asia"
     ]
   },
   {
-    "Name": "2 locations",
-    "UUID": "3f49dc25-2d48-4dcd-8009-0e983df530ee",
-    "Address": "",
-    "Latitude": 27.83874,
-    "Longitude": 103.385865,
-    "Description": "Zoom in to find more locations",
-    "ZoomLevel": 0,
-    "LocationNames": [
-      "Green Kunming",
-      "Chengdu Urban Rivers Association (CURA)"
-    ]
-  },
-  {
     "Name": "5 locations",
-    "UUID": "fe634159-85f5-4829-be5f-fc163fee68a4",
+    "UUID": "71e57a41-b4eb-4729-8fb8-c371f0520cfb",
     "Address": "",
     "Latitude": 40.39443,
     "Longitude": -74.55951200000001,
@@ -92,7 +69,7 @@
   },
   {
     "Name": "16 locations",
-    "UUID": "3c67a2eb-c3da-4468-9c9d-f4aab55f0c3e",
+    "UUID": "a9b443e9-fba2-4377-a27e-15cd50b52064",
     "Address": "",
     "Latitude": 39.94355,
     "Longitude": 116.41841437499998,
@@ -119,7 +96,7 @@
   },
   {
     "Name": "3 locations",
-    "UUID": "a5afba10-4125-4cbe-b916-fd3e17f5300e",
+    "UUID": "03e2c59a-4bec-4f89-8bb0-3b2c25df1be7",
     "Address": "",
     "Latitude": 30.914909999999995,
     "Longitude": 121.01176333333335,
@@ -132,22 +109,24 @@
     ]
   },
   {
-    "Name": "3 locations",
-    "UUID": "e51e9331-41b6-4cd8-bd2e-6512e64b25b0",
+    "Name": "5 locations",
+    "UUID": "0203b3fa-0345-4086-9800-de862499190b",
     "Address": "",
-    "Latitude": 22.574816666666667,
-    "Longitude": 113.90029,
+    "Latitude": 23.746465999999998,
+    "Longitude": 112.60155200000001,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 1,
     "LocationNames": [
       "Friends of Green Environment (FOGE)",
+      "Green Hunan",
+      "Guangxi Biodiversity Research and Conservation Association",
       "Friends of the Earth (HK)",
       "Greenpeace East Asia"
     ]
   },
   {
     "Name": "5 locations",
-    "UUID": "3986d40c-81c2-4000-ad8b-c69f3c838ce5",
+    "UUID": "d165bc17-d3b2-4bec-bb07-ec05e3ff4e29",
     "Address": "",
     "Latitude": 40.39443,
     "Longitude": -74.55951200000001,
@@ -163,7 +142,7 @@
   },
   {
     "Name": "5 locations",
-    "UUID": "c0267039-458b-4b10-8869-c01c0e86840e",
+    "UUID": "4262afe6-b4a8-4898-8bad-93aaf1053330",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -179,7 +158,7 @@
   },
   {
     "Name": "16 locations",
-    "UUID": "054ab5e1-126f-416e-a622-fb4b2d8e604a",
+    "UUID": "5fe6b4e0-167b-4365-9439-acae588d83a1",
     "Address": "",
     "Latitude": 39.94355,
     "Longitude": 116.41841437499998,
@@ -206,7 +185,7 @@
   },
   {
     "Name": "3 locations",
-    "UUID": "7395f3b1-337d-4a69-9ee2-5305abf77025",
+    "UUID": "d0e798de-23f2-4a69-a72d-df806658aa15",
     "Address": "",
     "Latitude": 30.914909999999995,
     "Longitude": 121.01176333333335,
@@ -220,7 +199,7 @@
   },
   {
     "Name": "3 locations",
-    "UUID": "81f224f6-cb06-49da-956d-29404cc60a09",
+    "UUID": "5a698404-e9a9-47d9-8c50-1818dc034296",
     "Address": "",
     "Latitude": 22.574816666666667,
     "Longitude": 113.90029,
@@ -234,7 +213,7 @@
   },
   {
     "Name": "4 locations",
-    "UUID": "1dfbc15d-dac1-4f95-b9c8-9b8b95a0e2a1",
+    "UUID": "81f1772e-59df-448a-9448-276acb155da5",
     "Address": "",
     "Latitude": 40.7724625,
     "Longitude": -73.92174,
@@ -249,7 +228,7 @@
   },
   {
     "Name": "5 locations",
-    "UUID": "13bc38c9-dd57-460b-99aa-7df594042446",
+    "UUID": "44092a39-90b0-48fb-bff6-4fb24fd7a908",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -265,7 +244,7 @@
   },
   {
     "Name": "16 locations",
-    "UUID": "30d387f2-c3f3-4e91-bb2a-49900fb953fb",
+    "UUID": "1779f0e5-d548-4a14-9da8-a948d0554d21",
     "Address": "",
     "Latitude": 39.94355,
     "Longitude": 116.41841437499998,
@@ -292,7 +271,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "d1d7a078-5acf-46d8-be27-009dbd96a47e",
+    "UUID": "0d2533c2-acbb-43df-ad35-84053d491f7a",
     "Address": "",
     "Latitude": 31.23746,
     "Longitude": 121.445925,
@@ -304,8 +283,22 @@
     ]
   },
   {
+    "Name": "3 locations",
+    "UUID": "f2787e5e-bcd4-4e4c-a0e8-213ed0b01b5b",
+    "Address": "",
+    "Latitude": 22.574816666666667,
+    "Longitude": 113.90029,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 3,
+    "LocationNames": [
+      "Friends of Green Environment (FOGE)",
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
     "Name": "4 locations",
-    "UUID": "d6570ece-a9af-4a55-8037-18279759d8f4",
+    "UUID": "cfe602d1-ad5c-4af9-a846-e35037a669a0",
     "Address": "",
     "Latitude": 40.7724625,
     "Longitude": -73.92174,
@@ -319,21 +312,8 @@
     ]
   },
   {
-    "Name": "2 locations",
-    "UUID": "4c5d1062-1302-44e9-b46d-5151f951dc4f",
-    "Address": "",
-    "Latitude": 22.2975,
-    "Longitude": 114.1696,
-    "Description": "Zoom in to find more locations",
-    "ZoomLevel": 3,
-    "LocationNames": [
-      "Friends of the Earth (HK)",
-      "Greenpeace East Asia"
-    ]
-  },
-  {
     "Name": "5 locations",
-    "UUID": "7316cb57-0747-4a30-81d8-de9bb72e70c9",
+    "UUID": "7c443f24-e79f-4d83-96fe-5c8c07cada28",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -349,7 +329,7 @@
   },
   {
     "Name": "16 locations",
-    "UUID": "82524152-bcac-49a1-a8a1-7b327ed73fd3",
+    "UUID": "79014445-813e-461f-a38c-b174aca49416",
     "Address": "",
     "Latitude": 39.94355,
     "Longitude": 116.41841437499998,
@@ -376,7 +356,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "ebac6c8e-af24-48cc-96aa-dd9b74c8d3aa",
+    "UUID": "1343e60a-989f-47a2-9fa6-a60b0bc2b5fe",
     "Address": "",
     "Latitude": 31.23746,
     "Longitude": 121.445925,
@@ -389,7 +369,7 @@
   },
   {
     "Name": "4 locations",
-    "UUID": "29c0f944-cebe-42b6-ae10-9d48a7affde7",
+    "UUID": "28c1368b-581d-468f-82cc-6d974cfd2b0a",
     "Address": "",
     "Latitude": 40.7724625,
     "Longitude": -73.92174,
@@ -404,7 +384,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "6a43291d-4b41-474f-bf63-ac5c0fb506c5",
+    "UUID": "da711566-8c71-49f7-b741-0d9e25d291a4",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -417,7 +397,7 @@
   },
   {
     "Name": "5 locations",
-    "UUID": "eb36d181-37a4-4bf7-9889-ec5acc6b760a",
+    "UUID": "734afdf5-a5e8-4670-bf9a-546ea2eab4e8",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -433,7 +413,7 @@
   },
   {
     "Name": "16 locations",
-    "UUID": "34c308b8-dce1-477f-83dc-e61a3ff67c60",
+    "UUID": "f5bef2ba-1f56-4f60-ae72-750359099eed",
     "Address": "",
     "Latitude": 39.94355,
     "Longitude": 116.41841437499998,
@@ -460,7 +440,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "797ae42e-a847-4830-a88f-768e99486834",
+    "UUID": "83160773-45c8-451f-a247-9ec479a65116",
     "Address": "",
     "Latitude": 31.23746,
     "Longitude": 121.445925,
@@ -473,7 +453,7 @@
   },
   {
     "Name": "4 locations",
-    "UUID": "d5111d7c-edf6-440b-abcf-a3116042317c",
+    "UUID": "b2e116eb-6e20-4612-985f-6d18bb5d786b",
     "Address": "",
     "Latitude": 40.7724625,
     "Longitude": -73.92174,
@@ -488,7 +468,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "010ea8ef-10fb-4784-8eb9-56e33ef7b97f",
+    "UUID": "7342cef0-8719-40ad-8c64-84ce978e4e93",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -501,7 +481,7 @@
   },
   {
     "Name": "5 locations",
-    "UUID": "3256f0d6-24dc-4a7f-8c5d-f3c62f880a4b",
+    "UUID": "e5c08184-4068-4de5-9f01-4cf7ae918353",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -517,7 +497,7 @@
   },
   {
     "Name": "16 locations",
-    "UUID": "ecb106e6-f7df-4e6c-9b85-0b7a26379c82",
+    "UUID": "9a0a0f76-5978-4a41-af5c-c941a31c5c51",
     "Address": "",
     "Latitude": 39.94355,
     "Longitude": 116.41841437499998,
@@ -544,7 +524,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "008af6ab-8827-422f-b983-16f6ffa88740",
+    "UUID": "182a1261-360a-47b3-9ab6-ac56175828d7",
     "Address": "",
     "Latitude": 31.23746,
     "Longitude": 121.445925,
@@ -557,7 +537,7 @@
   },
   {
     "Name": "4 locations",
-    "UUID": "76de0d8d-f1de-4090-9508-331b5b4da9a6",
+    "UUID": "9db1a8e8-4b73-45b7-94d1-42884418c92c",
     "Address": "",
     "Latitude": 40.7724625,
     "Longitude": -73.92174,
@@ -572,7 +552,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "7aef8285-fea1-4a6c-8c9b-c13a098070d1",
+    "UUID": "7c9b0e8c-3070-4b36-a388-ab6ace309030",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -585,7 +565,7 @@
   },
   {
     "Name": "5 locations",
-    "UUID": "b6b1f6a8-24a8-4cf9-ab44-547efe9c8375",
+    "UUID": "34500e98-6314-4b13-a847-08836aea9275",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -600,46 +580,47 @@
     ]
   },
   {
-    "Name": "9 locations",
-    "UUID": "07d1e6bb-9008-4f42-8aef-d18f23e8b938",
+    "Name": "15 locations",
+    "UUID": "777d5262-f025-4f85-aa5b-6be5a7a9588d",
     "Address": "",
-    "Latitude": 39.93893222222222,
-    "Longitude": 116.38118888888887,
+    "Latitude": 39.94077,
+    "Longitude": 116.41330199999997,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 7,
     "LocationNames": [
       "The Nature Conservancy – China Program",
       "Greenpeace East Asia – Beijing Office",
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Friends of Nature (FON)",
+      "China Mangrove Conservation Network (CMCN)",
       "Shanshui Conservation Center",
       "Global Environmental Institute (GEI)",
+      "Beijing Energy Network (BEN)",
       "China Biodiversity Conservation and Green Development Foundation (CBCGDF)",
       "Greenovation Hub",
+      "EcoAction",
+      "Environmental Defense Fund (EDF) China Program",
       "Wildlife Conservation Society (WCS) China",
       "Global Village of Beijing (GVB)",
       "China Youth Development Foundation (CYDF)"
     ]
   },
   {
-    "Name": "7 locations",
-    "UUID": "2f196b8b-a3c1-4873-b7fb-36c3e8c35cec",
+    "Name": "2 locations",
+    "UUID": "13038ad6-4a5d-4ed7-b447-03c4eb169b56",
     "Address": "",
-    "Latitude": 39.949487142857144,
-    "Longitude": 116.46627571428571,
+    "Latitude": 31.23746,
+    "Longitude": 121.445925,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 7,
     "LocationNames": [
-      "International Ecological Economy Promotion Association (IEEPA)",
-      "Friends of Nature (FON)",
-      "China Mangrove Conservation Network (CMCN)",
-      "Beijing Energy Network (BEN)",
-      "EcoAction",
-      "China Environmental Protection Foundation (CEPF)",
-      "Environmental Defense Fund (EDF) China Program"
+      "Shanghai Roots & Shoots",
+      "Shanghai Oasis Green Food Bank"
     ]
   },
   {
     "Name": "2 locations",
-    "UUID": "f5131126-3dbf-4580-89cc-57f131755532",
+    "UUID": "b07fdadf-0c4d-4f3d-817f-db61ad85c6fe",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -652,7 +633,7 @@
   },
   {
     "Name": "5 locations",
-    "UUID": "7dcbcc44-49ed-4e55-895f-7dc88169a677",
+    "UUID": "cffce723-1fd3-4616-9869-de5cfed23364",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -668,7 +649,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "054f2e75-656d-486c-bbcd-729ebdaec22d",
+    "UUID": "37853f61-2e76-4ad9-ba09-53eee5b9a9f1",
     "Address": "",
     "Latitude": 40.7401,
     "Longitude": -73.9899,
@@ -680,25 +661,27 @@
     ]
   },
   {
-    "Name": "3 locations",
-    "UUID": "38592065-fbaa-4aee-8cdd-ec2d5f20cb77",
+    "Name": "5 locations",
+    "UUID": "9acc4273-edfe-441e-b73d-d8bcf8e03899",
     "Address": "",
-    "Latitude": 39.93167,
-    "Longitude": 116.37681333333332,
+    "Latitude": 39.930818,
+    "Longitude": 116.39166,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 8,
     "LocationNames": [
       "The Nature Conservancy – China Program",
       "Greenpeace East Asia – Beijing Office",
-      "Shanshui Conservation Center"
+      "Shanshui Conservation Center",
+      "Wildlife Conservation Society (WCS) China",
+      "Global Village of Beijing (GVB)"
     ]
   },
   {
     "Name": "7 locations",
-    "UUID": "f47aa114-4a18-49b0-aac0-03131e66f578",
+    "UUID": "84daa480-4032-4cd3-bad9-10331a836fb7",
     "Address": "",
-    "Latitude": 39.94903285714286,
-    "Longitude": 116.45585000000001,
+    "Latitude": 39.94374,
+    "Longitude": 116.46112714285714,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 8,
     "LocationNames": [
@@ -707,13 +690,13 @@
       "China Mangrove Conservation Network (CMCN)",
       "Beijing Energy Network (BEN)",
       "Greenovation Hub",
-      "Environmental Defense Fund (EDF) China Program",
-      "Global Village of Beijing (GVB)"
+      "EcoAction",
+      "Environmental Defense Fund (EDF) China Program"
     ]
   },
   {
     "Name": "2 locations",
-    "UUID": "1a7b0a83-dee0-4726-9ccb-a43a7ebcb353",
+    "UUID": "eb99c23c-ad2a-420e-a1c9-a35d0fbeb1ce",
     "Address": "",
     "Latitude": 39.96865,
     "Longitude": 116.348465,
@@ -726,7 +709,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "596f6810-700d-41bf-935d-cfec353146fa",
+    "UUID": "574cf7a0-8612-4d1c-aead-e51985bb5d7c",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -738,15 +721,16 @@
     ]
   },
   {
-    "Name": "4 locations",
-    "UUID": "892ec822-c900-4c9f-8a12-c268b711b49e",
+    "Name": "5 locations",
+    "UUID": "51ec6183-3004-4c38-993d-d221d0ca5465",
     "Address": "",
-    "Latitude": 37.570949999999996,
-    "Longitude": 126.97834999999999,
+    "Latitude": 37.56464,
+    "Longitude": 126.97206000000001,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 8,
     "LocationNames": [
       "Korean Federation for Environmental Movement (KFEM)",
+      "Korea Green Foundation",
       "Green Korea United",
       "Korea Zero Waste Movement Network",
       "Korea Environmental Education Network"
@@ -754,7 +738,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "1bb818aa-c275-483f-a7d2-31cbc4cd78f1",
+    "UUID": "80c38b92-bdb8-4ec5-874a-0a70508f8df6",
     "Address": "",
     "Latitude": 40.7401,
     "Longitude": -73.9899,
@@ -766,8 +750,21 @@
     ]
   },
   {
+    "Name": "2 locations",
+    "UUID": "31b14335-bfe0-4a9d-bcf1-822562883c79",
+    "Address": "",
+    "Latitude": 39.947585,
+    "Longitude": 116.41651999999999,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 9,
+    "LocationNames": [
+      "Greenpeace East Asia – Beijing Office",
+      "Global Village of Beijing (GVB)"
+    ]
+  },
+  {
     "Name": "4 locations",
-    "UUID": "a4e40431-207f-4f8c-9e2e-3a7ecd5323e4",
+    "UUID": "f77626cf-0a43-4ed2-8269-84dee3d5a582",
     "Address": "",
     "Latitude": 39.94744,
     "Longitude": 116.46177,
@@ -782,7 +779,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "b15cbbb9-eca7-4ac8-aaf1-5e4cb44da9d0",
+    "UUID": "1286e2a8-2af6-4eff-863b-c85781c18f04",
     "Address": "",
     "Latitude": 39.91941,
     "Longitude": 116.46843,
@@ -795,7 +792,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "d5d0668a-4c8b-45b2-be36-0471efc7a22a",
+    "UUID": "8b9c8d72-0269-4f89-9903-cc4e73c2c3b3",
     "Address": "",
     "Latitude": 39.96865,
     "Longitude": 116.348465,
@@ -808,7 +805,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "a859b047-e0b3-4878-ba35-bb1f40affae5",
+    "UUID": "aa3a67d1-1fef-4b9a-8b93-6d1ed5ed7d39",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -820,13 +817,69 @@
     ]
   },
   {
+    "Name": "4 locations",
+    "UUID": "a1f81247-078c-49c1-b085-4e20d2182e75",
+    "Address": "",
+    "Latitude": 37.570949999999996,
+    "Longitude": 126.97834999999999,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 9,
+    "LocationNames": [
+      "Korean Federation for Environmental Movement (KFEM)",
+      "Green Korea United",
+      "Korea Zero Waste Movement Network",
+      "Korea Environmental Education Network"
+    ]
+  },
+  {
     "Name": "2 locations",
-    "UUID": "df700c0c-650a-4750-af5c-fcc82395a18a",
+    "UUID": "011bd251-e253-4bc9-bf9d-f19b41c0bb9b",
+    "Address": "",
+    "Latitude": 40.7401,
+    "Longitude": -73.9899,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 9,
+    "LocationNames": [
+      "Natural Resources Defense Council (NRDC)",
+      "Environmental Defense Fund (EDF)"
+    ]
+  },
+  {
+    "Name": "4 locations",
+    "UUID": "0f020c47-1b8b-41b2-94f1-7b9dcfa497d3",
+    "Address": "",
+    "Latitude": 39.94744,
+    "Longitude": 116.46177,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 10,
+    "LocationNames": [
+      "International Ecological Economy Promotion Association (IEEPA)",
+      "Beijing Energy Network (BEN)",
+      "Greenovation Hub",
+      "Environmental Defense Fund (EDF) China Program"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "dfea6418-8be3-47a4-adbf-266e950a9344",
+    "Address": "",
+    "Latitude": 22.2975,
+    "Longitude": 114.1696,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 10,
+    "LocationNames": [
+      "Friends of the Earth (HK)",
+      "Greenpeace East Asia"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "86304ab0-1b18-4319-9e44-bf3886f65746",
     "Address": "",
     "Latitude": 37.57145,
     "Longitude": 126.9686,
     "Description": "Zoom in to find more locations",
-    "ZoomLevel": 9,
+    "ZoomLevel": 10,
     "LocationNames": [
       "Korean Federation for Environmental Movement (KFEM)",
       "Korea Environmental Education Network"
@@ -834,12 +887,12 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "99630630-b696-432a-adfc-d0f6d38a9218",
+    "UUID": "5e576993-a0f9-4744-8975-846ff054e10a",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
     "Description": "Zoom in to find more locations",
-    "ZoomLevel": 9,
+    "ZoomLevel": 10,
     "LocationNames": [
       "Green Korea United",
       "Korea Zero Waste Movement Network"
@@ -847,73 +900,33 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "de8cb295-d880-4441-9517-8e325e3849a4",
+    "UUID": "0466d144-352c-49e8-b1e9-cadef3c4ac83",
     "Address": "",
     "Latitude": 40.7401,
     "Longitude": -73.9899,
     "Description": "Zoom in to find more locations",
-    "ZoomLevel": 9,
+    "ZoomLevel": 10,
     "LocationNames": [
       "Natural Resources Defense Council (NRDC)",
       "Environmental Defense Fund (EDF)"
     ]
   },
   {
-    "Name": "3 locations",
-    "UUID": "8a5695c3-8fd8-4b08-b35c-fc0ad3533e75",
+    "Name": "2 locations",
+    "UUID": "6d4ba688-d1ab-49dc-9402-62e534743ff0",
     "Address": "",
-    "Latitude": 39.9494,
-    "Longitude": 116.46175333333333,
+    "Latitude": 39.94752,
+    "Longitude": 116.45906,
     "Description": "Zoom in to find more locations",
-    "ZoomLevel": 10,
+    "ZoomLevel": 11,
     "LocationNames": [
       "International Ecological Economy Promotion Association (IEEPA)",
-      "Beijing Energy Network (BEN)",
       "Greenovation Hub"
     ]
   },
   {
     "Name": "2 locations",
-    "UUID": "bf72f96e-4a11-4950-9a71-ef8874993b07",
-    "Address": "",
-    "Latitude": 22.2975,
-    "Longitude": 114.1696,
-    "Description": "Zoom in to find more locations",
-    "ZoomLevel": 10,
-    "LocationNames": [
-      "Friends of the Earth (HK)",
-      "Greenpeace East Asia"
-    ]
-  },
-  {
-    "Name": "2 locations",
-    "UUID": "e929e7a4-9ee7-41a5-a547-048c601fa727",
-    "Address": "",
-    "Latitude": 37.57045,
-    "Longitude": 126.9881,
-    "Description": "Zoom in to find more locations",
-    "ZoomLevel": 10,
-    "LocationNames": [
-      "Green Korea United",
-      "Korea Zero Waste Movement Network"
-    ]
-  },
-  {
-    "Name": "2 locations",
-    "UUID": "bf3712c7-358c-4a3c-8f84-c53d3061a80e",
-    "Address": "",
-    "Latitude": 40.7401,
-    "Longitude": -73.9899,
-    "Description": "Zoom in to find more locations",
-    "ZoomLevel": 10,
-    "LocationNames": [
-      "Natural Resources Defense Council (NRDC)",
-      "Environmental Defense Fund (EDF)"
-    ]
-  },
-  {
-    "Name": "2 locations",
-    "UUID": "521cae83-4228-4774-838a-763b5b8b7163",
+    "UUID": "15a8aebc-4548-4482-8b2f-edc31961b85e",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
@@ -926,7 +939,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "d4d89916-eff0-4d0e-977e-38d0bad4e20b",
+    "UUID": "4f3b0f30-a37e-4a7a-b47a-d77f956e95d2",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
@@ -939,7 +952,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "976da585-0ac7-442d-9aae-2f09f5e346ee",
+    "UUID": "8e72b8c6-8ec1-4149-a625-4eb1bc38a2a9",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
@@ -952,7 +965,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "0218a95b-6e6c-4f71-bd0a-69f9bd203b52",
+    "UUID": "d0b98e86-5f36-4736-89d7-8d402c865e47",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
@@ -965,7 +978,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "e3862549-aecf-4432-8eb2-e32dd27e4c4c",
+    "UUID": "5b266eec-92cd-4a61-9d16-6d5021c39fcf",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
@@ -978,7 +991,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "650d7e7c-5108-4751-b9e5-04ecde3170ae",
+    "UUID": "41e13f28-b109-456c-8024-1c4d6f7ed636",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
