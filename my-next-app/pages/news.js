@@ -9,6 +9,7 @@ const News = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [adminEmails, setAdminEmails] = useState([]);
+	const [adminUids, setAdminUids] = useState([]);
 	const auth = getAuth(app);
 
 	useEffect(() => {
@@ -24,29 +25,29 @@ const News = () => {
 	}, []);
 
 	useEffect(() => {
+		const fetchAdminUids = async () => {
+			const adminUidsRef = ref(db, "adminUids");
+			onValue(adminUidsRef, (snapshot) => {
+				const data = snapshot.val();
+				setAdminUids(data ? Object.keys(data) : []);
+			});
+		};
+
+		fetchAdminUids();
+	}, []);
+
+	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
 				setIsAuthenticated(true);
-				setIsAdmin(adminEmails.includes(user.email));
+				setIsAdmin(adminEmails.includes(user.email) || adminUids.includes(user.uid)); // Ensure admin check includes UIDs
 			} else {
 				setIsAuthenticated(false);
 				setIsAdmin(false);
 			}
 		});
 		return () => unsubscribe();
-	}, [auth, adminEmails]);
-
-	useEffect(() => {
-		const fetchAdminUids = async () => {
-			const adminUidsRef = ref(db, "adminUids");
-			onValue(adminUidsRef, (snapshot) => {
-				const data = snapshot.val();
-				setIsAdmin(data ? Object.keys(data).includes(auth.currentUser?.uid) : false);
-			});
-		};
-
-		fetchAdminUids();
-	}, [auth]);
+	}, [auth, adminEmails, adminUids]);
 
 	const handleSignOut = async () => {
 		await signOut(auth);

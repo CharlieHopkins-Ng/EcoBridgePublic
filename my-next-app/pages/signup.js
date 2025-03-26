@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAuth, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendEmailVerification } from "firebase/auth";
-import { ref, onValue, set } from "firebase/database";
+import { ref, onValue, set, get } from "firebase/database";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
@@ -49,31 +49,45 @@ const Signup = () => {
 
 	const handleSignup = async (e) => {
 		e.preventDefault();
+
 		if (password !== confirmPassword) {
 			setError("Passwords do not match");
 			return;
 		}
+
 		try {
+			// Create user account
+			const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+			const user = userCredential.user;
+
+			// Send email verification
+			await sendEmailVerification(user);
+
 			// Check if the username already exists
-			const usernamesRef = ref(db, `usernames/${username}`);
-			const snapshot = await onValue(usernamesRef, (snapshot) => snapshot.exists());
-			if (snapshot) {
+			const usernameRef = ref(db, `usernames/${username}`);
+			const snapshot = await get(usernameRef);
+
+			if (snapshot.exists()) {
 				setError("Username already exists. Please choose a different one.");
 				return;
 			}
 
-			const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-			await sendEmailVerification(userCredential.user);
-
-			// Write the username to the users node and the usernames node
-			await set(ref(db, `users/${userCredential.user.uid}`), {
-				username: username
+			// Write user data to the database after account creation
+			const userRef = ref(db, `users/${user.uid}`);
+			await set(userRef, {
+				username: username,
+				email: email,
+				createdAt: new Date().toISOString(),
+				emailVerified: false
 			});
-			await set(ref(db, `usernames/${username}`), userCredential.user.uid);
+
+			// Store username reference
+			await set(ref(db, `usernames/${username}`), user.uid);
 
 			alert("Verification email sent. Please check your inbox.");
 			router.push("/verifyEmail");
 		} catch (error) {
+			console.error("Error during signup:", error.message);
 			setError(error.message);
 		}
 	};
