@@ -76,12 +76,14 @@ const MapPage = () => {
 
     const unsubscribeLocations = onValue(locationsRef, (snapshot) => {
       const data = snapshot.val();
+      console.log("Locations fetched:", data); // Debugging check for locations
       setLocations(data ? Object.values(data) : []);
       setIsLoading(false);
     });
 
     const unsubscribeClusters = onValue(clustersRef, (snapshot) => {
       const data = snapshot.val();
+      console.log("Clusters fetched:", data); // Debugging check for clusters
       setClusters(data ? Object.values(data) : []);
     });
 
@@ -239,7 +241,11 @@ const MapPage = () => {
         </div>
       </nav>
 
-      <div className="map-container" style={{ height: "100vh" }}>
+      <header className="header" style={{ color: "green", marginTop: "100px" , padding: "10px"}} >
+        <h2>Find locations to help the environment near you</h2>
+      </header>
+
+      <div className="map-container" style={{ height: "50vh", marginTop: "20px" }}>
         <MapContainer
           center={center}
           zoom={zoomLevel}
