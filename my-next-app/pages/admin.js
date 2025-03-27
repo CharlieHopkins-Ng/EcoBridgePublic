@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { getDatabase, ref, onValue, remove, set } from "firebase/database";
+import { getDatabase, ref, onValue, remove, set, get, update, runTransaction } from "firebase/database";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
@@ -100,12 +100,45 @@ const Admin = () => {
 	};
 
 	const handleApprove = async (locationId, locationData) => {
-		await set(ref(db, `locations/${locationId}`), locationData);
-		await remove(ref(db, `pendingLocations/${locationId}`));
+		try {
+			// Increment locationsApproved for the user atomically
+			const userRef = ref(db, `users/${locationData.Uid}/locationsApproved`);
+			await runTransaction(userRef, (currentApproved) => {
+				return (currentApproved || 0) + 1; // Increment atomically
+			});
+
+			// Update the database with the approved location and remove it from pending locations
+			const updates = {};
+			updates[`locations/${locationId}`] = locationData;
+			updates[`pendingLocations/${locationId}`] = null;
+			await update(ref(db), updates); // Apply location updates
+		} catch (error) {
+			alert("Failed to approve location: " + error.message);
+		}
 	};
 
 	const handleDeny = async (locationId) => {
-		await remove(ref(db, `pendingLocations/${locationId}`));
+		try {
+			// Fetch the location data from pending locations
+			const locationRef = ref(db, `pendingLocations/${locationId}`);
+			const snapshot = await get(locationRef);
+			const locationData = snapshot.val();
+
+			if (locationData) {
+				// Increment locationsDenied for the user atomically
+				const userRef = ref(db, `users/${locationData.Uid}/locationsDenied`);
+				await runTransaction(userRef, (currentDenied) => {
+					return (currentDenied || 0) + 1; // Increment atomically
+				});
+
+				// Remove the location from pending locations
+				const updates = {};
+				updates[`pendingLocations/${locationId}`] = null;
+				await update(ref(db), updates); // Apply updates
+			}
+		} catch (error) {
+			alert("Failed to deny location: " + error.message);
+		}
 	};
 
 	const handleSearch = () => {
@@ -162,6 +195,18 @@ const Admin = () => {
 				Website: editWebsite || "N/A", // Include website in the updated location
 			};
 			await set(ref(db, `locations/${editingLocation}`), updatedLocation);
+
+			// Increment locationsEdited for the user
+			const locationRef = ref(db, `locations/${editingLocation}`);
+			const snapshot = await get(locationRef); // Use get instead of onValue
+			const locationData = snapshot.val();
+			if (locationData) {
+				const userRef = ref(db, `users/${locationData.Uid}/locationsEdited`);
+				const userSnapshot = await get(userRef); // Use get instead of onValue
+				const currentValue = userSnapshot.val() || 0;
+				await set(userRef, currentValue + 1); // Update the value
+			}
+
 			alert("Location updated successfully.");
 			setEditingLocation(null);
 			setSearchResults(searchResults.map(([id, loc]) => id === editingLocation ? [id, updatedLocation] : [id, loc]));

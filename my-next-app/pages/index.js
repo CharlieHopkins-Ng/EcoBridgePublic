@@ -76,14 +76,12 @@ const MapPage = () => {
 
     const unsubscribeLocations = onValue(locationsRef, (snapshot) => {
       const data = snapshot.val();
-      console.log("Locations fetched:", data); // Debugging check for locations
       setLocations(data ? Object.values(data) : []);
       setIsLoading(false);
     });
 
     const unsubscribeClusters = onValue(clustersRef, (snapshot) => {
       const data = snapshot.val();
-      console.log("Clusters fetched:", data); // Debugging check for clusters
       setClusters(data ? Object.values(data) : []);
     });
 
