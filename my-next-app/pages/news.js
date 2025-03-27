@@ -117,8 +117,7 @@ const News = () => {
 							We are happy to announce that EcoBridge has launched! More features will be coming soon such as:
 						</p>
 						<ul>
-							<li>The ability to submit your own locations (this is mostly developed!)</li>
-							<li>User accounts (this too!)</li>
+							<li>Leaving reviews on locations</li>
 							<li>Multi-language support (feel free to contact us if you want to help with this)</li>
 							<li>A custom domain</li>
 							<li>Community blogs</li>
