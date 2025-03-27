@@ -103,7 +103,7 @@ const SubmitLocation = () => {
 
 	const handleSignOut = async () => {
 		await signOut(auth);
-		router.push("/login");
+		await router.push("/login"); // Ensure navigation is awaited
 	};
 
 	return (
