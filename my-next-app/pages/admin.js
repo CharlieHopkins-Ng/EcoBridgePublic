@@ -25,6 +25,8 @@ const Admin = () => {
 	const [editWebsite, setEditWebsite] = useState(""); // New state for editing website
 	const [editError, setEditError] = useState("");
 	const [activeSection, setActiveSection] = useState(null); // State to track the active section
+	const [showNoWebsiteOnly, setShowNoWebsiteOnly] = useState(false); // New state for filtering locations without websites
+	const [showAllLocations, setShowAllLocations] = useState(false); // New state for showing all locations
 	const auth = getAuth(app);
 	const db = getDatabase(app);
 	const router = useRouter();
@@ -90,6 +92,25 @@ const Admin = () => {
 		}
 	}, [isAdmin, db]);
 
+	useEffect(() => {
+		if (showAllLocations) {
+			//console.log("Show all locations is enabled. Displaying all locations.");
+		}
+	}, [showAllLocations]);
+
+	useEffect(() => {
+		if (showNoWebsiteOnly) {
+			//console.log("Show only locations without websites is enabled.");
+		}
+	}, [showNoWebsiteOnly]);
+
+	useEffect(() => {
+		// Ensure searchResults is updated when allLocations changes
+		if (showAllLocations) {
+			setSearchResults(allLocations);
+		}
+	}, [allLocations, showAllLocations]);
+
 	const filteredUsers = showUnverifiedOnly
 		? allUsers.filter(user => !user.emailVerified)
 		: allUsers;
@@ -142,9 +163,23 @@ const Admin = () => {
 	};
 
 	const handleSearch = () => {
-		const results = allLocations.filter(([id, location]) =>
-			location.Name.toLowerCase().includes(searchQuery.toLowerCase())
-		);
+		let results = allLocations;
+
+		if (showAllLocations) {
+			// Log a message when "Show all locations" is checked
+			console.log("Show all locations is enabled. Displaying all locations.");
+		} else {
+			// Apply search query filter
+			results = results.filter(([id, location]) =>
+				location.Name.toLowerCase().includes(searchQuery.toLowerCase())
+			);
+		}
+
+		// Apply "no website" filter
+		if (showNoWebsiteOnly) {
+			results = results.filter(([id, location]) => !location.Website || location.Website === "N/A");
+		}
+
 		setSearchResults(results);
 	};
 
@@ -330,6 +365,26 @@ const Admin = () => {
 						{activeSection === "locations" && (
 							<div>
 								<h2>Search and Edit Locations</h2>
+								<div style={{ display: "flex", alignItems: "center", marginBottom: "10px", gap: "10px" }}>
+									<label>
+										Show only locations without websites
+										<input
+											type="checkbox"
+											checked={showNoWebsiteOnly}
+											onChange={(e) => setShowNoWebsiteOnly(e.target.checked)}
+											style={{ marginLeft: "5px" }}
+										/>
+									</label>
+									<label>
+										Show all locations
+										<input
+											type="checkbox"
+											checked={showAllLocations}
+											onChange={(e) => setShowAllLocations(e.target.checked)}
+											style={{ marginLeft: "5px" }}
+										/>
+									</label>
+								</div>
 								<input
 									type="text"
 									placeholder="Search by location name"
