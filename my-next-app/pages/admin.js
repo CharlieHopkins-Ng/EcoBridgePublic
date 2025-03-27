@@ -22,7 +22,9 @@ const Admin = () => {
 	const [editLatitude, setEditLatitude] = useState("");
 	const [editLongitude, setEditLongitude] = useState("");
 	const [editDescription, setEditDescription] = useState("");
+	const [editWebsite, setEditWebsite] = useState(""); // New state for editing website
 	const [editError, setEditError] = useState("");
+	const [activeSection, setActiveSection] = useState(null); // State to track the active section
 	const auth = getAuth(app);
 	const db = getDatabase(app);
 	const router = useRouter();
@@ -141,6 +143,7 @@ const Admin = () => {
 		setEditLatitude(locationData.Latitude);
 		setEditLongitude(locationData.Longitude);
 		setEditDescription(locationData.Description);
+		setEditWebsite(locationData.Website || ""); // Set website for editing
 	};
 
 	const handleUpdateLocation = async (e) => {
@@ -156,6 +159,7 @@ const Admin = () => {
 				Latitude: parseFloat(editLatitude),
 				Longitude: parseFloat(editLongitude),
 				Description: editDescription,
+				Website: editWebsite || "N/A", // Include website in the updated location
 			};
 			await set(ref(db, `locations/${editingLocation}`), updatedLocation);
 			alert("Location updated successfully.");
@@ -218,116 +222,141 @@ const Admin = () => {
 					)}
 				</div>
 			</nav>
-			<div className="container">
+			<div className="container" style={{ marginTop: "80px" }}>
 				<h1>Admin Panel</h1>
 				{isAdmin ? (
 					<div>
-						<h2>All Users</h2>
-						<div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
-							<input
-								type="checkbox"
-								checked={showUnverifiedOnly}
-								onChange={(e) => setShowUnverifiedOnly(e.target.checked)}
-								style={{ marginRight: "5px" }}
-							/>
-							<label>Show only unverified users</label>
+						<div style={{ display: "flex", justifyContent: "left", gap: "10px", marginBottom: "20px", marginTop: "20px" }}>
+							<button onClick={() => setActiveSection("users")}>Manage Users</button>
+							<button onClick={() => setActiveSection("pendingLocations")}>Pending Locations</button>
+							<button onClick={() => setActiveSection("locations")}>Search and Edit Locations</button>
 						</div>
-						{filteredUsers.length > 0 ? (
-							filteredUsers.map((user) => (
-								<div key={user.id} className="location">
-									<h3>{user.username}</h3>
-									<p><strong>Email:</strong> {user.email}</p>
-									<p><strong>Account Created:</strong> {new Date(user.createdAt).toLocaleString()}</p>
-									<p><strong>Email Verified:</strong> {user.emailVerified ? "Yes" : "No"}</p>
-									<button onClick={() => handleDeleteUser(user.id)}>Delete User</button>
+
+						{activeSection === "users" && (
+							<div>
+								<h2>All Users</h2>
+								<div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+									<input
+										type="checkbox"
+										checked={showUnverifiedOnly}
+										onChange={(e) => setShowUnverifiedOnly(e.target.checked)}
+										style={{ marginRight: "5px" }}
+									/>
+									<label>Show only unverified users</label>
 								</div>
-							))
-						) : (
-							<p>No users found.</p>
+								{filteredUsers.length > 0 ? (
+									filteredUsers.map((user) => (
+										<div key={user.id} className="location">
+											<h3>{user.username}</h3>
+											<p><strong>Email:</strong> {user.email}</p>
+											<p><strong>Account Created:</strong> {new Date(user.createdAt).toLocaleString()}</p>
+											<p><strong>Email Verified:</strong> {user.emailVerified ? "Yes" : "No"}</p>
+											<button onClick={() => handleDeleteUser(user.id)}>Delete User</button>
+										</div>
+									))
+								) : (
+									<p>No users found.</p>
+								)}
+							</div>
 						)}
 
-						<h2>Pending Locations</h2>
-						{pendingLocations.length > 0 ? (
-							pendingLocations.map(([id, location]) => (
-								<div key={id} className="location">
-									<h3>{location.Name}</h3>
-									<p><strong>Address:</strong> {location.Address}</p>
-									<p><strong>Latitude:</strong> {location.Latitude}</p>
-									<p><strong>Longitude:</strong> {location.Longitude}</p>
-									<p><strong>Description:</strong> {location.Description}</p>
-									<p><strong>Submitted by:</strong> {location.Username} ({location.Email})</p>
-									<button onClick={() => handleApprove(id, location)}>Approve</button>
-									<button onClick={() => handleDeny(id)}>Deny</button>
-								</div>
-							))
-						) : (
-							<p>No pending locations.</p>
+						{activeSection === "pendingLocations" && (
+							<div>
+								<h2>Pending Locations</h2>
+								{pendingLocations.length > 0 ? (
+									pendingLocations.map(([id, location]) => (
+										<div key={id} className="location">
+											<h3>{location.Name}</h3>
+											<p><strong>Address:</strong> {location.Address}</p>
+											<p><strong>Latitude:</strong> {location.Latitude}</p>
+											<p><strong>Longitude:</strong> {location.Longitude}</p>
+											<p><strong>Description:</strong> {location.Description}</p>
+											<p><strong>Submitted by:</strong> {location.Username} ({location.Email})</p>
+											<button onClick={() => handleApprove(id, location)}>Approve</button>
+											<button onClick={() => handleDeny(id)}>Deny</button>
+										</div>
+									))
+								) : (
+									<p>No pending locations.</p>
+								)}
+							</div>
 						)}
 
-						<h2>Search and Edit Locations</h2>
-						<input
-							type="text"
-							placeholder="Search by location name"
-							value={searchQuery}
-							onChange={(e) => setSearchQuery(e.target.value)}
-						/>
-						<button onClick={handleSearch}>Search</button>
-						{searchResults.length > 0 ? (
-							searchResults.map(([id, location]) => (
-								<div key={id} className="location">
-									<h3>{location.Name}</h3>
-									<p><strong>Address:</strong> {location.Address}</p>
-									<p><strong>Latitude:</strong> {location.Latitude}</p>
-									<p><strong>Longitude:</strong> {location.Longitude}</p>
-									<p><strong>Description:</strong> {location.Description}</p>
-									<button onClick={() => handleEdit(id, location)}>Edit</button>
-									<button onClick={() => handleDeleteLocation(id)}>Delete</button>
-								</div>
-							))
-						) : (
-							<p>No locations found.</p>
-						)}
-						{editingLocation && (
-							<form onSubmit={handleUpdateLocation} style={{ textAlign: "left", width: "100%" }}>
-								<h3>Edit Location</h3>
+						{activeSection === "locations" && (
+							<div>
+								<h2>Search and Edit Locations</h2>
 								<input
 									type="text"
-									placeholder="Name"
-									value={editName}
-									onChange={(e) => setEditName(e.target.value)}
-									required
+									placeholder="Search by location name"
+									value={searchQuery}
+									onChange={(e) => setSearchQuery(e.target.value)}
 								/>
-								<input
-									type="text"
-									placeholder="Address"
-									value={editAddress}
-									onChange={(e) => setEditAddress(e.target.value)}
-									required
-								/>
-								<input
-									type="text"
-									placeholder="Latitude"
-									value={editLatitude}
-									onChange={(e) => setEditLatitude(e.target.value)}
-									required
-								/>
-								<input
-									type="text"
-									placeholder="Longitude"
-									value={editLongitude}
-									onChange={(e) => setEditLongitude(e.target.value)}
-									required
-								/>
-								<textarea
-									placeholder="Description"
-									value={editDescription}
-									onChange={(e) => setEditDescription(e.target.value)}
-									required
-								/>
-								{editError && <p style={{ color: "red" }}>{editError}</p>}
-								<button type="submit">Update Location</button>
-								<button type="button" onClick={() => setEditingLocation(null)}>Cancel</button>
-							</form>
+								<button onClick={handleSearch}>Search</button>
+								{searchResults.length > 0 ? (
+									searchResults.map(([id, location]) => (
+										<div key={id} className="location">
+											<h3>{location.Name}</h3>
+											<p><strong>Address:</strong> {location.Address}</p>
+											<p><strong>Latitude:</strong> {location.Latitude}</p>
+											<p><strong>Longitude:</strong> {location.Longitude}</p>
+											<p><strong>Description:</strong> {location.Description}</p>
+											<p><strong>Website:</strong> {location.Website !== "N/A" ? <a href={location.Website} target="_blank" rel="noopener noreferrer">{location.Website}</a> : "N/A"}</p>
+											<button onClick={() => handleEdit(id, location)}>Edit</button>
+											<button onClick={() => handleDeleteLocation(id)}>Delete</button>
+										</div>
+									))
+								) : (
+									<p>No locations found.</p>
+								)}
+								{editingLocation && (
+									<form onSubmit={handleUpdateLocation} style={{ textAlign: "left", width: "100%" }}>
+										<h3>Edit Location</h3>
+										<input
+											type="text"
+											placeholder="Name"
+											value={editName}
+											onChange={(e) => setEditName(e.target.value)}
+											required
+										/>
+										<input
+											type="text"
+											placeholder="Address"
+											value={editAddress}
+											onChange={(e) => setEditAddress(e.target.value)}
+											required
+										/>
+										<input
+											type="text"
+											placeholder="Latitude"
+											value={editLatitude}
+											onChange={(e) => setEditLatitude(e.target.value)}
+											required
+										/>
+										<input
+											type="text"
+											placeholder="Longitude"
+											value={editLongitude}
+											onChange={(e) => setEditLongitude(e.target.value)}
+											required
+										/>
+										<textarea
+											placeholder="Description"
+											value={editDescription}
+											onChange={(e) => setEditDescription(e.target.value)}
+											required
+										/>
+										<input
+											type="text"
+											placeholder="Website (optional)"
+											value={editWebsite}
+											onChange={(e) => setEditWebsite(e.target.value)}
+										/>
+										{editError && <p style={{ color: "red" }}>{editError}</p>}
+										<button type="submit">Update Location</button>
+										<button type="button" onClick={() => setEditingLocation(null)}>Cancel</button>
+									</form>
+								)}
+							</div>
 						)}
 					</div>
 				) : (

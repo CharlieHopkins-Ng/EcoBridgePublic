@@ -12,6 +12,7 @@ const SubmitLocation = () => {
 	const [latitude, setLatitude] = useState("");
 	const [longitude, setLongitude] = useState("");
 	const [description, setDescription] = useState("");
+	const [website, setWebsite] = useState(""); // New state for website
 	const [error, setError] = useState("");
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [isAdmin, setIsAdmin] = useState(false);
@@ -71,7 +72,7 @@ const SubmitLocation = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (!name || !address || !latitude || !longitude || !description) {
+		if (!name || !address || !latitude || !longitude || !description || !website) {
 			setError("All fields are required");
 			return;
 		}
@@ -82,6 +83,7 @@ const SubmitLocation = () => {
 				Latitude: parseFloat(latitude),
 				Longitude: parseFloat(longitude),
 				Description: description,
+				Website: website || "N/A", // Add website field
 				Username: username,
 				Email: email,
 				Uid: uid // Add the user's UID to the location data
@@ -175,7 +177,7 @@ const SubmitLocation = () => {
 							required
 						/>
 						<p style={{ fontSize: "12px", margin: "0px" }}>
-							Use <a href="https://www.latlong.net/convert-address-to-lat-long.html">this website</a> if you want to convert an address into latitude and longitude
+							Use <a href="https://www.latlong.net/convert-address-to-lat-long.html" target = "_blank">this website</a> if you want to convert an address into latitude and longitude
 						</p>
 						<input
 							type="text"
@@ -190,6 +192,12 @@ const SubmitLocation = () => {
 							value={longitude}
 							onChange={(e) => setLongitude(e.target.value)}
 							required
+						/>
+						<input
+							type="text"
+							placeholder="Website (optional)"
+							value={website}
+							onChange={(e) => setWebsite(e.target.value)}
 						/>
 						<textarea
 							placeholder="Description"
