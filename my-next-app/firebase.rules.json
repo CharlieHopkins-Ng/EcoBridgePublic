@@ -42,7 +42,7 @@
 			".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
 		},
 		"pendingLocations": {
-			".read": "auth != null",
+			".read": "auth != null && root.child('adminUids').child(auth.uid).exists()",
 			".write": "auth != null"
 		}
 	}
