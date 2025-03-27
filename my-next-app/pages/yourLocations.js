@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { getDatabase, ref, onValue, update, remove } from "firebase/database";
+import { getDatabase, ref, onValue, update, remove, runTransaction } from "firebase/database";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
@@ -86,6 +86,13 @@ const YourLocations = () => {
             };
             const locationRef = ref(db, `locations/${editingLocation}`);
             await update(locationRef, locationData);
+
+            // Increment locationsEdited for the user
+            const userRef = ref(db, `users/${uid}/locationsEdited`);
+            await runTransaction(userRef, (currentValue) => {
+                return (currentValue || 0) + 1; // Increment atomically
+            });
+
             setEditingLocation(null);
             fetchUserLocations(uid);
         } catch (error) {
