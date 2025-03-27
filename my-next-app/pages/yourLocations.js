@@ -19,6 +19,7 @@ const YourLocations = () => {
     const [website, setWebsite] = useState(""); // New state for website
     const [error, setError] = useState("");
     const [uid, setUid] = useState("");
+    const [adminUids, setAdminUids] = useState([]); // Add missing state for adminUids
     const auth = getAuth(app);
     const router = useRouter();
 
@@ -27,7 +28,7 @@ const YourLocations = () => {
             const adminUidsRef = ref(db, "adminUids");
             onValue(adminUidsRef, (snapshot) => {
                 const data = snapshot.val();
-                setIsAdmin(data ? Object.keys(data).includes(auth.currentUser?.uid) : false);
+                setAdminUids(data ? Object.keys(data) : []); // Initialize adminUids
             });
         };
 
