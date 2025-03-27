@@ -278,7 +278,21 @@ const MapPage = () => {
                 position={[location.Latitude, location.Longitude]}
                 icon={icons[0]}
                 onClick={() => setSelectedMarker(location.UUID)}
-                popupContent={<><strong>{location.Name}</strong><br />{location.Description}</>}
+                popupContent={
+                  <>
+                    <strong>
+                      {location.Website && location.Website !== "N/A" ? (
+                        <a href={location.Website} target="_blank" rel="noopener noreferrer">
+                          {location.Name}
+                        </a>
+                      ) : (
+                        location.Name
+                      )}
+                    </strong>
+                    <br />
+                    {location.Description}
+                  </>
+                }
               />
             );
           })}
