@@ -3,7 +3,7 @@
 		"users": {
 			"$uid": {
 				".read": "auth != null && (auth.uid == $uid || root.child('adminUids').child(auth.uid).exists())",
-				".write": "auth != null && (auth.uid == $uid || root.child('adminUids').child(auth.uid).exists())",
+				".write": "auth != null && auth.uid == $uid",
 				"username": {
 					".validate": "newData.isString() && newData.val().length > 0 && !root.child('usernames').child(newData.val()).exists()"
 				},
@@ -15,15 +15,15 @@
 				}
 			},
 			".read": "auth != null && root.child('adminUids').child(auth.uid).exists()",
-        ".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
+			".write": "auth != null"
 		},
 		"usernames": {
 			"$username": {
 				".read": "auth != null",
 				".write": "auth != null && !data.exists()"
 			},
-            ".read": "auth != null && root.child('adminUids').child(auth.uid).exists()",
-            ".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
+			".read": "auth != null",
+			".write": "auth != null"
 		},
 		"adminUids": {
 			".read": true,
@@ -34,8 +34,8 @@
 				".read": true,
 				".write": "auth != null && data.child('Uid').val() === auth.uid"
 			},
-        ".read": true,
-        ".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
+			".read": true,
+			".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
 		},
 		"clusteredLocations": {
 			".read": true,

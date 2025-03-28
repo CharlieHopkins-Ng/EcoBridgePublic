@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
 import { app, db } from "../firebaseConfig";
+import { getFirestore } from "firebase/firestore"; // Import Firestore
 
 const Signup = () => {
 	const [email, setEmail] = useState("");
@@ -56,21 +57,29 @@ const Signup = () => {
 		}
 
 		try {
+			// Debugging: Check if account creation is starting
+			console.log("Creating user account...");
+
 			// Create user account
 			const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 			const user = userCredential.user;
 
-			// Send email verification
-			await sendEmailVerification(user);
+			// Debugging: Confirm account creation
+			console.log(`Account created successfully. UID: ${user.uid}`);
 
 			// Check if the username already exists
 			const usernameRef = ref(db, `usernames/${username}`);
 			const snapshot = await get(usernameRef);
 
 			if (snapshot.exists()) {
+				console.log("Username already exists. Deleting the created account..."); // Debugging
 				setError("Username already exists. Please choose a different one.");
+				await user.delete(); // Delete the user if username already exists
 				return;
 			}
+
+			// Debugging: Writing user data to the database
+			console.log("Writing user data to the Realtime Database...");
 
 			// Write user data to the database after account creation
 			const userRef = ref(db, `users/${user.uid}`);
@@ -78,16 +87,22 @@ const Signup = () => {
 				username: username,
 				email: email,
 				createdAt: new Date().toISOString(),
-				emailVerified: false
+				emailVerified: false,
 			});
 
 			// Store username reference
 			await set(ref(db, `usernames/${username}`), user.uid);
 
+			// Debugging: Confirm data written to the database
+			console.log("User data written to the Realtime Database successfully.");
+
+			// Send email verification
+			await sendEmailVerification(user);
+
 			alert("Verification email sent. Please check your inbox.");
 			router.push("/verifyEmail");
 		} catch (error) {
-			console.error("Error during signup:", error.message);
+			console.error("Error during signup:", error.message); // Debugging
 			setError(error.message);
 		}
 	};

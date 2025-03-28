@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "firebase/auth";
 import { ref, get, update } from "firebase/database";
+import { getFirestore, doc, getDoc } from "firebase/firestore"; // Import Firestore
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
@@ -15,6 +16,7 @@ const Login = () => {
 	const [adminUids, setAdminUids] = useState([]);
 	const router = useRouter();
 	const auth = getAuth(app);
+	const firestoreDb = getFirestore(app); // Initialize Firestore
 
 	useEffect(() => {
 		const fetchAdminUids = async () => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { getDatabase, ref, push, onValue } from "firebase/database";
+import { getDatabase, ref, push, onValue, runTransaction, update, get } from "firebase/database"; // Add runTransaction, update, and get
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
@@ -77,6 +77,18 @@ const SubmitLocation = () => {
 			return;
 		}
 		try {
+			const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+
+			// Check if locationsSubmittedToday exceeds 50
+			const locationsSubmittedTodayRef = ref(db, `users/${uid}/locationsSubmittedToday/${today}`);
+			const snapshot = await get(locationsSubmittedTodayRef);
+			const locationsSubmittedToday = snapshot.exists() ? snapshot.val() : 0;
+
+			if (locationsSubmittedToday >= 50) {
+				setError("You have reached the daily limit of 50 location submissions.");
+				return;
+			}
+
 			const locationData = {
 				Name: name,
 				Address: address,
@@ -95,15 +107,45 @@ const SubmitLocation = () => {
 				const pendingLocationsRef = ref(db, "pendingLocations");
 				await push(pendingLocationsRef, locationData);
 			}
-			router.push("/");
+
+			// Increment locationsSubmitted
+			await runTransaction(ref(db, `users/${uid}/locationsSubmitted`), (currentValue) => {
+				return (currentValue || 0) + 1;
+			});
+
+			// Increment locationsSubmittedToday
+			await runTransaction(locationsSubmittedTodayRef, (currentValue) => {
+				return (currentValue || 0) + 1;
+			});
+
+			// Clean up old entries in locationsSubmittedToday
+			const locationsSubmittedTodayParentRef = ref(db, `users/${uid}/locationsSubmittedToday`);
+			const parentSnapshot = await get(locationsSubmittedTodayParentRef);
+			if (parentSnapshot.exists()) {
+				const data = parentSnapshot.val();
+				const updatedData = Object.keys(data)
+					.filter((date) => date === today) // Keep only today's entry
+					.reduce((acc, date) => {
+						acc[date] = data[date];
+						return acc;
+					}, {});
+				await update(locationsSubmittedTodayParentRef, updatedData);
+			}
+
+			await router.push("/"); // Ensure navigation is awaited
 		} catch (error) {
+			console.error("Error during location submission:", error);
 			setError(error.message);
 		}
 	};
 
 	const handleSignOut = async () => {
-		await signOut(auth);
-		await router.push("/login"); // Ensure navigation is awaited
+		try {
+			await signOut(auth);
+			await router.push("/login"); // Ensure navigation is awaited
+		} catch (error) {
+			console.error("Error during sign-out navigation:", error);
+		}
 	};
 
 	return (
