@@ -32,19 +32,40 @@ const Login = () => {
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, async (user) => {
 			if (user) {
-				if (!user.emailVerified) {
-					router.push("/verifyEmail");
-					return;
+				try {
+					const userRef = ref(db, `users/${user.uid}`);
+					const snapshot = await get(userRef);
+
+					if (snapshot.exists()) {
+						const userData = snapshot.val();
+
+						if (userData.banned) {
+							const banReason = userData.banReason || "No reason provided";
+							const banEndDate = userData.banEndDate || "Indefinite";
+							setError(`You are banned. Reason: ${banReason}. Ban expires on: ${banEndDate}`);
+							await signOut(auth);
+							return;
+						}
+
+						if (!user.emailVerified) {
+							router.push("/verifyEmail");
+							return;
+						}
+
+						setIsAuthenticated(true);
+
+						const adminUidsRef = ref(db, "adminUids");
+						const adminSnapshot = await get(adminUidsRef);
+						const adminData = adminSnapshot.val();
+						const updatedAdminUids = adminData ? Object.keys(adminData) : [];
+
+						setAdminUids(updatedAdminUids);
+						setIsAdmin(updatedAdminUids.includes(user.uid));
+					}
+				} catch (error) {
+					console.error("Error fetching user data:", error.message);
+					setError("Failed to fetch user data. Please try again later.");
 				}
-				setIsAuthenticated(true);
-
-				const adminUidsRef = ref(db, "adminUids");
-				const snapshot = await get(adminUidsRef);
-				const data = snapshot.val();
-				const updatedAdminUids = data ? Object.keys(data) : [];
-
-				setAdminUids(updatedAdminUids);
-				setIsAdmin(updatedAdminUids.includes(user.uid));
 			} else {
 				setIsAuthenticated(false);
 				setIsAdmin(false);

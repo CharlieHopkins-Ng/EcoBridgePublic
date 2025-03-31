@@ -30,6 +30,7 @@ const MapPage = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminEmails, setAdminEmails] = useState([]);
   const [adminUids, setAdminUids] = useState([]);
+  const [userLocation, setUserLocation] = useState(null); // State for user location
   const router = useRouter();
 
   useEffect(() => {
@@ -106,7 +107,8 @@ const MapPage = () => {
           "/treeIcon7.png",
           "/treeIcon8.png",
           "/treeIcon9.png",
-          "/treeIcon9+.png"
+          "/treeIcon9+.png",
+          "/youAreHere.png" // Add "You are here" marker icon
         ];
         const loadedIcons = {};
 
@@ -131,7 +133,9 @@ const MapPage = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setCenter([position.coords.latitude, position.coords.longitude]);
+          const userCoords = [position.coords.latitude, position.coords.longitude];
+          setCenter(userCoords);
+          setUserLocation(userCoords); // Set user location
           setZoomLevel(12);
         },
         (error) => {
@@ -158,7 +162,9 @@ const MapPage = () => {
       mapInstance.on("zoomend", handleZoomEnd);
 
       return () => {
-        mapInstance.off("zoomend", handleZoomEnd);
+        if (mapInstance) {
+          mapInstance.off("zoomend", handleZoomEnd);
+        }
       };
     }
   }, [mapInstance]);
@@ -294,6 +300,13 @@ const MapPage = () => {
               />
             );
           })}
+          {userLocation && (
+            <MemoizedMarker
+              position={userLocation}
+              icon={icons[10]} // Use the last icon for the "You are here" marker
+              popupContent={<strong>You are here</strong>}
+            />
+          )}
           <UpdateMapView center={center} zoom={zoomLevel} onZoomChange={setZoomLevel} />
         </MapContainer>
       </div>

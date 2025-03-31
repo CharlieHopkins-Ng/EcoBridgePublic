@@ -7,7 +7,7 @@ const UpdateMapView = ({ center, zoom, onZoomChange }) => {
 
   // Only update the map view when the center changes
   useEffect(() => {
-    if (map && (prevCenter.current[0] !== center[0] || prevCenter.current[1] !== center[1])) {
+    if (map && prevCenter.current && (prevCenter.current[0] !== center[0] || prevCenter.current[1] !== center[1])) {
       map.setView(center, zoom, { animate: true });
       prevCenter.current = center;
     }
@@ -22,8 +22,11 @@ const UpdateMapView = ({ center, zoom, onZoomChange }) => {
       };
 
       map.on("zoomend", handleZoomEnd);
+
       return () => {
-        map.off("zoomend", handleZoomEnd);
+        if (map) {
+          map.off("zoomend", handleZoomEnd);
+        }
       };
     }
   }, [map, onZoomChange]);

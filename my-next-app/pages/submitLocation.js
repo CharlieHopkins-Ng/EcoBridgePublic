@@ -38,18 +38,34 @@ const SubmitLocation = () => {
 	}, []);
 
 	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, (user) => {
+		const unsubscribe = onAuthStateChanged(auth, async (user) => {
 			if (user) {
-				if (!user.emailVerified) {
-					alert("Please verify your email to submit a location.");
-					router.push("/verifyEmail");
-					return;
+				const userRef = ref(db, `users/${user.uid}`);
+				const snapshot = await get(userRef);
+
+				if (snapshot.exists()) {
+					const userData = snapshot.val();
+
+					if (userData.banned) {
+						const banReason = userData.banReason || "No reason provided";
+						const banEndDate = userData.banEndDate || "Indefinite";
+						alert(`You are banned. Reason: ${banReason}. Ban expires on: ${banEndDate}`);
+						router.push("/");
+						return;
+					}
+
+					if (!user.emailVerified) {
+						alert("Please verify your email to submit a location.");
+						router.push("/verifyEmail");
+						return;
+					}
+
+					setIsAuthenticated(true);
+					setUid(user.uid);
+					setIsAdmin(adminEmails.includes(user.email) || adminUids.includes(user.uid));
+					setUsername(user.displayName || "Anonymous");
+					setEmail(user.email);
 				}
-				setIsAuthenticated(true);
-				setUid(user.uid);
-				setIsAdmin(adminEmails.includes(user.email) || adminUids.includes(user.uid)); // Ensure admin check includes UIDs
-				setUsername(user.displayName || "Anonymous");
-				setEmail(user.email);
 			} else {
 				setIsAuthenticated(false);
 				setIsAdmin(false);

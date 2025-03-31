@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { getDatabase, ref, onValue, remove, set, get, update, runTransaction } from "firebase/database";
+import { getDatabase, ref, onValue, remove, set, get, update, runTransaction, push } from "firebase/database";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
@@ -84,6 +84,8 @@ const Admin = () => {
 						locationsSubmitted: user.locationsSubmitted || 0,
 						locationsApproved: user.locationsApproved || 0,
 						locationsDenied: user.locationsDenied || 0,
+						banned: user.banned || false,
+						banEndDate: user.banEndDate || null,
 					}));
 					setAllUsers(users);
 				} else {
@@ -104,6 +106,72 @@ const Admin = () => {
 	const handleSignOut = async () => {
 		await signOut(auth);
 		router.push("/login");
+	};
+
+	const approveLocation = (id) => {
+		// Approve location logic
+	};
+
+	const denyLocation = (id) => {
+		// Deny location logic
+	};
+
+	const searchLocations = () => {
+		const results = allLocations.filter(([id, location]) => {
+			const matchesQuery = location.Name.toLowerCase().includes(searchQuery.toLowerCase());
+			const matchesNoWebsite = showNoWebsiteOnly ? location.Website === "N/A" : true;
+			return matchesQuery && matchesNoWebsite;
+		});
+		setSearchResults(showAllLocations ? allLocations : results);
+	};
+
+	const editLocation = (id, location) => {
+		// Edit location logic
+	};
+
+	const banUser = async (userId, banDuration, banReason) => {
+		try {
+			const banEndDate = new Date();
+			banEndDate.setDate(banEndDate.getDate() + banDuration);
+
+			const userRef = ref(db, `users/${userId}`);
+			await update(userRef, {
+				banned: true,
+				banEndDate: banEndDate.toISOString(),
+				banReason: banReason || "No reason provided",
+			});
+
+			const banHistoryRef = ref(db, `users/${userId}/banHistory`);
+			await push(banHistoryRef, {
+				banStartDate: new Date().toISOString(),
+				banEndDate: banEndDate.toISOString(),
+				banReason: banReason || "No reason provided",
+				adminId: auth.currentUser.uid,
+			});
+
+			alert("User has been banned.");
+		} catch (error) {
+			alert("Failed to ban user: " + error.message);
+		}
+	};
+
+	const unbanUser = async (userId, unbanReason) => {
+		try {
+			const userRef = ref(db, `users/${userId}`);
+			await update(userRef, { banned: false, banEndDate: null });
+
+			// Log the unban in banHistory
+			const banHistoryRef = ref(db, `users/${userId}/banHistory`);
+			await push(banHistoryRef, {
+				unbanDate: new Date().toISOString(),
+				unbanReason: unbanReason || "No reason provided",
+				adminId: auth.currentUser.uid,
+			});
+
+			alert("User has been unbanned.");
+		} catch (error) {
+			alert("Failed to unban user: " + error.message);
+		}
 	};
 
 	return (
@@ -167,6 +235,185 @@ const Admin = () => {
 							<button onClick={() => setActiveSection("pendingLocations")}>Pending Locations</button>
 							<button onClick={() => setActiveSection("locations")}>Search and Edit Locations</button>
 						</div>
+
+						{/* Manage Users Section */}
+						{activeSection === "users" && (
+							<div>
+								<h2>Manage Users</h2>
+								<label>
+									Show Unverified Users Only
+									<input
+										type="checkbox"
+										checked={showUnverifiedOnly}
+										onChange={(e) => setShowUnverifiedOnly(e.target.checked)}
+										style={{ marginLeft: "10px" }}
+									/>
+								</label>
+								<label>
+									Sort by Most Submitted
+									<input
+										type="checkbox"
+										checked={sortByMostSubmitted}
+										onChange={(e) => setSortByMostSubmitted(e.target.checked)}
+										style={{ marginLeft: "10px" }}
+									/>
+								</label>
+								<div>
+									{sortedUsers.map((user) => (
+										<div key={user.id} className="user-container" style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px", borderRadius: "5px" }}>
+											<h3>{user.username}</h3>
+											<p><strong>Email:</strong> {user.email}</p>
+											<p><strong>Created At:</strong> {user.createdAt}</p>
+											<p><strong>Email Verified:</strong> {user.emailVerified ? "Yes" : "No"}</p>
+											<p><strong>Locations Submitted:</strong> {user.locationsSubmitted}</p>
+											<p><strong>Locations Approved:</strong> {user.locationsApproved}</p>
+											<p><strong>Locations Denied:</strong> {user.locationsDenied}</p>
+											<p><strong>Banned:</strong> {user.banned ? "Yes" : "No"}</p>
+											{user.banned && <p><strong>Ban End Date:</strong> {user.banEndDate || "N/A"}</p>}
+											{user.banned ? (
+												<div>
+													<label>
+														Unban Reason:
+														<input type="text" id={`unbanReason-${user.id}`} placeholder="Enter reason" />
+													</label>
+													<button onClick={() => {
+														const unbanReason = document.getElementById(`unbanReason-${user.id}`).value;
+														unbanUser(user.id, unbanReason);
+													}}>Unban</button>
+												</div>
+											) : (
+												<div>
+													<label>
+														Ban Duration (days):
+														<input type="number" min="1" max="365" defaultValue="7" id={`banDuration-${user.id}`} />
+													</label>
+													<label>
+														Ban Reason:
+														<input type="text" id={`banReason-${user.id}`} placeholder="Enter reason" />
+													</label>
+													<button onClick={() => {
+														const banDuration = parseInt(document.getElementById(`banDuration-${user.id}`).value, 10);
+														const banReason = document.getElementById(`banReason-${user.id}`).value;
+														banUser(user.id, banDuration, banReason);
+													}}>Ban</button>
+												</div>
+											)}
+										</div>
+									))}
+								</div>
+							</div>
+						)}
+
+						{/* Pending Locations Section */}
+						{activeSection === "pendingLocations" && (
+							<div>
+								<h2>Pending Locations</h2>
+								<div>
+									{pendingLocations.map(([id, location]) => (
+										<div key={id} className="location-container" style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px", borderRadius: "5px" }}>
+											<h3>{location.Name}</h3>
+											<p><strong>Address:</strong> {location.Address}</p>
+											<p><strong>Latitude:</strong> {location.Latitude}</p>
+											<p><strong>Longitude:</strong> {location.Longitude}</p>
+											<p><strong>Description:</strong> {location.Description}</p>
+											<button onClick={() => approveLocation(id)}>Approve</button>
+											<button onClick={() => denyLocation(id)}>Deny</button>
+										</div>
+									))}
+								</div>
+							</div>
+						)}
+
+						{/* Search and Edit Locations Section */}
+						{activeSection === "locations" && (
+							<div>
+								<h2>Search and Edit Locations</h2>
+								<input
+									type="text"
+									placeholder="Search locations"
+									value={searchQuery}
+									onChange={(e) => setSearchQuery(e.target.value)}
+								/>
+								<label>
+									Show locations with no website only
+									<input
+										type="checkbox"
+										checked={showNoWebsiteOnly}
+										onChange={(e) => setShowNoWebsiteOnly(e.target.checked)}
+										style={{ marginLeft: "10px" }}
+									/>
+								</label>
+								<label>
+									Show all locations
+									<input
+										type="checkbox"
+										checked={showAllLocations}
+										onChange={(e) => setShowAllLocations(e.target.checked)}
+										style={{ marginLeft: "10px" }}
+									/>
+								</label>
+								<button onClick={searchLocations}>Search</button>
+								{editingLocation && (
+									<form onSubmit={handleUpdate} style={{ textAlign: "left", width: "100%", marginTop: "20px" }}>
+										<h3>Edit Location</h3>
+										<input
+											type="text"
+											placeholder="Name"
+											value={editName}
+											onChange={(e) => setEditName(e.target.value)}
+											required
+										/>
+										<input
+											type="text"
+											placeholder="Address"
+											value={editAddress}
+											onChange={(e) => setEditAddress(e.target.value)}
+											required
+										/>
+										<input
+											type="text"
+											placeholder="Latitude"
+											value={editLatitude}
+											onChange={(e) => setEditLatitude(e.target.value)}
+											required
+										/>
+										<input
+											type="text"
+											placeholder="Longitude"
+											value={editLongitude}
+											onChange={(e) => setEditLongitude(e.target.value)}
+											required
+										/>
+										<textarea
+											placeholder="Description"
+											value={editDescription}
+											onChange={(e) => setEditDescription(e.target.value)}
+											required
+										/>
+										<input
+											type="text"
+											placeholder="Website (optional)"
+											value={editWebsite}
+											onChange={(e) => setEditWebsite(e.target.value)}
+										/>
+										{editError && <p style={{ color: "red" }}>{editError}</p>}
+										<button type="submit">Update Location</button>
+									</form>
+								)}
+								<div>
+									{searchResults.map(([id, location]) => (
+										<div key={id} className="location-container" style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px", borderRadius: "5px" }}>
+											<h3>{location.Name}</h3>
+											<p><strong>Address:</strong> {location.Address}</p>
+											<p><strong>Latitude:</strong> {location.Latitude}</p>
+											<p><strong>Longitude:</strong> {location.Longitude}</p>
+											<p><strong>Description:</strong> {location.Description}</p>
+											<button onClick={() => editLocation(id, location)}>Edit</button>
+										</div>
+									))}
+								</div>
+							</div>
+						)}
 					</div>
 				) : (
 					<p>You do not have permission to access this page.</p>
