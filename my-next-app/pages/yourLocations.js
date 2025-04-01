@@ -20,6 +20,7 @@ const YourLocations = () => {
     const [error, setError] = useState("");
     const [uid, setUid] = useState("");
     const [adminUids, setAdminUids] = useState([]); // Add missing state for adminUids
+    const [bannedMessage, setBannedMessage] = useState(""); // New state for banned message
     const auth = getAuth(app);
     const router = useRouter();
 
@@ -49,7 +50,7 @@ const YourLocations = () => {
                     if (userData?.banned) {
                         const banReason = userData.banReason || "No reason provided";
                         const banEndDate = userData.banEndDate || "Indefinite";
-                        alert(`Reminder: You are banned. Reason: ${banReason}. Ban expires on: ${banEndDate}`);
+                        setBannedMessage(`You are banned. Reason: ${banReason}. Ban expires on: ${banEndDate}`);
                     }
                 });
             } else {
@@ -180,7 +181,9 @@ const YourLocations = () => {
             </nav>
             <div className="container">
                 <h1>Your Locations</h1>
-                {isAuthenticated ? (
+                {bannedMessage ? (
+                    <p style={{ color: "red" }}>{bannedMessage}</p>
+                ) : isAuthenticated ? (
                     <div>
                         <p><strong>Current UID:</strong> {uid}</p>
                         {userLocations.length > 0 ? (

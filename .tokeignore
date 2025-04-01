@@ -1,0 +1,6 @@
+package.json
+package-lock.json
+firebase.rules.json
+vercel.json
+jsconfig.json
+my-next-app/data

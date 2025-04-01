@@ -21,6 +21,7 @@ const SubmitLocation = () => {
 	const [uid, setUid] = useState("");
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
+	const [bannedMessage, setBannedMessage] = useState("");
 	const router = useRouter();
 	const auth = getAuth(app);
 	const db = getDatabase(app);
@@ -49,7 +50,8 @@ const SubmitLocation = () => {
 					if (userData.banned) {
 						const banReason = userData.banReason || "No reason provided";
 						const banEndDate = userData.banEndDate || "Indefinite";
-						alert(`Reminder: You are banned. Reason: ${banReason}. Ban expires on: ${banEndDate}`);
+						setBannedMessage(`You are banned. Reason: ${banReason}. Ban expires on: ${banEndDate}`);
+						return;
 					}
 
 					if (!user.emailVerified) {
@@ -224,7 +226,9 @@ const SubmitLocation = () => {
 			</nav>
 			<div className="container" style={{ maxWidth: "900px", width: "100%" }}>
 				<h1>{isAdmin ? "Add a New Location" : "Submit a New Location"}</h1>
-				{isAuthenticated ? (
+					{bannedMessage ? (
+						<p style={{ color: "red" }}>{bannedMessage}</p>
+					) : isAuthenticated ? (
 					<form onSubmit={handleSubmit} style={{ textAlign: "left", width: "100%" }}>
 						<input
 							type="text"

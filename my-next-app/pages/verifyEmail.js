@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { getAuth, sendEmailVerification, signOut } from "firebase/auth";
+import { ref, update } from "firebase/database";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
+import { db } from "../firebaseConfig";
 
 const VerifyEmail = () => {
 	const auth = getAuth();
@@ -26,9 +28,21 @@ const VerifyEmail = () => {
 	};
 
 	useEffect(() => {
-		if (auth.currentUser?.emailVerified) {
-			router.push("/");
-		}
+		const checkEmailVerification = async () => {
+			if (auth.currentUser) {
+				await auth.currentUser.reload(); // Reload user data to get the latest emailVerified status
+				if (auth.currentUser.emailVerified) {
+					// Update the database to reflect email verification
+					const userRef = ref(db, `users/${auth.currentUser.uid}`);
+					await update(userRef, { emailVerified: true });
+
+					// Redirect to the index page
+					router.push("/");
+				}
+			}
+		};
+
+		checkEmailVerification();
 	}, [auth, router]);
 
 	return (
