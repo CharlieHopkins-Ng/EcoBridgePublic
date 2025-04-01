@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut, updatePassword, sendPasswordResetEmail } from "firebase/auth";
-import { ref, onValue, update } from "firebase/database";
+import { ref, onValue, update, remove, set } from "firebase/database";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
@@ -69,15 +69,17 @@ const YourProfile = () => {
 				return;
 			}
 
-			// Update the username in the users node and the usernames node
+			// Update the username in the users node
 			const userRef = ref(db, `users/${auth.currentUser.uid}`);
 			await update(userRef, { username: newUsername });
 
 			// Remove the old username from the usernames node
-			await update(ref(db, `usernames/${username}`), null);
+			const oldUsernameRef = ref(db, `usernames/${username}`);
+			await remove(oldUsernameRef);
 
 			// Add the new username to the usernames node
-			await update(ref(db, `usernames/${newUsername}`), auth.currentUser.uid);
+			const newUsernameRef = ref(db, `usernames/${newUsername}`);
+			await set(newUsernameRef, auth.currentUser.uid);
 
 			setUsername(newUsername);
 			alert("Username updated successfully");

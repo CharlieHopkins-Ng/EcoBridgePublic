@@ -28,6 +28,16 @@ const Admin = () => {
 	const [activeSection, setActiveSection] = useState(null);
 	const [showNoWebsiteOnly, setShowNoWebsiteOnly] = useState(false);
 	const [showAllLocations, setShowAllLocations] = useState(false);
+	const [editingUser, setEditingUser] = useState(null);
+	const [editUsername, setEditUsername] = useState("");
+	const [editEmail, setEditEmail] = useState("");
+	const [editBanned, setEditBanned] = useState(false);
+	const [editBanReason, setEditBanReason] = useState("");
+	const [editBanEndDate, setEditBanEndDate] = useState("");
+	const [editLocationsSubmitted, setEditLocationsSubmitted] = useState(0);
+	const [editLocationsApproved, setEditLocationsApproved] = useState(0);
+	const [editLocationsDenied, setEditLocationsDenied] = useState(0);
+	const [editLocationsEdited, setEditLocationsEdited] = useState(0);
 	const auth = getAuth(app);
 	const db = getDatabase(app);
 	const router = useRouter();
@@ -84,8 +94,10 @@ const Admin = () => {
 						locationsSubmitted: user.locationsSubmitted || 0,
 						locationsApproved: user.locationsApproved || 0,
 						locationsDenied: user.locationsDenied || 0,
+						locationsEdited: user.locationsEdited || 0,
 						banned: user.banned || false,
 						banEndDate: user.banEndDate || null,
+						banReason: user.banReason || null,
 					}));
 					setAllUsers(users);
 				} else {
@@ -205,6 +217,124 @@ const Admin = () => {
 		}
 	};
 
+	const deleteUserAccount = async (userId) => {
+		try {
+			// Remove user data from the database
+			const userRef = ref(db, `users/${userId}`);
+			const userSnapshot = await get(userRef);
+
+			if (userSnapshot.exists()) {
+				const userData = userSnapshot.val();
+
+				// Remove the username reference
+				if (userData.username) {
+					const usernameRef = ref(db, `usernames/${userData.username}`);
+					await remove(usernameRef);
+				}
+			}
+
+			await remove(userRef);
+
+			alert("User account deleted successfully.");
+			setAllUsers(allUsers.filter(user => user.id !== userId)); // Update the UI
+		} catch (error) {
+			alert("Failed to delete user account: " + error.message);
+		}
+	};
+
+	const handleEditUser = (user) => {
+		setEditingUser(user.id);
+		setEditUsername(user.username);
+		setEditEmail(user.email);
+		setEditBanned(user.banned);
+		setEditBanReason(user.banReason || "");
+		setEditBanEndDate(user.banEndDate || "");
+		setEditLocationsSubmitted(user.locationsSubmitted || 0);
+		setEditLocationsApproved(user.locationsApproved || 0);
+		setEditLocationsDenied(user.locationsDenied || 0);
+		setEditLocationsEdited(user.locationsEdited || 0);
+	};
+
+	const handleUpdateUser = async (e) => {
+		e.preventDefault();
+		if (!editUsername || !editEmail) {
+			alert("Username and email cannot be empty.");
+			return;
+		}
+
+		try {
+			// Update user data in the database
+			const userRef = ref(db, `users/${editingUser}`);
+			await update(userRef, {
+				username: editUsername,
+				email: editEmail,
+				banned: editBanned,
+				banReason: editBanned ? editBanReason : null,
+				banEndDate: editBanned ? editBanEndDate : null,
+				locationsSubmitted: editLocationsSubmitted,
+				locationsApproved: editLocationsApproved,
+				locationsDenied: editLocationsDenied,
+				locationsEdited: editLocationsEdited,
+			});
+
+			// Update the username reference if it has changed
+			const originalUser = allUsers.find((user) => user.id === editingUser);
+			if (originalUser.username !== editUsername) {
+				await remove(ref(db, `usernames/${originalUser.username}`));
+				await set(ref(db, `usernames/${editUsername}`), editingUser);
+			}
+
+			alert("User data updated successfully.");
+			setEditingUser(null);
+		} catch (error) {
+			alert("Failed to update user data: " + error.message);
+		}
+	};
+
+	const handleBanUser = async (userId, banDuration, banReason) => {
+		try {
+			const banEndDate = new Date();
+			banEndDate.setDate(banEndDate.getDate() + banDuration);
+
+			const userRef = ref(db, `users/${userId}`);
+			await update(userRef, {
+				banned: true,
+				banEndDate: banEndDate.toISOString(),
+				banReason: banReason || "No reason provided",
+			});
+
+			const banHistoryRef = ref(db, `users/${userId}/banHistory`);
+			await push(banHistoryRef, {
+				banStartDate: new Date().toISOString(),
+				banEndDate: banEndDate.toISOString(),
+				banReason: banReason || "No reason provided",
+				adminId: auth.currentUser.uid,
+			});
+
+			alert("User has been banned.");
+		} catch (error) {
+			alert("Failed to ban user: " + error.message);
+		}
+	};
+
+	const handleUnbanUser = async (userId, unbanReason) => {
+		try {
+			const userRef = ref(db, `users/${userId}`);
+			await update(userRef, { banned: false, banEndDate: null });
+
+			const banHistoryRef = ref(db, `users/${userId}/banHistory`);
+			await push(banHistoryRef, {
+				unbanDate: new Date().toISOString(),
+				unbanReason: unbanReason || "No reason provided",
+				adminId: auth.currentUser.uid,
+			});
+
+			alert("User has been unbanned.");
+		} catch (error) {
+			alert("Failed to unban user: " + error.message);
+		}
+	};
+
 	return (
 		<div>
 			<Head>
@@ -294,41 +424,46 @@ const Admin = () => {
 										<div key={user.id} className="user-container" style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px", borderRadius: "5px" }}>
 											<h3>{user.username}</h3>
 											<p><strong>Email:</strong> {user.email}</p>
-											<p><strong>Created At:</strong> {user.createdAt}</p>
 											<p><strong>Email Verified:</strong> {user.emailVerified ? "Yes" : "No"}</p>
+											<p><strong>Created At:</strong> {user.createdAt}</p>
 											<p><strong>Locations Submitted:</strong> {user.locationsSubmitted}</p>
 											<p><strong>Locations Approved:</strong> {user.locationsApproved}</p>
 											<p><strong>Locations Denied:</strong> {user.locationsDenied}</p>
 											<p><strong>Banned:</strong> {user.banned ? "Yes" : "No"}</p>
 											{user.banned && <p><strong>Ban End Date:</strong> {user.banEndDate || "N/A"}</p>}
-											{user.banned ? (
-												<div>
-													<label>
-														Unban Reason:
-														<input type="text" id={`unbanReason-${user.id}`} placeholder="Enter reason" />
-													</label>
-													<button onClick={() => {
-														const unbanReason = document.getElementById(`unbanReason-${user.id}`).value;
-														unbanUser(user.id, unbanReason);
-													}}>Unban</button>
-												</div>
-											) : (
-												<div>
-													<label>
-														Ban Duration (days):
-														<input type="number" min="1" max="365" defaultValue="7" id={`banDuration-${user.id}`} />
-													</label>
-													<label>
-														Ban Reason:
-														<input type="text" id={`banReason-${user.id}`} placeholder="Enter reason" />
-													</label>
-													<button onClick={() => {
-														const banDuration = parseInt(document.getElementById(`banDuration-${user.id}`).value, 10);
-														const banReason = document.getElementById(`banReason-${user.id}`).value;
-														banUser(user.id, banDuration, banReason);
-													}}>Ban</button>
-												</div>
-											)}
+											<div>
+												{user.banned ? (
+													<div>
+														<label>
+															Unban Reason:
+															<input type="text" id={`unbanReason-${user.id}`} placeholder="Enter reason" />
+														</label>
+														<button onClick={() => {
+															const unbanReason = document.getElementById(`unbanReason-${user.id}`).value;
+															handleUnbanUser(user.id, unbanReason);
+														}}>Unban</button>
+													</div>
+												) : (
+													<div>
+														<label>
+															Ban Duration (days):
+															<input type="number" min="1" max="365" defaultValue="7" id={`banDuration-${user.id}`} />
+														</label>
+														<label>
+															Ban Reason:
+															<input type="text" id={`banReason-${user.id}`} placeholder="Enter reason" />
+														</label>
+														<button onClick={() => {
+															const banDuration = parseInt(document.getElementById(`banDuration-${user.id}`).value, 10);
+															const banReason = document.getElementById(`banReason-${user.id}`).value;
+															handleBanUser(user.id, banDuration, banReason);
+														}}>Ban</button>
+													</div>
+												)}
+												<button onClick={() => deleteUserAccount(user.id)} style={{ marginTop: "10px", backgroundColor: "red", color: "white" }}>
+													Delete Account
+												</button>
+											</div>
 										</div>
 									))}
 								</div>

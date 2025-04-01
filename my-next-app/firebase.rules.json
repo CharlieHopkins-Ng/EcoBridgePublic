@@ -27,7 +27,7 @@
 		},
 		"adminUids": {
 			".read": true,
-			".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
+			".write": false
 		},
 		"locations": {
 			"$locationId": {
