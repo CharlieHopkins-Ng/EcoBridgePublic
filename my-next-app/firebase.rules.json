@@ -3,7 +3,7 @@
 		"users": {
 			"$uid": {
 				".read": "auth != null && (auth.uid == $uid || root.child('adminUids').child(auth.uid).exists())",
-				".write": "auth != null && auth.uid == $uid && (!data.child('banned').exists() || data.child('banned').val() == false)",
+				".write": "auth != null && (!data.exists() || auth.uid == $uid)",
 				"username": {
 					".validate": "newData.isString() && newData.val().length > 0 && !root.child('usernames').child(newData.val()).exists()"
 				},
@@ -15,12 +15,12 @@
 				}
 			},
 			".read": "auth != null && root.child('adminUids').child(auth.uid).exists()",
-			".write": "auth != null"
+			".write": "auth != null" 
 		},
 		"usernames": {
 			"$username": {
 				".read": "auth != null",
-				".write": "auth != null && !data.exists()"
+				".write": "auth != null && !data.exists()" 
 			},
 			".read": "auth != null",
 			".write": "auth != null"

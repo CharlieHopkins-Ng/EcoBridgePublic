@@ -126,7 +126,38 @@ const Admin = () => {
 	};
 
 	const editLocation = (id, location) => {
-		// Edit location logic
+		setEditingLocation(id);
+		setEditName(location.Name);
+		setEditAddress(location.Address);
+		setEditLatitude(location.Latitude);
+		setEditLongitude(location.Longitude);
+		setEditDescription(location.Description);
+		setEditWebsite(location.Website || "N/A");
+	};
+
+	const handleUpdate = async (e) => {
+		e.preventDefault();
+		if (!editName || !editAddress || !editLatitude || !editLongitude || !editDescription || !editWebsite) {
+			setEditError("All fields are required");
+			return;
+		}
+		try {
+			const locationData = {
+				Name: editName,
+				Address: editAddress,
+				Latitude: parseFloat(editLatitude),
+				Longitude: parseFloat(editLongitude),
+				Description: editDescription,
+				Website: editWebsite || "N/A",
+			};
+			const locationRef = ref(db, `locations/${editingLocation}`);
+			await update(locationRef, locationData);
+
+			setEditingLocation(null);
+			alert("Location updated successfully.");
+		} catch (error) {
+			setEditError(error.message);
+		}
 	};
 
 	const banUser = async (userId, banDuration, banReason) => {
@@ -353,62 +384,67 @@ const Admin = () => {
 									/>
 								</label>
 								<button onClick={searchLocations}>Search</button>
-								{editingLocation && (
-									<form onSubmit={handleUpdate} style={{ textAlign: "left", width: "100%", marginTop: "20px" }}>
-										<h3>Edit Location</h3>
-										<input
-											type="text"
-											placeholder="Name"
-											value={editName}
-											onChange={(e) => setEditName(e.target.value)}
-											required
-										/>
-										<input
-											type="text"
-											placeholder="Address"
-											value={editAddress}
-											onChange={(e) => setEditAddress(e.target.value)}
-											required
-										/>
-										<input
-											type="text"
-											placeholder="Latitude"
-											value={editLatitude}
-											onChange={(e) => setEditLatitude(e.target.value)}
-											required
-										/>
-										<input
-											type="text"
-											placeholder="Longitude"
-											value={editLongitude}
-											onChange={(e) => setEditLongitude(e.target.value)}
-											required
-										/>
-										<textarea
-											placeholder="Description"
-											value={editDescription}
-											onChange={(e) => setEditDescription(e.target.value)}
-											required
-										/>
-										<input
-											type="text"
-											placeholder="Website (optional)"
-											value={editWebsite}
-											onChange={(e) => setEditWebsite(e.target.value)}
-										/>
-										{editError && <p style={{ color: "red" }}>{editError}</p>}
-										<button type="submit">Update Location</button>
-									</form>
-								)}
 								<div>
 									{searchResults.map(([id, location]) => (
 										<div key={id} className="location-container" style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px", borderRadius: "5px" }}>
-											<h3>{location.Name}</h3>
-											<p><strong>Address:</strong> {location.Address}</p>
-											<p><strong>Latitude:</strong> {location.Latitude}</p>
-											<p><strong>Longitude:</strong> {location.Longitude}</p>
-											<p><strong>Description:</strong> {location.Description}</p>
-											<button onClick={() => editLocation(id, location)}>Edit</button>
+											{editingLocation === id ? (
+												<form onSubmit={handleUpdate} style={{ textAlign: "left", width: "100%" }}>
+													<h3>Edit Location</h3>
+													<input
+														type="text"
+														placeholder="Name"
+														value={editName}
+														onChange={(e) => setEditName(e.target.value)}
+														required
+													/>
+													<input
+														type="text"
+														placeholder="Address"
+														value={editAddress}
+														onChange={(e) => setEditAddress(e.target.value)}
+														required
+													/>
+													<input
+														type="text"
+														placeholder="Latitude"
+														value={editLatitude}
+														onChange={(e) => setEditLatitude(e.target.value)}
+														required
+													/>
+													<input
+														type="text"
+														placeholder="Longitude"
+														value={editLongitude}
+														onChange={(e) => setEditLongitude(e.target.value)}
+														required
+													/>
+													<textarea
+														placeholder="Description"
+														value={editDescription}
+														onChange={(e) => setEditDescription(e.target.value)}
+														required
+													/>
+													<input
+														type="text"
+														placeholder="Website (optional)"
+														value={editWebsite}
+														onChange={(e) => setEditWebsite(e.target.value)}
+													/>
+													{editError && <p style={{ color: "red" }}>{editError}</p>}
+													<button type="submit">Update Location</button>
+													<button type="button" onClick={() => setEditingLocation(null)}>Cancel</button>
+												</form>
+											) : (
+												<>
+													<h3>{location.Name}</h3>
+													<p><strong>Address:</strong> {location.Address}</p>
+													<p><strong>Latitude:</strong> {location.Latitude}</p>
+													<p><strong>Longitude:</strong> {location.Longitude}</p>
+													<p><strong>Description:</strong> {location.Description}</p>
+													<p><strong>Website:</strong> {location.Website !== "N/A" ? <a href={location.Website} target="_blank" rel="noopener noreferrer">{location.Website}</a> : "N/A"}</p>
+													<button onClick={() => editLocation(id, location)}>Edit</button>
+												</>
+											)}
 										</div>
 									))}
 								</div>

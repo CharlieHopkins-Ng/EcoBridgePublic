@@ -49,9 +49,7 @@ const SubmitLocation = () => {
 					if (userData.banned) {
 						const banReason = userData.banReason || "No reason provided";
 						const banEndDate = userData.banEndDate || "Indefinite";
-						alert(`You are banned. Reason: ${banReason}. Ban expires on: ${banEndDate}`);
-						router.push("/");
-						return;
+						alert(`Reminder: You are banned. Reason: ${banReason}. Ban expires on: ${banEndDate}`);
 					}
 
 					if (!user.emailVerified) {
@@ -116,6 +114,8 @@ const SubmitLocation = () => {
 				Email: email,
 				Uid: uid // Add the user's UID to the location data
 			};
+			console.log("Submitting location data:", locationData);
+
 			if (isAdmin) {
 				const locationsRef = ref(db, "locations");
 				await push(locationsRef, locationData);
@@ -125,6 +125,7 @@ const SubmitLocation = () => {
 			}
 
 			// Increment locationsSubmitted
+			console.log("Incrementing locationsSubmitted for user:", uid);
 			await runTransaction(ref(db, `users/${uid}/locationsSubmitted`), (currentValue) => {
 				return (currentValue || 0) + 1;
 			});
@@ -150,8 +151,13 @@ const SubmitLocation = () => {
 
 			await router.push("/"); // Ensure navigation is awaited
 		} catch (error) {
-			console.error("Error during location submission:", error);
-			setError(error.message);
+			if (error.message.includes("permission_denied")) {
+				console.error("Permission denied:", error.message);
+				setError("Permission denied. Please check your Firebase rules.");
+			} else {
+				console.error("Error during location submission:", error);
+				setError(error.message);
+			}
 		}
 	};
 

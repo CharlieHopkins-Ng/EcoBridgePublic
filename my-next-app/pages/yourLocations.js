@@ -40,8 +40,18 @@ const YourLocations = () => {
             if (user) {
                 setIsAuthenticated(true);
                 setUid(user.uid);
-                setIsAdmin(adminUids.includes(user.uid)); // Ensure admin check includes UIDs
+                setIsAdmin(adminUids.includes(user.uid));
                 fetchUserLocations(user.uid);
+
+                const userRef = ref(db, `users/${user.uid}`);
+                onValue(userRef, (snapshot) => {
+                    const userData = snapshot.val();
+                    if (userData?.banned) {
+                        const banReason = userData.banReason || "No reason provided";
+                        const banEndDate = userData.banEndDate || "Indefinite";
+                        alert(`Reminder: You are banned. Reason: ${banReason}. Ban expires on: ${banEndDate}`);
+                    }
+                });
             } else {
                 setIsAuthenticated(false);
                 router.push("/login");
