@@ -43,7 +43,6 @@ const Login = () => {
 							const banReason = userData.banReason || "No reason provided";
 							const banEndDate = userData.banEndDate || "Indefinite";
 							setError(`You are banned. Reason: ${banReason}. Ban expires on: ${banEndDate}`);
-							await signOut(auth);
 							return;
 						}
 
@@ -106,7 +105,13 @@ const Login = () => {
 				router.push("/verifyEmail");
 			}
 		} catch (error) {
-			setError(error.message);
+			if (error.message.includes("auth/invalid-email")) {
+				setError("Invalid email");
+			} else if (error.message.includes("auth/invalid-credential")) {
+				setError("Invalid password");
+			} else {
+				setError(error.message);
+			}
 		}
 	};
 

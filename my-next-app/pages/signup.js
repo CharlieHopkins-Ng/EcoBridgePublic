@@ -49,63 +49,68 @@ const Signup = () => {
 	}, [auth, adminUids, router]);
 
 	const handleSignup = async (e) => {
-		e.preventDefault();
-
-		if (password !== confirmPassword) {
-			setError("Passwords do not match");
-			return;
-		}
-
-		try {
-			// Debugging: Check if account creation is starting
-			console.log("Creating user account...");
-
-			// Create user account
-			const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-			const user = userCredential.user;
-
-			// Debugging: Confirm account creation
-			console.log(`Account created successfully. UID: ${user.uid}`);
-
-			// Check if the username already exists
-			const usernameRef = ref(db, `usernames/${username}`);
-			const snapshot = await get(usernameRef);
-
-			if (snapshot.exists()) {
-				console.log("Username already exists. Deleting the created account..."); // Debugging
-				setError("Username already exists. Please choose a different one.");
-				await user.delete(); // Delete the user if username already exists
-				return;
-			}
-
-			// Debugging: Writing user data to the database
-			console.log("Writing user data to the Realtime Database...");
-
-			// Write user data to the database after account creation
-			const userRef = ref(db, `users/${user.uid}`);
-			await set(userRef, {
-				username: username,
-				email: email,
-				createdAt: new Date().toISOString(),
-				emailVerified: false,
-			});
-
-			// Store username reference
-			await set(ref(db, `usernames/${username}`), user.uid);
-
-			// Debugging: Confirm data written to the database
-			console.log("User data written to the Realtime Database successfully.");
-
-			// Send email verification
-			await sendEmailVerification(user);
-
-			alert("Verification email sent. Please check your inbox.");
-			router.push("/verifyEmail");
-		} catch (error) {
-			console.error("Error during signup:", error.message); // Debugging
-			setError(error.message);
-		}
-	};
+        e.preventDefault();
+        setError(""); // Clear any previous errors
+    
+        if (password !== confirmPassword) {
+            setError("Passwords do not match");
+            return;
+        }
+    
+        try {
+            // Create user account in Firebase Auth
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+    
+            // Wait until user is authenticated before writing to database
+            await new Promise((resolve) => {
+                const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+                    if (authUser && authUser.uid === user.uid) {
+                        resolve();
+                        unsubscribe();
+                    }
+                });
+            });
+    
+            // Check if the username is taken (this should be done after authentication)
+            const usernameRef = ref(db, `usernames/${username}`);
+            const usernameSnapshot = await get(usernameRef);
+            if (usernameSnapshot.exists()) {
+                setError("Username is already taken. Please choose a different one.");
+                return;
+            }
+    
+            // Write user data to the database
+            const userRef = ref(db, `users/${user.uid}`);
+            const userData = {
+                username: username,
+                email: email,
+                createdAt: new Date().toISOString(),
+                emailVerified: user.emailVerified || false,
+            };
+    
+            await set(userRef, userData);
+            await set(usernameRef, user.uid); // Store the username reference
+    
+            // Send email verification
+            await sendEmailVerification(user);
+    
+            alert("Verification email sent. Please check your inbox.");
+            router.push("/verifyEmail");
+        } catch (error) {
+            console.error("Signup error:", error);
+            if (error.code === "auth/email-already-in-use") {
+                setError("Email is already registered. Please use a different email.");
+            } else if (error.code === "auth/invalid-email") {
+                setError("Invalid email format.");
+            } else if (error.code === "auth/weak-password") {
+                setError("Password is too weak. Use at least 6 characters.");
+            } else {
+                setError("Error signing up. Please try again.");
+            }
+        }
+    };
+    
 
 	const handleSignOut = async () => {
 		await signOut(auth);
