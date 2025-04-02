@@ -105,6 +105,12 @@ const SubmitLocation = () => {
 				return;
 			}
 
+			// Fetch the username from the database
+			const userRef = ref(db, `users/${uid}`);
+			const userSnapshot = await get(userRef);
+			const userData = userSnapshot.exists() ? userSnapshot.val() : {};
+			const senderUsername = userData.username || "Anonymous";
+
 			const locationData = {
 				Name: name,
 				Address: address,
@@ -112,7 +118,7 @@ const SubmitLocation = () => {
 				Longitude: parseFloat(longitude),
 				Description: description,
 				Website: website || "N/A", // Add website field
-				Username: username,
+				Username: senderUsername, // Store the username of the sender
 				Email: email,
 				Uid: uid // Add the user's UID to the location data
 			};
@@ -204,6 +210,9 @@ const SubmitLocation = () => {
 							</Link>
 							<Link href="/yourProfile" legacyBehavior>
 								<button>Your Profile</button>
+							</Link>
+							<Link href="/inbox" legacyBehavior>
+								<button>Inbox</button>
 							</Link>
 						</>
 					)}
