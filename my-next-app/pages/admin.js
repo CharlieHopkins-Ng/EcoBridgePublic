@@ -38,6 +38,7 @@ const Admin = () => {
 	const [editLocationsApproved, setEditLocationsApproved] = useState(0);
 	const [editLocationsDenied, setEditLocationsDenied] = useState(0);
 	const [editLocationsEdited, setEditLocationsEdited] = useState(0);
+	const [userSearchQuery, setUserSearchQuery] = useState(""); // Add state for user search query
 	const auth = getAuth(app);
 	const db = getDatabase(app);
 	const router = useRouter();
@@ -115,17 +116,89 @@ const Admin = () => {
 		? [...filteredUsers].sort((a, b) => b.locationsSubmitted - a.locationsSubmitted)
 		: filteredUsers;
 
+	// Filter users based on the search query
+	const filteredUsersBySearch = sortedUsers.filter(
+		(user) =>
+			user.username.toLowerCase().includes(userSearchQuery.toLowerCase()) ||
+			user.email.toLowerCase().includes(userSearchQuery.toLowerCase())
+	);
+
 	const handleSignOut = async () => {
 		await signOut(auth);
 		router.push("/login");
 	};
 
-	const approveLocation = (id) => {
-		// Approve location logic
+	const approveLocation = async (id) => {
+		try {
+			// Get the pending location data
+			const pendingLocationRef = ref(db, `pendingLocations/${id}`);
+			const snapshot = await get(pendingLocationRef);
+
+			if (snapshot.exists()) {
+				const locationData = snapshot.val();
+
+				// Add the location to the approved locations
+				const locationsRef = ref(db, "locations");
+				await push(locationsRef, locationData);
+
+				 // Increment locationsApproved for the user
+				if (locationData.Uid) {
+					const userRef = ref(db, `users/${locationData.Uid}/locationsApproved`);
+					await runTransaction(userRef, (currentValue) => (currentValue || 0) + 1);
+				}
+
+				// Remove the location from pending locations
+				await remove(pendingLocationRef);
+
+				alert("Location approved successfully.");
+			} else {
+				alert("Location not found in pending locations.");
+			}
+		} catch (error) {
+			alert("Failed to approve location: " + error.message);
+		}
 	};
 
-	const denyLocation = (id) => {
-		// Deny location logic
+	const denyLocation = async (id) => {
+		try {
+			// Get the pending location data
+			const pendingLocationRef = ref(db, `pendingLocations/${id}`);
+			const snapshot = await get(pendingLocationRef);
+
+			if (snapshot.exists()) {
+				const locationData = snapshot.val();
+
+				 // Prompt for a reason
+				const reason = prompt("Please provide a reason for denying this location:");
+				if (!reason) {
+					alert("A reason is required to deny the location.");
+					return;
+				}
+
+				// Increment locationsDenied for the user
+				if (locationData.Uid) {
+					const userRef = ref(db, `users/${locationData.Uid}/locationsDenied`);
+					await runTransaction(userRef, (currentValue) => (currentValue || 0) + 1);
+
+					// Add the reason to the user's inbox
+					const inboxRef = ref(db, `users/${locationData.Uid}/inbox`);
+					await push(inboxRef, {
+						message: `Your location "${locationData.Name}" was denied.`,
+						reason: reason,
+						timestamp: new Date().toISOString(),
+					});
+				}
+
+				// Remove the location from pending locations
+				await remove(pendingLocationRef);
+
+				alert("Location denied successfully.");
+			} else {
+				alert("Location not found in pending locations.");
+			}
+		} catch (error) {
+			alert("Failed to deny location: " + error.message);
+		}
 	};
 
 	const searchLocations = () => {
@@ -145,6 +218,22 @@ const Admin = () => {
 		setEditLongitude(location.Longitude);
 		setEditDescription(location.Description);
 		setEditWebsite(location.Website || "N/A");
+	};
+
+	const deleteLocation = async (id) => {
+		try {
+			// Remove the location from the database
+			const locationRef = ref(db, `locations/${id}`);
+			await remove(locationRef);
+
+			// Update the search results and all locations
+			setSearchResults(searchResults.filter(([locationId]) => locationId !== id));
+			setAllLocations(allLocations.filter(([locationId]) => locationId !== id));
+
+			alert("Location deleted successfully.");
+		} catch (error) {
+			alert("Failed to delete location: " + error.message);
+		}
 	};
 
 	const handleUpdate = async (e) => {
@@ -172,11 +261,13 @@ const Admin = () => {
 		}
 	};
 
-	const banUser = async (userId, banDuration, banReason) => {
+	const handleBanUser = async (userId, banDuration, banReason) => {
+		console.log(`handleBanUser called with userId: ${userId}, banDuration: ${banDuration}, banReason: ${banReason}`);
 		try {
 			const banEndDate = new Date();
 			banEndDate.setDate(banEndDate.getDate() + banDuration);
 
+			// Update the user's banned status in the database
 			const userRef = ref(db, `users/${userId}`);
 			await update(userRef, {
 				banned: true,
@@ -184,6 +275,16 @@ const Admin = () => {
 				banReason: banReason || "No reason provided",
 			});
 
+			// Log the ban in the user's inbox
+			const inboxRef = ref(db, `users/${userId}/inbox`);
+			await push(inboxRef, {
+				message: "You have been banned.",
+				reason: banReason || "No reason provided",
+				banEndDate: banEndDate.toISOString(),
+				timestamp: new Date().toISOString(),
+			});
+
+			// Log the ban in banHistory
 			const banHistoryRef = ref(db, `users/${userId}/banHistory`);
 			await push(banHistoryRef, {
 				banStartDate: new Date().toISOString(),
@@ -192,13 +293,15 @@ const Admin = () => {
 				adminId: auth.currentUser.uid,
 			});
 
-			alert("User has been banned.");
+			alert("User has been banned successfully.");
 		} catch (error) {
+			console.error("Failed to ban user:", error.message);
 			alert("Failed to ban user: " + error.message);
 		}
 	};
 
-	const unbanUser = async (userId, unbanReason) => {
+	const handleUnbanUser = async (userId, unbanReason) => {
+		console.log(`handleUnbanUser called with userId: ${userId}, unbanReason: ${unbanReason}`);
 		try {
 			const userRef = ref(db, `users/${userId}`);
 			await update(userRef, { banned: false, banEndDate: null });
@@ -211,9 +314,31 @@ const Admin = () => {
 				adminId: auth.currentUser.uid,
 			});
 
-			alert("User has been unbanned.");
+			// Notify the user about the unban
+			const inboxRef = ref(db, `users/${userId}/inbox`);
+			await push(inboxRef, {
+				message: "You have been unbanned.",
+				reason: unbanReason || "No reason provided",
+				timestamp: new Date().toISOString(),
+			});
+
+			alert("User has been unbanned and notified.");
 		} catch (error) {
+			console.error("Failed to unban user:", error.message);
 			alert("Failed to unban user: " + error.message);
+		}
+	};
+
+	const sendMessageToUser = async (userId, messageContent) => {
+		try {
+			const inboxRef = ref(db, `users/${userId}/inbox`);
+			await push(inboxRef, {
+				message: messageContent,
+				timestamp: new Date().toISOString(),
+			});
+			alert("Message sent to the user.");
+		} catch (error) {
+			alert("Failed to send message: " + error.message);
 		}
 	};
 
@@ -291,50 +416,6 @@ const Admin = () => {
 		}
 	};
 
-	const handleBanUser = async (userId, banDuration, banReason) => {
-		try {
-			const banEndDate = new Date();
-			banEndDate.setDate(banEndDate.getDate() + banDuration);
-
-			const userRef = ref(db, `users/${userId}`);
-			await update(userRef, {
-				banned: true,
-				banEndDate: banEndDate.toISOString(),
-				banReason: banReason || "No reason provided",
-			});
-
-			const banHistoryRef = ref(db, `users/${userId}/banHistory`);
-			await push(banHistoryRef, {
-				banStartDate: new Date().toISOString(),
-				banEndDate: banEndDate.toISOString(),
-				banReason: banReason || "No reason provided",
-				adminId: auth.currentUser.uid,
-			});
-
-			alert("User has been banned.");
-		} catch (error) {
-			alert("Failed to ban user: " + error.message);
-		}
-	};
-
-	const handleUnbanUser = async (userId, unbanReason) => {
-		try {
-			const userRef = ref(db, `users/${userId}`);
-			await update(userRef, { banned: false, banEndDate: null });
-
-			const banHistoryRef = ref(db, `users/${userId}/banHistory`);
-			await push(banHistoryRef, {
-				unbanDate: new Date().toISOString(),
-				unbanReason: unbanReason || "No reason provided",
-				adminId: auth.currentUser.uid,
-			});
-
-			alert("User has been unbanned.");
-		} catch (error) {
-			alert("Failed to unban user: " + error.message);
-		}
-	};
-
 	return (
 		<div>
 			<Head>
@@ -368,6 +449,9 @@ const Admin = () => {
 							<Link href="/yourProfile" legacyBehavior>
 								<button>Your Profile</button>
 							</Link>
+							<Link href="/inbox" legacyBehavior>
+								<button>Inbox</button>
+							</Link>
 						</>
 					)}
 				</div>
@@ -395,6 +479,7 @@ const Admin = () => {
 							<button onClick={() => setActiveSection("users")}>Manage Users</button>
 							<button onClick={() => setActiveSection("pendingLocations")}>Pending Locations</button>
 							<button onClick={() => setActiveSection("locations")}>Search and Edit Locations</button>
+							<button onClick={() => setActiveSection("sendMessages")}>Send Messages</button>
 						</div>
 
 						{/* Manage Users Section */}
@@ -419,8 +504,15 @@ const Admin = () => {
 										style={{ marginLeft: "10px" }}
 									/>
 								</label>
+								<input
+									type="text"
+									placeholder="Search users by username or email"
+									value={userSearchQuery}
+									onChange={(e) => setUserSearchQuery(e.target.value)}
+									style={{ margin: "10px 0", width: "100%", padding: "5px" }}
+								/>
 								<div>
-									{sortedUsers.map((user) => (
+									{filteredUsersBySearch.map((user) => (
 										<div key={user.id} className="user-container" style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px", borderRadius: "5px" }}>
 											<h3>{user.username}</h3>
 											<p><strong>Email:</strong> {user.email}</p>
@@ -482,6 +574,7 @@ const Admin = () => {
 											<p><strong>Latitude:</strong> {location.Latitude}</p>
 											<p><strong>Longitude:</strong> {location.Longitude}</p>
 											<p><strong>Description:</strong> {location.Description}</p>
+											<p><strong>Website:</strong> {location.Website !== "N/A" ? <a href={location.Website} target="_blank" rel="noopener noreferrer">{location.Website}</a> : "N/A"}</p>
 											<button onClick={() => approveLocation(id)}>Approve</button>
 											<button onClick={() => denyLocation(id)}>Deny</button>
 										</div>
@@ -578,11 +671,44 @@ const Admin = () => {
 													<p><strong>Description:</strong> {location.Description}</p>
 													<p><strong>Website:</strong> {location.Website !== "N/A" ? <a href={location.Website} target="_blank" rel="noopener noreferrer">{location.Website}</a> : "N/A"}</p>
 													<button onClick={() => editLocation(id, location)}>Edit</button>
+													<button onClick={() => deleteLocation(id)} style={{ marginLeft: "10px", backgroundColor: "red", color: "white" }}>Delete</button>
 												</>
 											)}
 										</div>
 									))}
 								</div>
+							</div>
+						)}
+
+						{/* Send Messages Section */}
+						{activeSection === "sendMessages" && (
+							<div>
+								<h2>Send Messages to Users</h2>
+								<input
+									type="text"
+									placeholder="Search users by username or email"
+									value={userSearchQuery}
+									onChange={(e) => setUserSearchQuery(e.target.value)}
+									style={{ margin: "10px 0", width: "100%", padding: "5px" }}
+								/>
+								{filteredUsersBySearch.map((user) => (
+									<div key={user.id} className="user-container" style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px", borderRadius: "5px" }}>
+										<h3>{user.username}</h3>
+										<p><strong>Email:</strong> {user.email}</p>
+										<p><strong>User ID:</strong> {user.id}</p>
+										<textarea
+											id={`message-${user.id}`}
+											placeholder="Write your message here..."
+											style={{ width: "100%", height: "100px", marginBottom: "10px" }}
+										></textarea>
+										<button onClick={() => {
+											const messageContent = document.getElementById(`message-${user.id}`).value;
+											sendMessageToUser(user.id, messageContent);
+										}}>
+											Send Message
+										</button>
+									</div>
+								))}
 							</div>
 						)}
 					</div>

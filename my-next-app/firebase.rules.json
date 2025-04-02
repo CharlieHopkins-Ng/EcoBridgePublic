@@ -3,7 +3,7 @@
 		"users": {
 			"$uid": {
 				".read": "auth != null && (auth.uid == $uid || root.child('adminUids').child(auth.uid).exists())",
-				".write": "auth != null && (!data.exists() || auth.uid == $uid)",
+				".write": "auth != null && (auth.uid == $uid || root.child('adminUids').child(auth.uid).exists())",
 				"username": {
 					".validate": "newData.isString() && newData.val().length > 0 && !root.child('usernames').child(newData.val()).exists()"
 				},
@@ -15,12 +15,12 @@
 				}
 			},
 			".read": "auth != null && root.child('adminUids').child(auth.uid).exists()",
-			".write": "auth != null" 
+			".write": "auth != null && root.child('adminUids').child(auth.uid).exists()"
 		},
 		"usernames": {
 			"$username": {
 				".read": "auth != null",
-				".write": "auth != null && !data.exists()" 
+				".write": "auth != null && !data.exists()"
 			},
 			".read": "auth != null",
 			".write": "auth != null"
@@ -44,6 +44,10 @@
 		"pendingLocations": {
 			".read": "auth != null && root.child('adminUids').child(auth.uid).exists()",
 			".write": "auth != null && (!root.child('users').child(auth.uid).child('banned').exists() || root.child('users').child(auth.uid).child('banned').val() == false)"
+		},
+		"adminInbox": {
+			".read": "auth != null && root.child('adminUids').child(auth.uid).exists()",
+			".write": "auth != null"
 		}
 	}
 }

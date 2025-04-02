@@ -18,15 +18,15 @@ const YourProfile = () => {
 	const router = useRouter();
 
 	useEffect(() => {
-		const fetchAdminEmails = async () => {
-			const adminEmailsRef = ref(db, "adminEmails");
-			onValue(adminEmailsRef, (snapshot) => {
+		const fetchAdminUids = async () => {
+			const adminUidsRef = ref(db, "adminUids");
+			onValue(adminUidsRef, (snapshot) => {
 				const data = snapshot.val();
-				setIsAdmin(data ? Object.values(data).includes(auth.currentUser?.email) : false);
+				setIsAdmin(data ? Object.keys(data).includes(auth.currentUser?.uid) : false);
 			});
 		};
 
-		fetchAdminEmails();
+		fetchAdminUids();
 	}, [auth]);
 
 	useEffect(() => {
@@ -139,6 +139,9 @@ const YourProfile = () => {
 							</Link>
 							<Link href="/yourProfile" legacyBehavior>
 								<button>Your Profile</button>
+							</Link>
+							<Link href="/inbox" legacyBehavior>
+								<button>Inbox</button>
 							</Link>
 						</>
 					)}

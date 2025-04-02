@@ -160,6 +160,9 @@ const YourLocations = () => {
                             <Link href="/yourProfile" legacyBehavior>
                                 <button>Your Profile</button>
                             </Link>
+                            <Link href="/inbox" legacyBehavior>
+                                <button>Inbox</button>
+                            </Link>
                         </>
                     )}
                 </div>
