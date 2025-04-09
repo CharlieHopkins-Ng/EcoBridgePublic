@@ -13,6 +13,7 @@ const SubmitLocation = () => {
 	const [longitude, setLongitude] = useState("");
 	const [description, setDescription] = useState("");
 	const [website, setWebsite] = useState(""); // New state for website
+	const [howToHelp, setHowToHelp] = useState(""); // New state for "How to Help"
 	const [error, setError] = useState("");
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [isAdmin, setIsAdmin] = useState(false);
@@ -88,7 +89,7 @@ const SubmitLocation = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (!name || !address || !latitude || !longitude || !description || !website) {
+		if (!name || !address || !latitude || !longitude || !description || !website || !howToHelp) {
 			setError("All fields are required");
 			return;
 		}
@@ -118,6 +119,7 @@ const SubmitLocation = () => {
 				Longitude: parseFloat(longitude),
 				Description: description,
 				Website: website || "N/A", // Add website field
+				HowToHelp: howToHelp, // Add "How to Help" field
 				Username: senderUsername, // Store the username of the sender
 				Email: email,
 				Uid: uid // Add the user's UID to the location data
@@ -280,6 +282,12 @@ const SubmitLocation = () => {
 							placeholder="Description"
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
+							required
+						/>
+						<textarea
+							placeholder="How to Help"
+							value={howToHelp}
+							onChange={(e) => setHowToHelp(e.target.value)}
 							required
 						/>
 						{error && <p style={{ color: "red" }}>{error}</p>}

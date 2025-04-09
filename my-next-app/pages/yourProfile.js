@@ -37,7 +37,10 @@ const YourProfile = () => {
 				fetchUsername(user.uid);
 			} else {
 				setIsAuthenticated(false);
-				router.push("/login");
+				setUsername("");
+				setNewUsername("");
+				setEmail("");
+				setError("You must be logged in to access this page.");
 			}
 		});
 		return () => unsubscribe();
@@ -193,7 +196,7 @@ const YourProfile = () => {
 						</form>
 					</div>
 				) : (
-					<p>You need to be signed in to view your profile.</p>
+						<p style={{ color: "red" }}>{error}</p>
 				)}
 			</div>
 		</div>

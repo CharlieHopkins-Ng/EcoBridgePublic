@@ -24,9 +24,11 @@ const Admin = () => {
 	const [editLongitude, setEditLongitude] = useState("");
 	const [editDescription, setEditDescription] = useState("");
 	const [editWebsite, setEditWebsite] = useState("");
+	const [editHowToHelp, setEditHowToHelp] = useState(""); // Add state for How to Help field
 	const [editError, setEditError] = useState("");
 	const [activeSection, setActiveSection] = useState(null);
 	const [showNoWebsiteOnly, setShowNoWebsiteOnly] = useState(false);
+	const [showNoHowToHelpOnly, setShowNoHowToHelpOnly] = useState(false); // New state for filtering locations without "How to Help"
 	const [showAllLocations, setShowAllLocations] = useState(false);
 	const [editingUser, setEditingUser] = useState(null);
 	const [editUsername, setEditUsername] = useState("");
@@ -205,7 +207,8 @@ const Admin = () => {
 		const results = allLocations.filter(([id, location]) => {
 			const matchesQuery = location.Name.toLowerCase().includes(searchQuery.toLowerCase());
 			const matchesNoWebsite = showNoWebsiteOnly ? location.Website === "N/A" : true;
-			return matchesQuery && matchesNoWebsite;
+			const matchesNoHowToHelp = showNoHowToHelpOnly ? !location.HowToHelp : true; // Filter locations without "How to Help"
+			return matchesQuery && matchesNoWebsite && matchesNoHowToHelp;
 		});
 		setSearchResults(showAllLocations ? allLocations : results);
 	};
@@ -218,6 +221,7 @@ const Admin = () => {
 		setEditLongitude(location.Longitude);
 		setEditDescription(location.Description);
 		setEditWebsite(location.Website || "N/A");
+		setEditHowToHelp(location.HowToHelp || ""); // Set How to Help field
 	};
 
 	const deleteLocation = async (id) => {
@@ -238,7 +242,7 @@ const Admin = () => {
 
 	const handleUpdate = async (e) => {
 		e.preventDefault();
-		if (!editName || !editAddress || !editLatitude || !editLongitude || !editDescription || !editWebsite) {
+		if (!editName || !editAddress || !editLatitude || !editLongitude || !editDescription || !editWebsite || !editHowToHelp) {
 			setEditError("All fields are required");
 			return;
 		}
@@ -250,6 +254,7 @@ const Admin = () => {
 				Longitude: parseFloat(editLongitude),
 				Description: editDescription,
 				Website: editWebsite || "N/A",
+				HowToHelp: editHowToHelp, // Include How to Help field
 			};
 			const locationRef = ref(db, `locations/${editingLocation}`);
 			await update(locationRef, locationData);
@@ -575,6 +580,7 @@ const Admin = () => {
 											<p><strong>Longitude:</strong> {location.Longitude}</p>
 											<p><strong>Description:</strong> {location.Description}</p>
 											<p><strong>Website:</strong> {location.Website !== "N/A" ? <a href={location.Website} target="_blank" rel="noopener noreferrer">{location.Website}</a> : "N/A"}</p>
+											<p><strong>How to Help:</strong> {location.HowToHelp || "N/A"}</p>
 											<button onClick={() => approveLocation(id)}>Approve</button>
 											<button onClick={() => denyLocation(id)}>Deny</button>
 										</div>
@@ -599,6 +605,15 @@ const Admin = () => {
 										type="checkbox"
 										checked={showNoWebsiteOnly}
 										onChange={(e) => setShowNoWebsiteOnly(e.target.checked)}
+										style={{ marginLeft: "10px" }}
+									/>
+								</label>
+								<label>
+									Show locations with no "How to Help" only
+									<input
+										type="checkbox"
+										checked={showNoHowToHelpOnly}
+										onChange={(e) => setShowNoHowToHelpOnly(e.target.checked)}
 										style={{ marginLeft: "10px" }}
 									/>
 								</label>
@@ -658,6 +673,12 @@ const Admin = () => {
 														value={editWebsite}
 														onChange={(e) => setEditWebsite(e.target.value)}
 													/>
+													<textarea
+														placeholder="How to Help"
+														value={editHowToHelp}
+														onChange={(e) => setEditHowToHelp(e.target.value)}
+														required
+													/>
 													{editError && <p style={{ color: "red" }}>{editError}</p>}
 													<button type="submit">Update Location</button>
 													<button type="button" onClick={() => setEditingLocation(null)}>Cancel</button>
@@ -670,6 +691,7 @@ const Admin = () => {
 													<p><strong>Longitude:</strong> {location.Longitude}</p>
 													<p><strong>Description:</strong> {location.Description}</p>
 													<p><strong>Website:</strong> {location.Website !== "N/A" ? <a href={location.Website} target="_blank" rel="noopener noreferrer">{location.Website}</a> : "N/A"}</p>
+													{location.HowToHelp && <p><strong>How to Help:</strong> {location.HowToHelp}</p>}
 													<button onClick={() => editLocation(id, location)}>Edit</button>
 													<button onClick={() => deleteLocation(id)} style={{ marginLeft: "10px", backgroundColor: "red", color: "white" }}>Delete</button>
 												</>
