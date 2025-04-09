@@ -119,7 +119,7 @@ const Login = () => {
 
 	const handleForgotPassword = async () => {
 		if (!emailOrUsername) {
-			setError("Please enter your email or username to reset your password.");
+			setError("Please enter your email to reset your password.");
 			return;
 		}
 

@@ -7,6 +7,7 @@ import { ref, onValue } from "firebase/database";
 import { useRouter } from "next/router";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import React from "react";
+import haversine from 'haversine-distance';
 
 // Dynamically import Leaflet components
 const MapContainer = dynamic(() => import("react-leaflet").then((mod) => mod.MapContainer), { ssr: false });
@@ -29,8 +30,10 @@ const MapPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminEmails, setAdminEmails] = useState([]);
+  const [displayList, setDisplayList] = useState(false);
   const [adminUids, setAdminUids] = useState([]);
   const [userLocation, setUserLocation] = useState(null); // State for user location
+  const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -196,90 +199,154 @@ const MapPage = () => {
     </Marker>
   ));
 
+  const switchToList = () => {
+    setDisplayList(!displayList);
+  };
+
+  if (isLoading || Object.keys(icons).length === 0) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
+      {/* NAV BAR - NOW PROPERLY INCLUDED */}
       <nav className="nav">
-				<div className="nav-left">
-					<Link href="/" legacyBehavior>
-						<button>Home</button>
-					</Link>
-					<Link href="/aboutUs" legacyBehavior>
-						<button>About Us</button>
-					</Link>
-					<Link href="/news" legacyBehavior>
-						<button>News</button>
-					</Link>
-					<Link href="/submitLocation" legacyBehavior>
-						<button>{isAdmin ? "Add Location" : "Submit Location"}</button>
-					</Link>
-					{isAdmin && (
-						<Link href="/admin" legacyBehavior>
-							<button>Admin</button>
-						</Link>
-					)}
-					{isAuthenticated && (
-						<>
-							<Link href="/yourLocations" legacyBehavior>
-								<button>Your Locations</button>
-							</Link>
-							<Link href="/yourProfile" legacyBehavior>
-								<button>Your Profile</button>
-							</Link>
-							<Link href="/inbox" legacyBehavior>
-								<button>Inbox</button>
-							</Link>
-						</>
-					)}
-				</div>
-				<div className="nav-right">
-					{!isAuthenticated && (
-						<>
-							<Link href="/signup" legacyBehavior>
-								<button>Sign Up</button>
-							</Link>
-							<Link href="/login" legacyBehavior>
-								<button>Log In</button>
-							</Link>
-						</>
-					)}
-					{isAuthenticated && (
-						<button onClick={handleSignOut}>Sign Out</button>
-					)}
-				</div>
-			</nav>
+        <div className="nav-left">
+          <Link href="/" legacyBehavior>
+            <button>Home</button>
+          </Link>
+          <Link href="/aboutUs" legacyBehavior>
+            <button>About Us</button>
+          </Link>
+          <Link href="/news" legacyBehavior>
+            <button>News</button>
+          </Link>
+          <Link href="/submitLocation" legacyBehavior>
+            <button>{isAdmin ? "Add Location" : "Submit Location"}</button>
+          </Link>
+          {isAdmin && (
+            <Link href="/admin" legacyBehavior>
+              <button>Admin</button>
+            </Link>
+          )}
+          {isAuthenticated && (
+            <>
+              <Link href="/yourLocations" legacyBehavior>
+                <button>Your Locations</button>
+              </Link>
+              <Link href="/yourProfile" legacyBehavior>
+                <button>Your Profile</button>
+              </Link>
+              <Link href="/inbox" legacyBehavior>
+                <button>Inbox</button>
+              </Link>
+            </>
+          )}
+        </div>
+        <div className="nav-right">
+          {!isAuthenticated && (
+            <>
+              <Link href="/signup" legacyBehavior>
+                <button>Sign Up</button>
+              </Link>
+              <Link href="/login" legacyBehavior>
+                <button>Log In</button>
+              </Link>
+            </>
+          )}
+          {isAuthenticated && (
+            <button onClick={handleSignOut}>Sign Out</button>
+          )}
+        </div>
+      </nav>
 
-      <header className="header" style={{ color: "green", marginTop: "100px" , padding: "10px"}} >
+      <header className="header" style={{ color: "green", marginTop: "100px", padding: "10px" }}>
         <h2>Find locations to help the environment near you</h2>
       </header>
-
-      <div className="map-container" style={{ height: "50vh", marginTop: "20px" }}>
-        <MapContainer
-          center={center}
-          zoom={zoomLevel}
-          className="map"
-          whenCreated={(map) => {
-            mapRef.current = map;
-            setMapInstance(map);
-          }}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      
+      <button onClick={switchToList}>Switch to {displayList ? 'Map' : 'List'}</button>
+      
+      {displayList ? (
+        <div style={{ marginTop: "20px", padding: "10px", width: "800px"}}>
+          <h2>Locations Near You</h2>
+          <input
+            type="text"
+            placeholder="Search locations..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{ marginBottom: "15px", padding: "8px", width: "100%", maxWidth: "400px" }}
           />
-          {filteredClusters.map((cluster, index) => {
-            const icon = getClusterIcon(cluster.LocationNames.length);
-            return (
-              <MemoizedMarker
-                key={index}
-                position={[cluster.Latitude, cluster.Longitude]}
-                icon={icon}
-                onClick={() => setSelectedMarker(cluster.UUID)}
-                popupContent={<><strong>{cluster.Name}</strong><br />{cluster.Description}</>}
-              />
-            );
-          })}
-          {nonClusteredLocations.map((location, index) => {
-            return (
+          
+          <div style={{ marginTop: "20px" }}>
+            {locations
+              .filter(location => 
+                searchQuery === '' ||  // Show all if search is empty
+                location.Name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                (location.Description && location.Description.toLowerCase().includes(searchQuery.toLowerCase()))
+              )
+              .sort((a, b) => {
+                if (!userLocation) return 0;
+                const distanceA = haversine(userLocation, [a.Latitude, a.Longitude]);
+                const distanceB = haversine(userLocation, [b.Latitude, b.Longitude]);
+                return distanceA - distanceB;
+              })
+              .map((location, index) => (
+                <div key={index} className="location-container" style={{ 
+                  border: "1px solid #ccc", 
+                  padding: "15px", 
+                  marginBottom: "15px", 
+                  borderRadius: "5px",
+                  backgroundColor: "#f9f9f9"
+                }}>
+                  {
+                    <>
+                    <strong>
+                      {location.Website && location.Website !== "N/A" ? (
+                        <a href={location.Website} target="_blank" rel="noopener noreferrer">
+                          {location.Name}
+                        </a>
+                      ) : (
+                        location.Name
+                      )}
+                    </strong>
+                    <br />
+                    {location.Description}
+                    <br />
+                    {location.HowToHelp && <><strong>How to Help:</strong> {location.HowToHelp}</>}
+                  </>
+                  }
+                </div>
+              ))}
+          </div>
+        </div>
+      ) : (
+        <div className="map-container" style={{ height: "50vh", marginTop: "20px" }}>
+          <MapContainer
+            center={center}
+            zoom={zoomLevel}
+            className="map"
+            whenCreated={(map) => {
+              mapRef.current = map;
+              setMapInstance(map);
+            }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {filteredClusters.map((cluster, index) => {
+              const icon = getClusterIcon(cluster.LocationNames.length);
+              return (
+                <MemoizedMarker
+                  key={index}
+                  position={[cluster.Latitude, cluster.Longitude]}
+                  icon={icon}
+                  onClick={() => setSelectedMarker(cluster.UUID)}
+                  popupContent={<><strong>{cluster.Name}</strong><br />{cluster.Description}</>}
+                />
+              );
+            })}
+            {nonClusteredLocations.map((location, index) => (
               <MemoizedMarker
                 key={index}
                 position={[location.Latitude, location.Longitude]}
@@ -303,18 +370,18 @@ const MapPage = () => {
                   </>
                 }
               />
-            );
-          })}
-          {userLocation && (
-            <MemoizedMarker
-              position={userLocation}
-              icon={icons[10]} // Use the last icon for the "You are here" marker
-              popupContent={<strong>You are here</strong>}
-            />
-          )}
-          <UpdateMapView center={center} zoom={zoomLevel} onZoomChange={setZoomLevel} />
-        </MapContainer>
-      </div>
+            ))}
+            {userLocation && (
+              <MemoizedMarker
+                position={userLocation}
+                icon={icons[10]}
+                popupContent={<strong>You are here</strong>}
+              />
+            )}
+            <UpdateMapView center={center} zoom={zoomLevel} onZoomChange={setZoomLevel} />
+          </MapContainer>
+        </div>
+      )}
     </div>
   );
 };
