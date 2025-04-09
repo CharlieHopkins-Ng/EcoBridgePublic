@@ -124,7 +124,7 @@ const AboutUs = () => {
 					<h2>Meet the Team</h2>
 					<p>
 						We are a team of environmental enthusiasts, coders, and volunteers passionate about making a difference.
-						If you&apos;d like to contribute, get in touch with us at supp0rtecobridge@gmail.com (we do not have a domain yet)! We are completely open source, and our repository is <a href="https://github.com/NoAyeBeardo/EcoBridgePublic">here</a>.
+						If you&apos;d like to contribute, get in touch with us at supp0rtecobridge@gmail.com (we do not have a domain yet)! We are completely open source, and our repository is <a href="https://github.com/CharlieHopkins-Ng/EcoBridgePublic">here</a>.
 						All of our icons are from <a href="https://icons8.com/icons">Icons8</a>
 					</p>
 					<div style={{ textAlign: 'left' }}>
