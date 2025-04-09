@@ -34,6 +34,7 @@ const addLocationsToFirebase = async () => {
   // Ensure each location has a UUID
   const locationsWithUUIDs = locations.map(location => ({
     ...location,
+    howToHelp: location.howToHelp || "",
     UUID: location.UUID || uuidv4()
   }));
 

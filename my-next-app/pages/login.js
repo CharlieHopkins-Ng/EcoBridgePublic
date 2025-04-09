@@ -105,7 +105,9 @@ const Login = () => {
 				router.push("/verifyEmail");
 			}
 		} catch (error) {
-			if (error.message.includes("auth/invalid-email")) {
+			if (error.message.includes("auth/user-not-found")) {
+				setError("Account with this email does not exist");
+			} else if (error.message.includes("auth/invalid-email")) {
 				setError("Invalid email");
 			} else if (error.message.includes("auth/invalid-credential")) {
 				setError("Invalid password");

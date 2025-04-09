@@ -17,6 +17,7 @@ const YourLocations = () => {
     const [longitude, setLongitude] = useState("");
     const [description, setDescription] = useState("");
     const [website, setWebsite] = useState(""); // New state for website
+    const [howToHelp, setHowToHelp] = useState(""); // New state for "How to Help"
     const [error, setError] = useState("");
     const [uid, setUid] = useState("");
     const [adminUids, setAdminUids] = useState([]); // Add missing state for adminUids
@@ -77,12 +78,13 @@ const YourLocations = () => {
         setLatitude(location[1].Latitude);
         setLongitude(location[1].Longitude);
         setDescription(location[1].Description);
-        setWebsite(location[1].Website || "N/A"); // Set website field
+        setWebsite(location[1].Website || "N/A");
+        setHowToHelp(location[1].HowToHelp || ""); // Set "How to Help" field
     };
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        if (!name || !address || !latitude || !longitude || !description || !website) {
+        if (!name || !address || !latitude || !longitude || !description || !website || !howToHelp) {
             setError("All fields are required");
             return;
         }
@@ -93,7 +95,8 @@ const YourLocations = () => {
                 Latitude: parseFloat(latitude),
                 Longitude: parseFloat(longitude),
                 Description: description,
-                Website: website || "N/A" // Add website field
+                Website: website || "N/A",
+                HowToHelp: howToHelp // Add "How to Help" field
             };
             const locationRef = ref(db, `locations/${editingLocation}`);
             await update(locationRef, locationData);
@@ -198,6 +201,7 @@ const YourLocations = () => {
                                     <p><strong>Longitude:</strong> {location.Longitude}</p>
                                     <p><strong>Description:</strong> {location.Description}</p>
                                     <p><strong>Website:</strong> {location.Website !== "N/A" ? <a href={location.Website} target="_blank" rel="noopener noreferrer">{location.Website}</a> : "N/A"}</p>
+                                    <p><strong>How to Help:</strong> {location.HowToHelp || "N/A"}</p>
                                     <button onClick={() => handleEdit([id, location])}>Edit</button>
                                     <button onClick={() => handleDelete(id)}>Delete</button>
                                 </div>
@@ -246,6 +250,12 @@ const YourLocations = () => {
                                     placeholder="Website (optional)"
                                     value={website}
                                     onChange={(e) => setWebsite(e.target.value)}
+                                />
+                                <textarea
+                                    placeholder="How to Help"
+                                    value={howToHelp}
+                                    onChange={(e) => setHowToHelp(e.target.value)}
+                                    required
                                 />
                                 {error && <p style={{ color: "red" }}>{error}</p>}
                                 <button type="submit">Update Location</button>

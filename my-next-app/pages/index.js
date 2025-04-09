@@ -298,6 +298,8 @@ const MapPage = () => {
                     </strong>
                     <br />
                     {location.Description}
+                    <br />
+                    {location.HowToHelp && <><strong>How to Help:</strong> {location.HowToHelp}</>}
                   </>
                 }
               />
