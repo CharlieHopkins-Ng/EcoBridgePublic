@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
 import { app, db } from "../firebaseConfig";
+import Navbar from '../components/navBar';
 
 const Login = () => {
 	const [emailOrUsername, setEmailOrUsername] = useState("");
@@ -159,26 +160,7 @@ const Login = () => {
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
 
-			<nav className="nav">
-				<div className="nav-left">
-					<Link href="/" legacyBehavior><button>Home</button></Link>
-					<Link href="/aboutUs" legacyBehavior><button>About Us</button></Link>
-					<Link href="/news" legacyBehavior><button>News</button></Link>
-					<Link href="/submitLocation" legacyBehavior>
-						<button>{isAdmin ? "Add Location" : "Submit Location"}</button>
-					</Link>
-					{isAdmin && <Link href="/admin" legacyBehavior><button>Admin</button></Link>}
-				</div>
-				<div className="nav-right">
-					{!isAuthenticated && (
-						<>
-							<Link href="/signup" legacyBehavior><button>Sign Up</button></Link>
-							<Link href="/login" legacyBehavior><button>Log In</button></Link>
-						</>
-					)}
-					{isAuthenticated && <button onClick={handleSignOut}>Sign Out</button>}
-				</div>
-			</nav>
+			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
 
 			<div className="container" style={{ maxWidth: "900px", width: "100%" }}>
 				<h1>Login</h1>
@@ -197,7 +179,7 @@ const Login = () => {
 						onChange={(e) => setPassword(e.target.value)}
 						required
 					/>
-					{error && <p style={{ color: "red" }}>{error}</p>}
+					{error && <p style={{color: "red" }}>{error}</p>}
 					<button type="submit">Login</button>
 				</form>
 				<p>

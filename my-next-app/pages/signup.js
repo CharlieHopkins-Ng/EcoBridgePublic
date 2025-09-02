@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
 import { app, db } from "../firebaseConfig";
-import { getFirestore } from "firebase/firestore"; // Import Firestore
+import Navbar from '../components/navBar';
 
 const Signup = () => {
 	const [email, setEmail] = useState("");
@@ -122,42 +122,7 @@ const Signup = () => {
 				<title>Sign Up - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<nav className="nav">
-				<div className="nav-left">
-					<Link href="/" legacyBehavior>
-						<button>Home</button>
-					</Link>
-					<Link href="/aboutUs" legacyBehavior>
-						<button>About Us</button>
-					</Link>
-					<Link href="/news" legacyBehavior>
-						<button>News</button>
-					</Link>
-					<Link href="/submitLocation" legacyBehavior>
-						<button>{isAdmin ? "Add Location" : "Submit Location"}</button>
-					</Link>
-					{isAdmin && (
-						<Link href="/admin" legacyBehavior>
-							<button>Admin</button>
-						</Link>
-					)}
-				</div>
-				<div className="nav-right">
-					{!isAuthenticated && (
-						<Link href="/signup" legacyBehavior>
-							<button>Sign Up</button>
-						</Link>
-					)}
-					{!isAuthenticated && (
-						<Link href="/login" legacyBehavior>
-							<button>Log In</button>
-						</Link>
-					)}
-					{isAuthenticated && (
-						<button onClick={handleSignOut}>Sign Out</button>
-					)}
-				</div>
-			</nav>
+			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
 			<div className="container" style={{ maxWidth: "900px", width: "100%" }}>
 				<h1>Sign Up</h1>
 				<form onSubmit={handleSignup} style={{ textAlign: "left", width: "100%" }}>

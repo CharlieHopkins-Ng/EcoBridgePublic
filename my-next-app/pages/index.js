@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import "leaflet/dist/leaflet.css";
 import { db, auth } from "../firebaseConfig";
 import { ref, onValue } from "firebase/database";
@@ -8,6 +7,7 @@ import { useRouter } from "next/router";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import React from "react";
 import haversine from 'haversine-distance';
+import Navbar from '../components/navBar';
 
 // Dynamically import Leaflet components
 const MapContainer = dynamic(() => import("react-leaflet").then((mod) => mod.MapContainer), { ssr: false });
@@ -209,56 +209,7 @@ const MapPage = () => {
 
   return (
     <div>
-      {/* NAV BAR - NOW PROPERLY INCLUDED */}
-      <nav className="nav">
-        <div className="nav-left">
-          <Link href="/" legacyBehavior>
-            <button>Home</button>
-          </Link>
-          <Link href="/aboutUs" legacyBehavior>
-            <button>About Us</button>
-          </Link>
-          <Link href="/news" legacyBehavior>
-            <button>News</button>
-          </Link>
-          <Link href="/submitLocation" legacyBehavior>
-            <button>{isAdmin ? "Add Location" : "Submit Location"}</button>
-          </Link>
-          {isAdmin && (
-            <Link href="/admin" legacyBehavior>
-              <button>Admin</button>
-            </Link>
-          )}
-          {isAuthenticated && (
-            <>
-              <Link href="/yourLocations" legacyBehavior>
-                <button>Your Locations</button>
-              </Link>
-              <Link href="/yourProfile" legacyBehavior>
-                <button>Your Profile</button>
-              </Link>
-              <Link href="/inbox" legacyBehavior>
-                <button>Inbox</button>
-              </Link>
-            </>
-          )}
-        </div>
-        <div className="nav-right">
-          {!isAuthenticated && (
-            <>
-              <Link href="/signup" legacyBehavior>
-                <button>Sign Up</button>
-              </Link>
-              <Link href="/login" legacyBehavior>
-                <button>Log In</button>
-              </Link>
-            </>
-          )}
-          {isAuthenticated && (
-            <button onClick={handleSignOut}>Sign Out</button>
-          )}
-        </div>
-      </nav>
+      <Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
 
       <header className="header" style={{ color: "green", marginTop: "100px", padding: "10px" }}>
         <h2>Find locations to help the environment near you</h2>
@@ -376,6 +327,7 @@ const MapPage = () => {
                 position={userLocation}
                 icon={icons[10]}
                 popupContent={<strong>You are here</strong>}
+                onClick={() => {}}
               />
             )}
             <UpdateMapView center={center} zoom={zoomLevel} onZoomChange={setZoomLevel} />

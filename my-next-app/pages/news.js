@@ -1,9 +1,9 @@
-import Link from "next/link";
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { ref, onValue } from "firebase/database";
 import { app, db } from "../firebaseConfig";
+import Navbar from '../components/navBar';
 
 const News = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -59,55 +59,7 @@ const News = () => {
 				<title>News - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<nav className="nav">
-				<div className="nav-left">
-					<Link href="/" legacyBehavior>
-						<button>Home</button>
-					</Link>
-					<Link href="/aboutUs" legacyBehavior>
-						<button>About Us</button>
-					</Link>
-					<Link href="/news" legacyBehavior>
-						<button>News</button>
-					</Link>
-					<Link href="/submitLocation" legacyBehavior>
-						<button>{isAdmin ? "Add Location" : "Submit Location"}</button>
-					</Link>
-					{isAdmin && (
-						<Link href="/admin" legacyBehavior>
-							<button>Admin</button>
-						</Link>
-					)}
-					{isAuthenticated && (
-						<>
-							<Link href="/yourLocations" legacyBehavior>
-								<button>Your Locations</button>
-							</Link>
-							<Link href="/yourProfile" legacyBehavior>
-								<button>Your Profile</button>
-							</Link>
-							<Link href="/inbox" legacyBehavior>
-								<button>Inbox</button>
-							</Link>
-						</>
-					)}
-				</div>
-				<div className="nav-right">
-					{!isAuthenticated && (
-						<>
-							<Link href="/signup" legacyBehavior>
-								<button>Sign Up</button>
-							</Link>
-							<Link href="/login" legacyBehavior>
-								<button>Log In</button>
-							</Link>
-						</>
-					)}
-					{isAuthenticated && (
-						<button onClick={handleSignOut}>Sign Out</button>
-					)}
-				</div>
-			</nav>
+			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
 			<header className="header">
 				EcoBridge - Latest News and Updates
 			</header>
