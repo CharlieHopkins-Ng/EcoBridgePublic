@@ -1,9 +1,7 @@
 import { initializeApp, getApps } from "firebase/app";
-import { getDatabase } from "firebase/database";
+import { getDatabase } from "firebase/database";   // Realtime DB
+import { getFirestore } from "firebase/firestore"; // Firestore
 import { getAuth } from "firebase/auth";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -23,7 +21,14 @@ if (!getApps().length) {
   app = getApps()[0];
 }
 
-const db = getDatabase(app);
+// ✅ Realtime Database (for your main features)
+const rtdb = getDatabase(app);
+
+// ✅ Firestore (for translations)
+const firestore = getFirestore(app);
+
+// ✅ Auth
 const auth = getAuth(app);
 
-export { db, auth, app };
+export { rtdb, firestore, auth, app, firebaseConfig };
+export { rtdb as db }; // Export Realtime Database as 'db' for consistency with existing code
