@@ -1,6 +1,6 @@
 EcoBridge
 
-EcoBridge is a website that aims to provide a platform that helps people connect with organizations dedicated to the environment. It does this by showing users an interactive map of these organizations near them. Users can also submit locations that will be reviewed and added.
+EcoBridge is a website that aims to provide a platform that helps people connect with organizations dedicated to the environment. It does this by showing users an interactive map of these organizations near them. Users can also submit locations that will be reviewed and added if appropriate.
 
 Hosted at https://eco-bridge-public.vercel.app/
 

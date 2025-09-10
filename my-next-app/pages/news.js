@@ -67,7 +67,7 @@ const News = () => {
 				<section className="news-container">
 					<h1>Latest News</h1>
 					<article>
-						<h2>[#insert date here] Beta Launch!</h2>
+						<h2>10 September 2025 - Beta Launch!</h2>
 						<p>
 							We are happy to announce that EcoBridge has launched! More features will be coming soon such as:
 						</p>
@@ -75,7 +75,6 @@ const News = () => {
 							<li>Leaving reviews on locations</li>
 							<li>Multi-language support (feel free to contact us if you want to help with this)</li>
 							<li>A custom domain</li>
-							<li>Community blogs</li>
 						</ul>
 					</article>
 				</section>

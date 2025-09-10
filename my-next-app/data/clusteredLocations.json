@@ -1,7 +1,7 @@
 [
   {
     "Name": "24 locations",
-    "UUID": "347015eb-85ee-4037-8323-9d0d84d523c0",
+    "UUID": "175d62ae-330c-4a2e-ac5b-d0c5cae40276",
     "Address": "",
     "Latitude": 38.319363749999994,
     "Longitude": 119.19125916666667,
@@ -36,7 +36,7 @@
   },
   {
     "Name": "6 locations",
-    "UUID": "c918694c-6ffc-4224-be24-96217645978f",
+    "UUID": "0a13bd58-9bef-47ec-812b-ee77280dc62c",
     "Address": "",
     "Latitude": 23.962694999999997,
     "Longitude": 110.95226000000001,
@@ -52,11 +52,11 @@
     ]
   },
   {
-    "Name": "5 locations",
-    "UUID": "71e57a41-b4eb-4729-8fb8-c371f0520cfb",
+    "Name": "9 locations",
+    "UUID": "306fa820-b735-4c7e-962f-de2eeeea96cf",
     "Address": "",
-    "Latitude": 40.39443,
-    "Longitude": -74.55951200000001,
+    "Latitude": 40.13747233333333,
+    "Longitude": -74.98687833333334,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 0,
     "LocationNames": [
@@ -64,12 +64,16 @@
       "Natural Resources Defense Council (NRDC)",
       "The Nature Conservancy",
       "Environmental Defense Fund (EDF)",
-      "Wildlife Conservation Society (WCS)"
+      "Wildlife Conservation Society (WCS)",
+      "The Nature Conservancy",
+      "Greenpeace USA",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
     ]
   },
   {
     "Name": "16 locations",
-    "UUID": "a9b443e9-fba2-4377-a27e-15cd50b52064",
+    "UUID": "3c69023e-0cbf-4631-b579-1baa56410d8a",
     "Address": "",
     "Latitude": 39.94355,
     "Longitude": 116.41841437499998,
@@ -96,7 +100,7 @@
   },
   {
     "Name": "3 locations",
-    "UUID": "03e2c59a-4bec-4f89-8bb0-3b2c25df1be7",
+    "UUID": "997eac9a-9374-484b-9288-b46e4f6098f4",
     "Address": "",
     "Latitude": 30.914909999999995,
     "Longitude": 121.01176333333335,
@@ -110,7 +114,7 @@
   },
   {
     "Name": "5 locations",
-    "UUID": "0203b3fa-0345-4086-9800-de862499190b",
+    "UUID": "8d44b057-46da-4028-ba71-109f499e44ea",
     "Address": "",
     "Latitude": 23.746465999999998,
     "Longitude": 112.60155200000001,
@@ -125,11 +129,11 @@
     ]
   },
   {
-    "Name": "5 locations",
-    "UUID": "d165bc17-d3b2-4bec-bb07-ec05e3ff4e29",
+    "Name": "9 locations",
+    "UUID": "a7835586-8122-4940-b87b-f6445fd8ef4b",
     "Address": "",
-    "Latitude": 40.39443,
-    "Longitude": -74.55951200000001,
+    "Latitude": 40.13747233333333,
+    "Longitude": -74.98687833333334,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 1,
     "LocationNames": [
@@ -137,12 +141,16 @@
       "Natural Resources Defense Council (NRDC)",
       "The Nature Conservancy",
       "Environmental Defense Fund (EDF)",
-      "Wildlife Conservation Society (WCS)"
+      "Wildlife Conservation Society (WCS)",
+      "The Nature Conservancy",
+      "Greenpeace USA",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
     ]
   },
   {
     "Name": "5 locations",
-    "UUID": "4262afe6-b4a8-4898-8bad-93aaf1053330",
+    "UUID": "ac43bc9c-9af2-49d4-bcd6-35dc45d6c096",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -158,7 +166,7 @@
   },
   {
     "Name": "16 locations",
-    "UUID": "5fe6b4e0-167b-4365-9439-acae588d83a1",
+    "UUID": "2acf63a0-552f-4d90-909b-a2220c8f6cdd",
     "Address": "",
     "Latitude": 39.94355,
     "Longitude": 116.41841437499998,
@@ -185,7 +193,7 @@
   },
   {
     "Name": "3 locations",
-    "UUID": "d0e798de-23f2-4a69-a72d-df806658aa15",
+    "UUID": "2796ad78-aab2-42ef-8378-63fe164a7c82",
     "Address": "",
     "Latitude": 30.914909999999995,
     "Longitude": 121.01176333333335,
@@ -199,7 +207,7 @@
   },
   {
     "Name": "3 locations",
-    "UUID": "5a698404-e9a9-47d9-8c50-1818dc034296",
+    "UUID": "54bb9e8c-5a3d-40ac-9ef4-1cbe52b88b64",
     "Address": "",
     "Latitude": 22.574816666666667,
     "Longitude": 113.90029,
@@ -212,23 +220,25 @@
     ]
   },
   {
-    "Name": "4 locations",
-    "UUID": "81f1772e-59df-448a-9448-276acb155da5",
+    "Name": "6 locations",
+    "UUID": "00a0c6fa-d793-45b9-8c22-aaacae23ab10",
     "Address": "",
-    "Latitude": 40.7724625,
-    "Longitude": -73.92174,
+    "Latitude": 40.761164,
+    "Longitude": -73.94355966666667,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 2,
     "LocationNames": [
       "The Zigen Fund",
       "Natural Resources Defense Council (NRDC)",
       "Environmental Defense Fund (EDF)",
-      "Wildlife Conservation Society (WCS)"
+      "Wildlife Conservation Society (WCS)",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
     ]
   },
   {
     "Name": "5 locations",
-    "UUID": "44092a39-90b0-48fb-bff6-4fb24fd7a908",
+    "UUID": "2139b216-b2a7-49fe-ace3-ac5ede4bebf2",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -243,8 +253,22 @@
     ]
   },
   {
+    "Name": "3 locations",
+    "UUID": "f02de9a6-f3ce-4870-b223-a2ee81ef4e5b",
+    "Address": "",
+    "Latitude": 38.890089,
+    "Longitude": -77.07351566666667,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 2,
+    "LocationNames": [
+      "The Nature Conservancy",
+      "The Nature Conservancy",
+      "Greenpeace USA"
+    ]
+  },
+  {
     "Name": "16 locations",
-    "UUID": "1779f0e5-d548-4a14-9da8-a948d0554d21",
+    "UUID": "814c388a-810a-4813-9501-8868682cfdf9",
     "Address": "",
     "Latitude": 39.94355,
     "Longitude": 116.41841437499998,
@@ -271,7 +295,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "0d2533c2-acbb-43df-ad35-84053d491f7a",
+    "UUID": "4d396ca5-836b-4e33-8ff7-8d53f4dad80d",
     "Address": "",
     "Latitude": 31.23746,
     "Longitude": 121.445925,
@@ -284,7 +308,7 @@
   },
   {
     "Name": "3 locations",
-    "UUID": "f2787e5e-bcd4-4e4c-a0e8-213ed0b01b5b",
+    "UUID": "d5a89a5b-ab60-4560-9bf8-3bd7330e9074",
     "Address": "",
     "Latitude": 22.574816666666667,
     "Longitude": 113.90029,
@@ -297,23 +321,25 @@
     ]
   },
   {
-    "Name": "4 locations",
-    "UUID": "cfe602d1-ad5c-4af9-a846-e35037a669a0",
+    "Name": "6 locations",
+    "UUID": "715c2772-a996-44e4-8c3c-6a1b88bf7655",
     "Address": "",
-    "Latitude": 40.7724625,
-    "Longitude": -73.92174,
+    "Latitude": 40.761164,
+    "Longitude": -73.94355966666667,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 3,
     "LocationNames": [
       "The Zigen Fund",
       "Natural Resources Defense Council (NRDC)",
       "Environmental Defense Fund (EDF)",
-      "Wildlife Conservation Society (WCS)"
+      "Wildlife Conservation Society (WCS)",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
     ]
   },
   {
     "Name": "5 locations",
-    "UUID": "7c443f24-e79f-4d83-96fe-5c8c07cada28",
+    "UUID": "dfdf17f4-3cca-4ccd-9721-76ff22a10cb1",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -328,8 +354,22 @@
     ]
   },
   {
+    "Name": "3 locations",
+    "UUID": "b04ef98f-26cc-405d-b195-8d81c9191d2e",
+    "Address": "",
+    "Latitude": 38.890089,
+    "Longitude": -77.07351566666667,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 3,
+    "LocationNames": [
+      "The Nature Conservancy",
+      "The Nature Conservancy",
+      "Greenpeace USA"
+    ]
+  },
+  {
     "Name": "16 locations",
-    "UUID": "79014445-813e-461f-a38c-b174aca49416",
+    "UUID": "8da4058a-d623-4e21-817e-3ecdf07be6d4",
     "Address": "",
     "Latitude": 39.94355,
     "Longitude": 116.41841437499998,
@@ -356,7 +396,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "1343e60a-989f-47a2-9fa6-a60b0bc2b5fe",
+    "UUID": "b6ce0584-0902-476f-a220-160b6affac9f",
     "Address": "",
     "Latitude": 31.23746,
     "Longitude": 121.445925,
@@ -368,23 +408,25 @@
     ]
   },
   {
-    "Name": "4 locations",
-    "UUID": "28c1368b-581d-468f-82cc-6d974cfd2b0a",
+    "Name": "6 locations",
+    "UUID": "df2a9446-4799-4273-919c-a3024b0ed5a5",
     "Address": "",
-    "Latitude": 40.7724625,
-    "Longitude": -73.92174,
+    "Latitude": 40.761164,
+    "Longitude": -73.94355966666667,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 4,
     "LocationNames": [
       "The Zigen Fund",
       "Natural Resources Defense Council (NRDC)",
       "Environmental Defense Fund (EDF)",
-      "Wildlife Conservation Society (WCS)"
+      "Wildlife Conservation Society (WCS)",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
     ]
   },
   {
     "Name": "2 locations",
-    "UUID": "da711566-8c71-49f7-b741-0d9e25d291a4",
+    "UUID": "faa19243-f6a6-46ce-82fb-d6c30644dbec",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -397,7 +439,7 @@
   },
   {
     "Name": "5 locations",
-    "UUID": "734afdf5-a5e8-4670-bf9a-546ea2eab4e8",
+    "UUID": "978b015b-04af-47e2-8df1-8c828d3710f1",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -412,8 +454,22 @@
     ]
   },
   {
+    "Name": "3 locations",
+    "UUID": "a924ba45-4bed-4968-806f-2d79ff124181",
+    "Address": "",
+    "Latitude": 38.890089,
+    "Longitude": -77.07351566666667,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 4,
+    "LocationNames": [
+      "The Nature Conservancy",
+      "The Nature Conservancy",
+      "Greenpeace USA"
+    ]
+  },
+  {
     "Name": "16 locations",
-    "UUID": "f5bef2ba-1f56-4f60-ae72-750359099eed",
+    "UUID": "278f78dd-068e-48f3-bd7c-01da4677ab26",
     "Address": "",
     "Latitude": 39.94355,
     "Longitude": 116.41841437499998,
@@ -440,7 +496,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "83160773-45c8-451f-a247-9ec479a65116",
+    "UUID": "f0aead60-0c70-437a-aad3-dd6dbee4ffc8",
     "Address": "",
     "Latitude": 31.23746,
     "Longitude": 121.445925,
@@ -452,23 +508,25 @@
     ]
   },
   {
-    "Name": "4 locations",
-    "UUID": "b2e116eb-6e20-4612-985f-6d18bb5d786b",
+    "Name": "6 locations",
+    "UUID": "441db7b9-3481-40ff-9b07-4aad1132af73",
     "Address": "",
-    "Latitude": 40.7724625,
-    "Longitude": -73.92174,
+    "Latitude": 40.761164,
+    "Longitude": -73.94355966666667,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 5,
     "LocationNames": [
       "The Zigen Fund",
       "Natural Resources Defense Council (NRDC)",
       "Environmental Defense Fund (EDF)",
-      "Wildlife Conservation Society (WCS)"
+      "Wildlife Conservation Society (WCS)",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
     ]
   },
   {
     "Name": "2 locations",
-    "UUID": "7342cef0-8719-40ad-8c64-84ce978e4e93",
+    "UUID": "2ef42c06-d560-49c6-92c9-b5ec67afa022",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -481,7 +539,7 @@
   },
   {
     "Name": "5 locations",
-    "UUID": "e5c08184-4068-4de5-9f01-4cf7ae918353",
+    "UUID": "b48a7cad-59c7-4c12-9084-586c6d30af4f",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -496,8 +554,22 @@
     ]
   },
   {
+    "Name": "3 locations",
+    "UUID": "0b0dfcab-b609-4d29-b07b-a9629f4f311c",
+    "Address": "",
+    "Latitude": 38.890089,
+    "Longitude": -77.07351566666667,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 5,
+    "LocationNames": [
+      "The Nature Conservancy",
+      "The Nature Conservancy",
+      "Greenpeace USA"
+    ]
+  },
+  {
     "Name": "16 locations",
-    "UUID": "9a0a0f76-5978-4a41-af5c-c941a31c5c51",
+    "UUID": "8c502a4d-8cae-41a3-bf76-8c1cf7f212f6",
     "Address": "",
     "Latitude": 39.94355,
     "Longitude": 116.41841437499998,
@@ -524,7 +596,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "182a1261-360a-47b3-9ab6-ac56175828d7",
+    "UUID": "52c54b3b-ebea-4bcb-83d9-a024720cbe3e",
     "Address": "",
     "Latitude": 31.23746,
     "Longitude": 121.445925,
@@ -536,23 +608,25 @@
     ]
   },
   {
-    "Name": "4 locations",
-    "UUID": "9db1a8e8-4b73-45b7-94d1-42884418c92c",
+    "Name": "6 locations",
+    "UUID": "b72ef94a-07bd-4a0f-8757-3824a1aa224f",
     "Address": "",
-    "Latitude": 40.7724625,
-    "Longitude": -73.92174,
+    "Latitude": 40.761164,
+    "Longitude": -73.94355966666667,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 6,
     "LocationNames": [
       "The Zigen Fund",
       "Natural Resources Defense Council (NRDC)",
       "Environmental Defense Fund (EDF)",
-      "Wildlife Conservation Society (WCS)"
+      "Wildlife Conservation Society (WCS)",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
     ]
   },
   {
     "Name": "2 locations",
-    "UUID": "7c9b0e8c-3070-4b36-a388-ab6ace309030",
+    "UUID": "58e2cce9-1c08-4000-aa97-7e0f02a9b257",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -565,7 +639,7 @@
   },
   {
     "Name": "5 locations",
-    "UUID": "34500e98-6314-4b13-a847-08836aea9275",
+    "UUID": "1e6a2a03-8465-459d-a832-c8234165352d",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -577,11 +651,25 @@
       "Green Korea United",
       "Korea Zero Waste Movement Network",
       "Korea Environmental Education Network"
+    ]
+  },
+  {
+    "Name": "3 locations",
+    "UUID": "675f28ce-af2b-4451-9480-65697caf7e69",
+    "Address": "",
+    "Latitude": 38.890089,
+    "Longitude": -77.07351566666667,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 6,
+    "LocationNames": [
+      "The Nature Conservancy",
+      "The Nature Conservancy",
+      "Greenpeace USA"
     ]
   },
   {
     "Name": "15 locations",
-    "UUID": "777d5262-f025-4f85-aa5b-6be5a7a9588d",
+    "UUID": "3704b596-161f-442d-b9ec-3e52e7abe645",
     "Address": "",
     "Latitude": 39.94077,
     "Longitude": 116.41330199999997,
@@ -607,7 +695,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "13038ad6-4a5d-4ed7-b447-03c4eb169b56",
+    "UUID": "1c44c001-6768-41d7-8acc-d2ede5b98034",
     "Address": "",
     "Latitude": 31.23746,
     "Longitude": 121.445925,
@@ -620,7 +708,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "b07fdadf-0c4d-4f3d-817f-db61ad85c6fe",
+    "UUID": "1e8608a7-a72c-43b9-bf74-275dcc7690e6",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -633,7 +721,7 @@
   },
   {
     "Name": "5 locations",
-    "UUID": "cffce723-1fd3-4616-9869-de5cfed23364",
+    "UUID": "43e51682-3160-4212-895f-3d40c53c4472",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -648,21 +736,37 @@
     ]
   },
   {
-    "Name": "2 locations",
-    "UUID": "37853f61-2e76-4ad9-ba09-53eee5b9a9f1",
+    "Name": "4 locations",
+    "UUID": "260a925a-c3ee-4666-9d64-c9c3d748cb01",
     "Address": "",
-    "Latitude": 40.7401,
-    "Longitude": -73.9899,
+    "Latitude": 40.7393335,
+    "Longitude": -73.9885495,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 7,
     "LocationNames": [
       "Natural Resources Defense Council (NRDC)",
-      "Environmental Defense Fund (EDF)"
+      "Environmental Defense Fund (EDF)",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
+    ]
+  },
+  {
+    "Name": "3 locations",
+    "UUID": "cdb77b2c-5ad7-4bc4-897e-46405e5345f3",
+    "Address": "",
+    "Latitude": 38.890089,
+    "Longitude": -77.07351566666667,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 7,
+    "LocationNames": [
+      "The Nature Conservancy",
+      "The Nature Conservancy",
+      "Greenpeace USA"
     ]
   },
   {
     "Name": "5 locations",
-    "UUID": "9acc4273-edfe-441e-b73d-d8bcf8e03899",
+    "UUID": "4c1882f2-1854-4cc0-9274-dca064856968",
     "Address": "",
     "Latitude": 39.930818,
     "Longitude": 116.39166,
@@ -678,7 +782,7 @@
   },
   {
     "Name": "7 locations",
-    "UUID": "84daa480-4032-4cd3-bad9-10331a836fb7",
+    "UUID": "ffb093e9-8e42-4ca3-bcaf-5966600bfecb",
     "Address": "",
     "Latitude": 39.94374,
     "Longitude": 116.46112714285714,
@@ -696,7 +800,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "eb99c23c-ad2a-420e-a1c9-a35d0fbeb1ce",
+    "UUID": "a26c52b6-6c5f-4bd1-a45c-aa8661da7617",
     "Address": "",
     "Latitude": 39.96865,
     "Longitude": 116.348465,
@@ -709,7 +813,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "574cf7a0-8612-4d1c-aead-e51985bb5d7c",
+    "UUID": "fcd41e5e-cd52-41aa-8539-c26cf68fcc03",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -722,7 +826,7 @@
   },
   {
     "Name": "5 locations",
-    "UUID": "51ec6183-3004-4c38-993d-d221d0ca5465",
+    "UUID": "0ef156d4-8c10-4866-9066-2809794c43d3",
     "Address": "",
     "Latitude": 37.56464,
     "Longitude": 126.97206000000001,
@@ -737,21 +841,36 @@
     ]
   },
   {
-    "Name": "2 locations",
-    "UUID": "80c38b92-bdb8-4ec5-874a-0a70508f8df6",
+    "Name": "4 locations",
+    "UUID": "1f36a76c-b1ce-4f71-81a2-b7d09df626bd",
     "Address": "",
-    "Latitude": 40.7401,
-    "Longitude": -73.9899,
+    "Latitude": 40.7393335,
+    "Longitude": -73.9885495,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 8,
     "LocationNames": [
       "Natural Resources Defense Council (NRDC)",
-      "Environmental Defense Fund (EDF)"
+      "Environmental Defense Fund (EDF)",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
     ]
   },
   {
     "Name": "2 locations",
-    "UUID": "31b14335-bfe0-4a9d-bcf1-822562883c79",
+    "UUID": "2f65a4ce-e52e-43f0-9df9-ed7012930f0e",
+    "Address": "",
+    "Latitude": 38.885304500000004,
+    "Longitude": -77.099192,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 8,
+    "LocationNames": [
+      "The Nature Conservancy",
+      "The Nature Conservancy"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "956b5fb9-173b-4274-816b-a49c7c97b9e2",
     "Address": "",
     "Latitude": 39.947585,
     "Longitude": 116.41651999999999,
@@ -764,7 +883,7 @@
   },
   {
     "Name": "4 locations",
-    "UUID": "f77626cf-0a43-4ed2-8269-84dee3d5a582",
+    "UUID": "7aa1f298-846d-43b6-97c1-0b23b0fe9b15",
     "Address": "",
     "Latitude": 39.94744,
     "Longitude": 116.46177,
@@ -779,7 +898,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "1286e2a8-2af6-4eff-863b-c85781c18f04",
+    "UUID": "eef1bc4f-242f-476d-b7de-2f403ec1f492",
     "Address": "",
     "Latitude": 39.91941,
     "Longitude": 116.46843,
@@ -792,7 +911,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "8b9c8d72-0269-4f89-9903-cc4e73c2c3b3",
+    "UUID": "7381830e-fb0f-45d5-b6e2-724678858e20",
     "Address": "",
     "Latitude": 39.96865,
     "Longitude": 116.348465,
@@ -805,7 +924,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "aa3a67d1-1fef-4b9a-8b93-6d1ed5ed7d39",
+    "UUID": "6b4dd001-378b-4d7a-ae49-f8e30afcdd0c",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -818,7 +937,7 @@
   },
   {
     "Name": "4 locations",
-    "UUID": "a1f81247-078c-49c1-b085-4e20d2182e75",
+    "UUID": "23ab41d7-8f00-4d58-a1c2-b0a6037a8b1b",
     "Address": "",
     "Latitude": 37.570949999999996,
     "Longitude": 126.97834999999999,
@@ -832,21 +951,36 @@
     ]
   },
   {
-    "Name": "2 locations",
-    "UUID": "011bd251-e253-4bc9-bf9d-f19b41c0bb9b",
+    "Name": "4 locations",
+    "UUID": "c1bdcbad-3524-44df-af99-c0e5df4e3e9d",
     "Address": "",
-    "Latitude": 40.7401,
-    "Longitude": -73.9899,
+    "Latitude": 40.7393335,
+    "Longitude": -73.9885495,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 9,
     "LocationNames": [
       "Natural Resources Defense Council (NRDC)",
-      "Environmental Defense Fund (EDF)"
+      "Environmental Defense Fund (EDF)",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "1cf6476a-a086-49c4-861a-052330c9eb0c",
+    "Address": "",
+    "Latitude": 38.885304500000004,
+    "Longitude": -77.099192,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 9,
+    "LocationNames": [
+      "The Nature Conservancy",
+      "The Nature Conservancy"
     ]
   },
   {
     "Name": "4 locations",
-    "UUID": "0f020c47-1b8b-41b2-94f1-7b9dcfa497d3",
+    "UUID": "4f901bb3-af67-45ea-81ac-576fe8666e34",
     "Address": "",
     "Latitude": 39.94744,
     "Longitude": 116.46177,
@@ -861,7 +995,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "dfea6418-8be3-47a4-adbf-266e950a9344",
+    "UUID": "99576b1e-2186-46c2-9abd-61b4d1a6fb33",
     "Address": "",
     "Latitude": 22.2975,
     "Longitude": 114.1696,
@@ -874,7 +1008,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "86304ab0-1b18-4319-9e44-bf3886f65746",
+    "UUID": "18ff344e-2f6c-461f-bfd9-9c4a3cdde147",
     "Address": "",
     "Latitude": 37.57145,
     "Longitude": 126.9686,
@@ -887,7 +1021,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "5e576993-a0f9-4744-8975-846ff054e10a",
+    "UUID": "ec134ef4-5400-41d6-8703-57017dbd526c",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
@@ -899,21 +1033,23 @@
     ]
   },
   {
-    "Name": "2 locations",
-    "UUID": "0466d144-352c-49e8-b1e9-cadef3c4ac83",
+    "Name": "4 locations",
+    "UUID": "f0bb8586-d37b-47f9-93af-117a7040a5c4",
     "Address": "",
-    "Latitude": 40.7401,
-    "Longitude": -73.9899,
+    "Latitude": 40.7393335,
+    "Longitude": -73.9885495,
     "Description": "Zoom in to find more locations",
     "ZoomLevel": 10,
     "LocationNames": [
       "Natural Resources Defense Council (NRDC)",
-      "Environmental Defense Fund (EDF)"
+      "Environmental Defense Fund (EDF)",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
     ]
   },
   {
     "Name": "2 locations",
-    "UUID": "6d4ba688-d1ab-49dc-9402-62e534743ff0",
+    "UUID": "72f9c840-57d2-43af-8c28-42736e602783",
     "Address": "",
     "Latitude": 39.94752,
     "Longitude": 116.45906,
@@ -926,7 +1062,7 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "15a8aebc-4548-4482-8b2f-edc31961b85e",
+    "UUID": "88982612-58e2-4460-b561-20599784a9c5",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
@@ -938,8 +1074,22 @@
     ]
   },
   {
+    "Name": "3 locations",
+    "UUID": "9daf1cd8-d246-4c80-baa4-ac8d42166a5c",
+    "Address": "",
+    "Latitude": 40.738478,
+    "Longitude": -73.98693266666668,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 11,
+    "LocationNames": [
+      "Environmental Defense Fund (EDF)",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
+    ]
+  },
+  {
     "Name": "2 locations",
-    "UUID": "4f3b0f30-a37e-4a7a-b47a-d77f956e95d2",
+    "UUID": "943512fe-1bdd-4963-b54d-6ce642a00451",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
@@ -951,8 +1101,22 @@
     ]
   },
   {
+    "Name": "3 locations",
+    "UUID": "2e8595fa-9d1e-49c4-a9bc-e71706faa83b",
+    "Address": "",
+    "Latitude": 40.738478,
+    "Longitude": -73.98693266666668,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 12,
+    "LocationNames": [
+      "Environmental Defense Fund (EDF)",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
+    ]
+  },
+  {
     "Name": "2 locations",
-    "UUID": "8e72b8c6-8ec1-4149-a625-4eb1bc38a2a9",
+    "UUID": "22548653-68db-430d-9128-c426245502ab",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
@@ -964,8 +1128,22 @@
     ]
   },
   {
+    "Name": "3 locations",
+    "UUID": "c8f7699d-df61-4a5c-8b7e-44e3b7f2d46e",
+    "Address": "",
+    "Latitude": 40.738478,
+    "Longitude": -73.98693266666668,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 13,
+    "LocationNames": [
+      "Environmental Defense Fund (EDF)",
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
+    ]
+  },
+  {
     "Name": "2 locations",
-    "UUID": "d0b98e86-5f36-4736-89d7-8d402c865e47",
+    "UUID": "0e3b1158-5ebd-415f-ba77-c884c91d326c",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
@@ -978,7 +1156,20 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "5b266eec-92cd-4a61-9d16-6d5021c39fcf",
+    "UUID": "8cd3660e-ec78-4f40-8aa2-9478ab790d91",
+    "Address": "",
+    "Latitude": 40.738567,
+    "Longitude": -73.987199,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 14,
+    "LocationNames": [
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "1709a604-520f-4309-afc8-ff3dcda71b77",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
@@ -991,7 +1182,20 @@
   },
   {
     "Name": "2 locations",
-    "UUID": "41e13f28-b109-456c-8024-1c4d6f7ed636",
+    "UUID": "9bcd83b0-a6f8-4750-9981-4275e0c3c918",
+    "Address": "",
+    "Latitude": 40.738567,
+    "Longitude": -73.987199,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 15,
+    "LocationNames": [
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "0cc97f51-e51e-4799-89a9-a13100e762a1",
     "Address": "",
     "Latitude": 37.57045,
     "Longitude": 126.9881,
@@ -1000,6 +1204,32 @@
     "LocationNames": [
       "Green Korea United",
       "Korea Zero Waste Movement Network"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "139a1b25-536a-4c71-8906-bd9eeca11baa",
+    "Address": "",
+    "Latitude": 40.738567,
+    "Longitude": -73.987199,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 16,
+    "LocationNames": [
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
+    ]
+  },
+  {
+    "Name": "2 locations",
+    "UUID": "a3dfac43-13c1-4eb7-8b1b-02848e24dec0",
+    "Address": "",
+    "Latitude": 40.738567,
+    "Longitude": -73.987199,
+    "Description": "Zoom in to find more locations",
+    "ZoomLevel": 17,
+    "LocationNames": [
+      "Environmental Defense Fund",
+      "Environmental Defense Fund"
     ]
   }
 ]

@@ -22,7 +22,7 @@ if (!getApps().length) {
 }
 
 // ✅ Realtime Database (for your main features)
-const rtdb = getDatabase(app);
+const db = getDatabase(app);
 
 // ✅ Firestore (for translations)
 const firestore = getFirestore(app);
@@ -30,5 +30,4 @@ const firestore = getFirestore(app);
 // ✅ Auth
 const auth = getAuth(app);
 
-export { rtdb, firestore, auth, app, firebaseConfig };
-export { rtdb as db }; // Export Realtime Database as 'db' for consistency with existing code
+export { db, firestore, auth, app, firebaseConfig };
