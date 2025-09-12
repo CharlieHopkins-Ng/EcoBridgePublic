@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signOut, onAuthStateChanged, sendEmailVerification } from "firebase/auth";
-import { ref, onValue, set, get } from "firebase/database";
+import { ref, set, get } from "firebase/database";
+import { useAuthRoles } from "../context/authRolesContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
@@ -13,40 +14,9 @@ const Signup = () => {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [error, setError] = useState("");
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [isAdmin, setIsAdmin] = useState(false);
-	const [adminUids, setAdminUids] = useState([]);
 	const router = useRouter();
 	const auth = getAuth(app);
-
-	useEffect(() => {
-		const fetchAdminUids = async () => {
-			const adminUidsRef = ref(db, "adminUids");
-			onValue(adminUidsRef, (snapshot) => {
-				const data = snapshot.val();
-				setAdminUids(data ? Object.keys(data) : []);
-			});
-		};
-
-		fetchAdminUids();
-	}, []);
-
-	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			if (user) {
-				if (!user.emailVerified) {
-					router.push("/verifyEmail");
-					return;
-				}
-				setIsAuthenticated(true);
-				setIsAdmin(adminUids.includes(user.uid));
-			} else {
-				setIsAuthenticated(false);
-				setIsAdmin(false);
-			}
-		});
-		return () => unsubscribe();
-	}, [auth, adminUids, router]);
+	const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
 
 	const handleSignup = async (e) => {
 		e.preventDefault();
@@ -122,7 +92,7 @@ const Signup = () => {
 				<title>Sign Up - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
+			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
 			<div className="container" style={{ maxWidth: "900px", width: "100%" }}>
 				<h1>Sign Up</h1>
 				<form onSubmit={handleSignup} style={{ textAlign: "left", width: "100%" }}>

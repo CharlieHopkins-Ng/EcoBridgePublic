@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "firebase/auth";
 import { ref, get, update } from "firebase/database";
-import { getFirestore, doc, getDoc } from "firebase/firestore"; // Import Firestore
+import { useAuthRoles } from "../context/authRolesContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
@@ -12,23 +12,9 @@ const Login = () => {
 	const [emailOrUsername, setEmailOrUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [isAdmin, setIsAdmin] = useState(false);
-	const [adminUids, setAdminUids] = useState([]);
 	const router = useRouter();
 	const auth = getAuth(app);
-	const firestoreDb = getFirestore(app); // Initialize Firestore
-
-	useEffect(() => {
-		const fetchAdminUids = async () => {
-			const adminUidsRef = ref(db, "adminUids");
-			const snapshot = await get(adminUidsRef);
-			const data = snapshot.val();
-			setAdminUids(data ? Object.keys(data) : []);
-		};
-
-		fetchAdminUids();
-	}, []);
+	const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -52,23 +38,11 @@ const Login = () => {
 							return;
 						}
 
-						setIsAuthenticated(true);
-
-						const adminUidsRef = ref(db, "adminUids");
-						const adminSnapshot = await get(adminUidsRef);
-						const adminData = adminSnapshot.val();
-						const updatedAdminUids = adminData ? Object.keys(adminData) : [];
-
-						setAdminUids(updatedAdminUids);
-						setIsAdmin(updatedAdminUids.includes(user.uid));
 					}
 				} catch (error) {
 					console.error("Error fetching user data:", error.message);
 					setError("Failed to fetch user data. Please try again later.");
 				}
-			} else {
-				setIsAuthenticated(false);
-				setIsAdmin(false);
 			}
 		});
 
@@ -160,7 +134,7 @@ const Login = () => {
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
 
-			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
+			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
 
 			<div className="container" style={{ maxWidth: "900px", width: "100%" }}>
 				<h1>Login</h1>

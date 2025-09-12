@@ -1,18 +1,13 @@
 import { useState, useEffect } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { firestore, app, db} from "../firebaseConfig";
-import { ref, onValue } from "firebase/database";        
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { useAuthRoles } from "../context/authRolesContext";
+import { getAuth, signOut } from "firebase/auth";
 import Navbar from "../components/navBar";
 import { useTranslation } from "../hooks/useTranslation";
 
 const TranslatorPanel = ({ currentLanguage, onLanguageChange }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [isTranslator, setIsTranslator] = useState(false);
-    const [adminEmails, setAdminEmails] = useState([]);
-    const [adminUids, setAdminUids] = useState([]);
-    const [translatorUids, setTranslatorUids] = useState([]);
+    const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
     const auth = getAuth(app);
 
     const [selectedLanguage, setSelectedLanguage] = useState("en");
@@ -22,53 +17,6 @@ const TranslatorPanel = ({ currentLanguage, onLanguageChange }) => {
     const [englishTranslations, setEnglishTranslations] = useState({});
 
     const { t: tnavBar } = useTranslation(currentLanguage, "nav");
-
-    // Fetch admin emails
-    useEffect(() => {
-        const adminEmailsRef = ref(db, "adminEmails");
-        onValue(adminEmailsRef, (snapshot) => {
-            const data = snapshot.val();
-            setAdminEmails(data ? Object.values(data) : []);
-        });
-    }, []);
-
-    // Fetch admin UIDs
-    useEffect(() => {
-        const adminUidsRef = ref(db, "adminUids");
-        onValue(adminUidsRef, (snapshot) => {
-            const data = snapshot.val();
-            setAdminUids(data ? Object.keys(data) : []);
-        });
-    }, []);
-
-    // Fetch translator UIDs
-    useEffect(() => {
-        const translatorUidsRef = ref(db, "translatorUids");
-        onValue(translatorUidsRef, (snapshot) => {
-            const data = snapshot.val();
-            setTranslatorUids(data ? Object.keys(data) : []);
-        });
-    }, []);
-
-    // Auth listener
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const isUserAdmin = adminEmails.includes(user.email) || adminUids.includes(user.uid);
-                const isUserTranslator = translatorUids.includes(user.uid);
-
-                setIsAuthenticated(true);
-                setIsAdmin(isUserAdmin);
-                setIsTranslator(isUserTranslator || isUserAdmin);
-            } else {
-                setIsAuthenticated(false);
-                setIsAdmin(false);
-                setIsTranslator(false);
-            }
-        });
-
-        return () => unsubscribe();
-    }, [adminEmails, adminUids, translatorUids]);
 
     const handleSignOut = async () => {
         await signOut(auth);

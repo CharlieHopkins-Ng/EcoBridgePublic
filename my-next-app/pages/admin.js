@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { getDatabase, ref, onValue, remove, set, get, update, runTransaction, push } from "firebase/database";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { app } from "../firebaseConfig";
 import Navbar from '../components/navBar';
+import { useAuthRoles } from "../context/authRolesContext";
 
 const Admin = () => {
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [isAdmin, setIsAdmin] = useState(false);
+	const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
 	const [pendingLocations, setPendingLocations] = useState([]);
 	const [allLocations, setAllLocations] = useState([]);
 	const [searchQuery, setSearchQuery] = useState("");
@@ -44,31 +44,6 @@ const Admin = () => {
 	const auth = getAuth(app);
 	const db = getDatabase(app);
 	const router = useRouter();
-
-	useEffect(() => {
-		const fetchAdminUids = async () => {
-			const adminUidsRef = ref(db, "adminUids");
-			onValue(adminUidsRef, (snapshot) => {
-				const data = snapshot.val();
-				setAdminUids(data ? Object.keys(data) : []);
-			});
-		};
-
-		fetchAdminUids();
-	}, []);
-
-	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			if (user) {
-				setIsAuthenticated(true);
-				setIsAdmin(adminUids.includes(user.uid));
-			} else {
-				setIsAuthenticated(false);
-				setIsAdmin(false);
-			}
-		});
-		return () => unsubscribe();
-	}, [auth, adminUids]);
 
 	useEffect(() => {
 		if (isAdmin) {
@@ -427,7 +402,7 @@ const Admin = () => {
 				<title>Admin - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
+			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
 			<div className="container" style={{ marginTop: "80px" }}>
 				<h1>Admin Panel</h1>
 				{isAdmin ? (

@@ -5,10 +5,9 @@ import { useRouter } from "next/router";
 import Navbar from '../components/navBar';
 import Head from "next/head";
 import { app, db } from "../firebaseConfig";
+import { useAuthRoles } from "../context/authRolesContext";
 
 const YourLocations = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false);
     const [userLocations, setUserLocations] = useState([]);
     const [editingLocation, setEditingLocation] = useState(null);
     const [name, setName] = useState("");
@@ -20,29 +19,15 @@ const YourLocations = () => {
     const [howToHelp, setHowToHelp] = useState(""); // New state for "How to Help"
     const [error, setError] = useState("");
     const [uid, setUid] = useState("");
-    const [adminUids, setAdminUids] = useState([]); // Add missing state for adminUids
     const [bannedMessage, setBannedMessage] = useState(""); // New state for banned message
     const auth = getAuth(app);
     const router = useRouter();
-
-    useEffect(() => {
-        const fetchAdminUids = async () => {
-            const adminUidsRef = ref(db, "adminUids");
-            onValue(adminUidsRef, (snapshot) => {
-                const data = snapshot.val();
-                setAdminUids(data ? Object.keys(data) : []); // Initialize adminUids
-            });
-        };
-
-        fetchAdminUids();
-    }, [auth]);
+    const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                setIsAuthenticated(true);
                 setUid(user.uid);
-                setIsAdmin(adminUids.includes(user.uid));
                 fetchUserLocations(user.uid);
 
                 const userRef = ref(db, `users/${user.uid}`);
@@ -55,12 +40,11 @@ const YourLocations = () => {
                     }
                 });
             } else {
-                setIsAuthenticated(false);
                 router.push("/login");
             }
         });
         return () => unsubscribe();
-    }, [auth, adminUids, router]);
+    }, [auth, router]);
 
     const fetchUserLocations = (uid) => {
         const locationsRef = ref(db, "locations");
@@ -136,7 +120,7 @@ const YourLocations = () => {
                 <title>Your Locations - EcoBridge</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Head>
-            <Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
+            <Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
             <div className="container">
                 <h1>Your Locations</h1>
                 {bannedMessage ? (

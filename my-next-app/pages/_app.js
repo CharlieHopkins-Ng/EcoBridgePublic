@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/navBar";
+import { AuthRolesProvider } from "../context/authRolesContext";
 import styles from "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
@@ -17,18 +18,20 @@ function MyApp({ Component, pageProps }) {
     };
 
     return (
-        <>
-            <Navbar
-                currentLanguage={currentLanguage}
-                onLanguageChange={handleLanguageChange}
-                {...pageProps}
-            />
-            <Component
-                {...pageProps}
-                currentLanguage={currentLanguage}
-                onLanguageChange={handleLanguageChange}
-            />
-        </>
+        <AuthRolesProvider>
+            <>
+                <Navbar
+                    currentLanguage={currentLanguage}
+                    onLanguageChange={handleLanguageChange}
+                    {...pageProps}
+                />
+                <Component
+                    {...pageProps}
+                    currentLanguage={currentLanguage}
+                    onLanguageChange={handleLanguageChange}
+                />
+            </>
+        </AuthRolesProvider>
     );
 }
 

@@ -5,10 +5,10 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { app } from "../firebaseConfig";
 import Navbar from '../components/navBar';
+import { useAuthRoles } from "../context/authRolesContext";
 
 const Inbox = () => {
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [isAdmin, setIsAdmin] = useState(false); // Add isAdmin state
+	const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
 	const [inboxMessages, setInboxMessages] = useState([]);
 	const auth = getAuth(app);
 	const db = getDatabase(app);
@@ -17,18 +17,6 @@ const Inbox = () => {
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, async (user) => {
 			if (user) {
-				setIsAuthenticated(true);
-
-				// Check if the user is an admin
-				const adminUidsRef = ref(db, "adminUids");
-				onValue(adminUidsRef, (snapshot) => {
-					const adminUids = snapshot.val() ? Object.keys(snapshot.val()) : [];
-					if (adminUids.includes(user.uid)) {
-						router.push("/adminInbox"); // Redirect admins to adminInbox
-					} else {
-						setIsAdmin(false);
-					}
-				});
 
 				// Fetch inbox messages
 				const inboxRef = ref(db, `users/${user.uid}/inbox`);
@@ -55,7 +43,6 @@ const Inbox = () => {
 					]);
 				}
 			} else {
-				setIsAuthenticated(false);
 				router.push("/login");
 			}
 		});
@@ -104,7 +91,7 @@ const Inbox = () => {
 				<title>Inbox - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
+			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
 			<div className="container">
 				<h1>Your Inbox</h1>
 				{inboxMessages.length > 0 ? (

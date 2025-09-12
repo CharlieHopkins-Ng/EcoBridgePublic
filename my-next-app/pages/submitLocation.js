@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { getDatabase, ref, push, onValue, runTransaction, update, get } from "firebase/database"; // Add runTransaction, update, and get
+import { getDatabase, ref, push, runTransaction, update, get } from "firebase/database"; // Add runTransaction, update, and get
 import { useRouter } from "next/router";
 import Navbar from '../components/navBar';
+import { useAuthRoles } from "../context/authRolesContext";
 import Head from "next/head";
 import { app} from "../firebaseConfig";
 
@@ -15,29 +16,14 @@ const SubmitLocation = () => {
 	const [website, setWebsite] = useState(""); // New state for website
 	const [howToHelp, setHowToHelp] = useState(""); // New state for "How to Help"
 	const [error, setError] = useState("");
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [isAdmin, setIsAdmin] = useState(false);
-	const [adminEmails, setAdminEmails] = useState([]); // Add missing state
-	const [adminUids, setAdminUids] = useState([]); // Add missing state
 	const [uid, setUid] = useState("");
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [bannedMessage, setBannedMessage] = useState("");
+	const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
 	const router = useRouter();
 	const auth = getAuth(app);
 	const db = getDatabase(app);
-
-	useEffect(() => {
-		const fetchAdminEmails = async () => {
-			const adminEmailsRef = ref(db, "adminEmails");
-			onValue(adminEmailsRef, (snapshot) => {
-				const data = snapshot.val();
-				setAdminEmails(data ? Object.values(data) : []);
-			});
-		};
-
-		fetchAdminEmails();
-	}, []);
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -61,31 +47,14 @@ const SubmitLocation = () => {
 						return;
 					}
 
-					setIsAuthenticated(true);
 					setUid(user.uid);
-					setIsAdmin(adminEmails.includes(user.email) || adminUids.includes(user.uid));
 					setUsername(user.displayName || "Anonymous");
 					setEmail(user.email);
 				}
-			} else {
-				setIsAuthenticated(false);
-				setIsAdmin(false);
 			}
 		});
 		return () => unsubscribe();
-	}, [auth, adminEmails, adminUids, router]);
-
-	useEffect(() => {
-		const fetchAdminUids = async () => {
-			const adminUidsRef = ref(db, "adminUids");
-			onValue(adminUidsRef, (snapshot) => {
-				const data = snapshot.val();
-				setAdminUids(data ? Object.keys(data) : []);
-			});
-		};
-
-		fetchAdminUids();
-	}, [auth]);
+	}, [auth, router]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -186,7 +155,7 @@ const SubmitLocation = () => {
 				<title>{isAdmin ? "Add a New Location" : "Submit a New Location"} - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
+			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
 			<div className="container" style={{ maxWidth: "900px", width: "100%" }}>
 				<h1>{isAdmin ? "Add a New Location" : "Submit a New Location"}</h1>
 					{bannedMessage ? (

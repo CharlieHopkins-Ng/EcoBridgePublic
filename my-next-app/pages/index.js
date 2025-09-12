@@ -4,7 +4,8 @@ import "leaflet/dist/leaflet.css";
 import { db, auth } from "../firebaseConfig";
 import { ref, onValue } from "firebase/database";
 import { useRouter } from "next/router";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import { useAuthRoles } from "../context/authRolesContext";
 import React from "react";
 import haversine from 'haversine-distance';
 import Navbar from '../components/navBar';
@@ -27,46 +28,12 @@ const MapPage = () => {
   const [mapInstance, setMapInstance] = useState(null);
   const mapRef = useRef(null);
   const [selectedMarker, setSelectedMarker] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [adminEmails, setAdminEmails] = useState([]);
   const [displayList, setDisplayList] = useState(false);
-  const [adminUids, setAdminUids] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchAdminEmails = async () => {
-      const adminEmailsRef = ref(db, "adminEmails");
-      onValue(adminEmailsRef, (snapshot) => {
-        const data = snapshot.val();
-        setAdminEmails(data ? Object.values(data) : []);
-      });
-    };
-
-    fetchAdminEmails();
-  }, []);
-
-  useEffect(() => {
-    const fetchAdminUids = async () => {
-      const adminUidsRef = ref(db, "adminUids");
-      onValue(adminUidsRef, (snapshot) => {
-        const data = snapshot.val();
-        setAdminUids(data ? Object.keys(data) : []);
-      });
-    };
-
-    fetchAdminUids();
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsAuthenticated(!!user);
-      setIsAdmin(user && adminUids.includes(user.uid));
-    });
-    return () => unsubscribe();
-  }, [auth, adminUids]);
 
   const handleSignOut = async () => {
     await signOut(auth);
@@ -219,7 +186,7 @@ const MapPage = () => {
 
   return (
     <div>
-      <Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
+      <Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
 
       <header className="header" style={{ color: "green", marginTop: "100px", padding: "10px" }}>
         <h2>Find locations to help the environment near you</h2>

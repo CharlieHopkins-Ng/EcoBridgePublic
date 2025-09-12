@@ -1,45 +1,19 @@
-import { useState, useEffect } from "react";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { getDatabase, ref, onValue, get, remove } from "firebase/database";
+import { useState} from "react";
+import { getAuth, signOut } from "firebase/auth";
+import { getDatabase, ref, remove } from "firebase/database";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { app } from "../firebaseConfig";
 import Navbar from '../components/navBar';
+import { useAuthRoles } from "../context/authRolesContext";
 
 const AdminInbox = () => {
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [isAdmin, setIsAdmin] = useState(false);
+	const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
+
 	const [adminMessages, setAdminMessages] = useState([]);
 	const auth = getAuth(app);
 	const db = getDatabase(app);
 	const router = useRouter();
-
-	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, async (user) => {
-			if (user) {
-				setIsAuthenticated(true);
-
-				// Check if the user is an admin using only adminUids
-				const adminUidsRef = ref(db, "adminUids");
-				const adminUidsSnapshot = await get(adminUidsRef);
-				const adminUids = adminUidsSnapshot.val() ? Object.keys(adminUidsSnapshot.val()) : [];
-
-				setIsAdmin(adminUids.includes(user.uid));
-
-				// Fetch admin inbox messages
-				const adminInboxRef = ref(db, "adminInbox");
-				onValue(adminInboxRef, (snapshot) => {
-					const data = snapshot.val();
-					const messages = data ? Object.entries(data).map(([id, message]) => ({ id, ...message })) : [];
-					setAdminMessages(messages);
-				});
-			} else {
-				setIsAuthenticated(false);
-				router.push("/login");
-			}
-		});
-		return () => unsubscribe();
-	}, [auth, db, router]);
 
 	const handleSignOut = async () => {
 		await signOut(auth);
@@ -62,7 +36,7 @@ const AdminInbox = () => {
 				<title>Admin Inbox - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
+			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
 			<div className="container">
 				<h1>Admin Inbox</h1>
 				{isAdmin ? (

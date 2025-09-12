@@ -5,38 +5,25 @@ import { useRouter } from "next/router";
 import Navbar from '../components/navBar';
 import Head from "next/head";
 import { app, db } from "../firebaseConfig";
+import { useAuthRoles } from "../context/authRolesContext";
 
 const YourProfile = () => {
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [isAdmin, setIsAdmin] = useState(false);
 	const [username, setUsername] = useState("");
 	const [newUsername, setNewUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [error, setError] = useState("");
+	const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
 	const auth = getAuth(app);
 	const router = useRouter();
 
-	useEffect(() => {
-		const fetchAdminUids = async () => {
-			const adminUidsRef = ref(db, "adminUids");
-			onValue(adminUidsRef, (snapshot) => {
-				const data = snapshot.val();
-				setIsAdmin(data ? Object.keys(data).includes(auth.currentUser?.uid) : false);
-			});
-		};
-
-		fetchAdminUids();
-	}, [auth]);
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
-				setIsAuthenticated(true);
 				setEmail(user.email);
 				fetchUsername(user.uid);
 			} else {
-				setIsAuthenticated(false);
 				setUsername("");
 				setNewUsername("");
 				setEmail("");
@@ -116,7 +103,7 @@ const YourProfile = () => {
 				<title>Your Profile - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
+			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
 			<div className="container">
 				<h1>Your Profile</h1>
 				{isAuthenticated ? (

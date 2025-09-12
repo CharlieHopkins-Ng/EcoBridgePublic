@@ -1,53 +1,12 @@
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { ref, onValue } from "firebase/database";
-import { app, db } from "../firebaseConfig";
+import { getAuth, signOut } from "firebase/auth";
+import { useAuthRoles } from "../context/authRolesContext";
+import { app } from "../firebaseConfig";
 import Navbar from '../components/navBar';
 
 const News = () => {
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [isAdmin, setIsAdmin] = useState(false);
-	const [adminEmails, setAdminEmails] = useState([]);
-	const [adminUids, setAdminUids] = useState([]);
+	const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
 	const auth = getAuth(app);
-
-	useEffect(() => {
-		const fetchAdminEmails = async () => {
-			const adminEmailsRef = ref(db, "adminEmails");
-			onValue(adminEmailsRef, (snapshot) => {
-				const data = snapshot.val();
-				setAdminEmails(data ? Object.values(data) : []);
-			});
-		};
-
-		fetchAdminEmails();
-	}, []);
-
-	useEffect(() => {
-		const fetchAdminUids = async () => {
-			const adminUidsRef = ref(db, "adminUids");
-			onValue(adminUidsRef, (snapshot) => {
-				const data = snapshot.val();
-				setAdminUids(data ? Object.keys(data) : []);
-			});
-		};
-
-		fetchAdminUids();
-	}, []);
-
-	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			if (user) {
-				setIsAuthenticated(true);
-				setIsAdmin(adminEmails.includes(user.email) || adminUids.includes(user.uid)); // Ensure admin check includes UIDs
-			} else {
-				setIsAuthenticated(false);
-				setIsAdmin(false);
-			}
-		});
-		return () => unsubscribe();
-	}, [auth, adminEmails, adminUids]);
 
 	const handleSignOut = async () => {
 		await signOut(auth);
@@ -59,7 +18,7 @@ const News = () => {
 				<title>News - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} />
+			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
 			<header className="header">
 				EcoBridge - Latest News and Updates
 			</header>
