@@ -6,8 +6,9 @@ import Navbar from '../components/navBar';
 import { useAuthRoles } from "../context/authRolesContext";
 import Head from "next/head";
 import { app} from "../firebaseConfig";
+import { useTranslation } from "../hooks/useTranslation";
 
-const SubmitLocation = () => {
+const SubmitLocation = ({currentLanguage, onLanguageChange}) => {
 	const [name, setName] = useState("");
 	const [address, setAddress] = useState("");
 	const [latitude, setLatitude] = useState("");
@@ -24,6 +25,8 @@ const SubmitLocation = () => {
 	const router = useRouter();
 	const auth = getAuth(app);
 	const db = getDatabase(app);
+
+	const { t: tsubmitLocation } = useTranslation(currentLanguage, "submitLocation");
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -59,7 +62,7 @@ const SubmitLocation = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!name || !address || !latitude || !longitude || !description || !website || !howToHelp) {
-			setError("All fields are required");
+			setError(tsubmitLocation("allFieldsRequired"));
 			return;
 		}
 		try {
@@ -71,7 +74,7 @@ const SubmitLocation = () => {
 			const locationsSubmittedToday = snapshot.exists() ? snapshot.val() : 0;
 
 			if (locationsSubmittedToday >= 50) {
-				setError("You have reached the daily limit of 50 location submissions.");
+				setError(tsubmitLocation("maxLocationsReached"));
 				return;
 			}
 
@@ -87,13 +90,12 @@ const SubmitLocation = () => {
 				Latitude: parseFloat(latitude),
 				Longitude: parseFloat(longitude),
 				Description: description,
-				Website: website || "N/A", // Add website field
-				HowToHelp: howToHelp, // Add "How to Help" field
-				Username: senderUsername, // Store the username of the sender
+				Website: website || "N/A", 
+				HowToHelp: howToHelp,
+				Username: senderUsername, 
 				Email: email,
-				Uid: uid // Add the user's UID to the location data
+				Uid: uid 
 			};
-			console.log("Submitting location data:", locationData);
 
 			if (isAdmin) {
 				const locationsRef = ref(db, "locations");
@@ -104,7 +106,6 @@ const SubmitLocation = () => {
 			}
 
 			// Increment locationsSubmitted
-			console.log("Incrementing locationsSubmitted for user:", uid);
 			await runTransaction(ref(db, `users/${uid}/locationsSubmitted`), (currentValue) => {
 				return (currentValue || 0) + 1;
 			});
@@ -155,23 +156,30 @@ const SubmitLocation = () => {
 				<title>{isAdmin ? "Add a New Location" : "Submit a New Location"} - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
+			<Navbar 
+                isAuthenticated={isAuthenticated} 
+                isAdmin={isAdmin} 
+                handleSignOut={handleSignOut} 
+                isTranslator={isTranslator} 
+                currentLanguage={currentLanguage} 
+                onLanguageChange={onLanguageChange}
+            />
 			<div className="container" style={{ maxWidth: "900px", width: "100%" }}>
-				<h1>{isAdmin ? "Add a New Location" : "Submit a New Location"}</h1>
+				<h1>{isAdmin ? tsubmitLocation("addLocation") : tsubmitLocation("submitLocation")}</h1>
 					{bannedMessage ? (
 						<p style={{ color: "red" }}>{bannedMessage}</p>
 					) : isAuthenticated ? (
 					<form onSubmit={handleSubmit} style={{ textAlign: "left", width: "100%" }}>
 						<input
 							type="text"
-							placeholder="Name"
+							placeholder={tsubmitLocation("name")}
 							value={name}
 							onChange={(e) => setName(e.target.value)}
 							required
 						/>
 						<input
 							type="text"
-							placeholder="Address"
+							placeholder={tsubmitLocation("address")}
 							value={address}
 							onChange={(e) => setAddress(e.target.value)}
 							required
@@ -181,38 +189,38 @@ const SubmitLocation = () => {
 						</p>
 						<input
 							type="text"
-							placeholder="Latitude"
+							placeholder={tsubmitLocation("latitude")}
 							value={latitude}
 							onChange={(e) => setLatitude(e.target.value)}
 							required
 						/>
 						<input
 							type="text"
-							placeholder="Longitude"
+							placeholder={tsubmitLocation("longitude")}
 							value={longitude}
 							onChange={(e) => setLongitude(e.target.value)}
 							required
 						/>
 						<input
 							type="text"
-							placeholder="Website (optional)"
+							placeholder={tsubmitLocation("website")}
 							value={website}
 							onChange={(e) => setWebsite(e.target.value)}
 						/>
 						<textarea
-							placeholder="Description"
+							placeholder={tsubmitLocation("description")}
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
 							required
 						/>
 						<textarea
-							placeholder="How to Help"
+							placeholder={tsubmitLocation("howToHelp")}
 							value={howToHelp}
 							onChange={(e) => setHowToHelp(e.target.value)}
 							required
 						/>
 						{error && <p style={{ color: "red" }}>{error}</p>}
-						<button type="submit">{isAdmin ? "Add Location" : "Submit Location"}</button>
+						<button type="submit">{isAdmin ? tsubmitLocation("addLocation") : tsubmitLocation("submitLocation")}</button>
 					</form>
 				) : (
 					<p>You need to be signed in to use this feature.</p>

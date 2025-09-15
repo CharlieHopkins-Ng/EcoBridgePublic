@@ -111,8 +111,14 @@ const TranslatorPanel = ({ currentLanguage, onLanguageChange }) => {
                     >
                         <option value="common">Common</option>
                         <option value="nav">Nav</option>
-                        <option value="map">Map</option>
+                        <option value="index">Index</option>
                         <option value="aboutUs">About Us</option>
+                        <option value="news">News</option>
+                        <option value="submitLocation">Submit Location</option>
+                        <option value="YourLocations">Your Locations</option>
+                        <option value="yourProfile">Your Profile</option>
+                        <option value="inbox">Inbox</option>
+
                     </select>
                 </label>
             </div>

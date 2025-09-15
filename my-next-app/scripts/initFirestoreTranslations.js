@@ -4,6 +4,7 @@ import { readFileSync } from 'fs';
 import path from 'path';
 
 // Load service account key
+// its in gitignore and only on my local machine
 const serviceAccountPath = path.resolve(process.cwd(), 'serviceAccountKey.json');
 const serviceAccount = JSON.parse(readFileSync(serviceAccountPath));
 
@@ -27,20 +28,64 @@ const initialTranslations = {
             coordinates: "Coordinates",
             youAreHere: "You are here",
         },
+        index: {
+            header: "Find locations to help the environment near you"
+        },
         aboutUs: {
-          aboutEcoBridge: "EcoBridge - Connecting You to Environmental Change",
-          aboutDescription:
-              "Ecobridge is a platform to connect people with other organizations or charities to support environmental causes. Whether it is donating items, volunteering, or getting involved in local sustainability initiatives, we make it easier to get involved and take action.",
-          ourMission: "Our Mission",
-          missionDescription:
-              "At EcoBridge, our mission is to facilitate individuals and communities to take meaningful action for the environment by connecting them with opportunities to donate, volunteer, and contribute to sustainable initiatives. We want advocacy for sustainability to be easily accessible by others who are interested in actively supporting the environment.",
-          meetTheTeam: "Meet the Team",
-          teamDescription:
-              "We are a team of environmental enthusiasts, coders, and volunteers passionate about making a difference. If you'd like to contribute, get in touch with us at supp0rtecobridge@gmail.com.",
-          siyeongBio:
-              "Hi! I am Siyeong Park, the founder of Ecobridge. I am a freshman at Shanghai American School. The LA wildfire that occurred at the start of 2025 inspired me to make this platform.",
-          charlieBio:
-              "Hi! I am Charlie Hopkins-Ng, Ecobridge's website developer. I have always been passionate about the environment, and have been to multiple protests about the environment.",
+        aboutEcoBridge: "EcoBridge - Connecting You to Environmental Change",
+        aboutDescription:
+            "Ecobridge is a platform to connect people with other organizations or charities to support environmental causes. Whether it is donating items, volunteering, or getting involved in local sustainability initiatives, we make it easier to get involved and take action.",
+        ourMission: "Our Mission",
+        missionDescription:
+            "At EcoBridge, our mission is to facilitate individuals and communities to take meaningful action for the environment by connecting them with opportunities to donate, volunteer, and contribute to sustainable initiatives. We want advocacy for sustainability to be easily accessible by others who are interested in actively supporting the environment.",
+        meetTheTeam: "Meet the Team",
+        teamDescription:
+            "We are a team of environmental enthusiasts, coders, and volunteers passionate about making a difference. If you'd like to contribute, get in touch with us at supp0rtecobridge@gmail.com.",
+        siyeongDesc: "Siyeong Park (Founder)",
+        siyeongBio:
+            "Hi! I am Siyeong Park, the founder of Ecobridge. I am a freshman at Shanghai American School. The LA wildfire that occurred at the start of 2025 inspired me to make this platform.",
+        charlieDesc: "Charlie Hopkins-Ng (Website Developer & Co-Founder)",
+        charlieBio:
+            "Hi! I am Charlie Hopkins-Ng, Ecobridge's website developer. I have always been passionate about the environment, and have been to multiple protests about the environment.",
+        },
+        news: {
+            latestNews: "Latest News",
+            betaLaunch: "10 September 2025 - Beta Launch!",
+            betaDescription: "We are happy to announce that EcoBridge has launched! More features will be coming soon such as:",
+            feature1: "Leaving reviews on locations",
+            feature2: "Multi-language support (feel free to contact us if you want to help with this)",
+            feature3: "A custom domain",
+        },
+        submitLocation: {
+            submitLocation: "Submit a new Location",
+            addLocation: "Add a new Location",
+            name: "Name",
+            address: "Address",
+            latitude: "Latitude",
+            longitude: "Longitude",
+            website: "Website (optional)",
+            description: "Description",
+            howToHelp: "How to Help",
+            submitButton: "Submit Location",
+            addButton: "Add Location",
+            allFieldsRequired: "All fields except website are required.",
+            maxLocationsReached: "You have reached the maximum number of locations you can submit for today.",
+            VerifyEmail: "Please verify your email to submit locations.",
+        },
+        YourLocations: {
+            yourLocations: "Your Locations",
+            signedIn: "You need to be signed in to view your locations.",
+            noLocations: "You have not submitted any locations yet.",
+        },
+        yourProfile: {
+            yourProfile: "Your Profile",
+            currentUsername: "Current Username",
+            updateUsername: "Update Username",
+            updatePassword: "Update Password",
+        },
+        inbox: {
+            inbox: "Inbox",
+            noMessages: "No messages in your inbox."
         },
         nav: {
             home: "Home",

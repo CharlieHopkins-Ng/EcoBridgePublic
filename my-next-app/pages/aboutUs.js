@@ -6,7 +6,6 @@ import { useAuthRoles } from "../context/authRolesContext";
 
 const AboutUs = ({ currentLanguage, onLanguageChange }) => {
     const { t: taboutUs } = useTranslation(currentLanguage, "aboutUs");
-	const { t: tnavBar } = useTranslation(currentLanguage, "nav");
 
     const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
 
@@ -36,7 +35,6 @@ const AboutUs = ({ currentLanguage, onLanguageChange }) => {
                         <h1>{taboutUs("aboutEcoBridge")}</h1>
                     </header>
 
-                    <h1>{taboutUs("aboutEcoBridge")}</h1>
                     <p>
                         {taboutUs("aboutDescription")}
                     </p>
@@ -49,11 +47,11 @@ const AboutUs = ({ currentLanguage, onLanguageChange }) => {
 
                     <div style={{ textAlign: "left" }}>
                         <p>
-                            <strong>Siyeong Park (Founder):</strong><br />
+                            <strong>{taboutUs("siyeongDesc")}:</strong><br />
                             {taboutUs("siyeongBio")}
                         </p>
                         <p>
-                            <strong>Charlie Hopkins-Ng (Website Developer & Co-Founder):</strong><br />
+                            <strong>{taboutUs("charlieDesc")}</strong><br />
                             {taboutUs("charlieBio")}
                         </p>
                     </div>

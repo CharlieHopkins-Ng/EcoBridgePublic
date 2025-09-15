@@ -62,7 +62,7 @@ nav {
 
 .nav-left, .nav-right {
     display: flex;
-    gap: 20px;
+    gap: 10px;
 }
 
 nav button {
