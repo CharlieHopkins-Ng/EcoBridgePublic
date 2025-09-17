@@ -7,7 +7,7 @@ import { app } from "../firebaseConfig";
 import Navbar from '../components/navBar';
 import { useAuthRoles } from "../context/authRolesContext";
 
-const Admin = () => {
+const Admin = ({ currentLanguage, onLanguageChange }) => {
 	const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
 	const [pendingLocations, setPendingLocations] = useState([]);
 	const [allLocations, setAllLocations] = useState([]);
@@ -402,7 +402,14 @@ const Admin = () => {
 				<title>Admin - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
+			<Navbar 
+				isAuthenticated={isAuthenticated} 
+				isAdmin={isAdmin} 
+				handleSignOut={handleSignOut} 
+				isTranslator={isTranslator}
+				onLanguageChange={onLanguageChange}
+				currentLanguage={currentLanguage}
+			/>
 			<div className="container" style={{ marginTop: "80px" }}>
 				<h1>Admin Panel</h1>
 				{isAdmin ? (

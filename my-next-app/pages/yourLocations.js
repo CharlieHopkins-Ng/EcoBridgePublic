@@ -6,8 +6,9 @@ import Navbar from '../components/navBar';
 import Head from "next/head";
 import { app, db } from "../firebaseConfig";
 import { useAuthRoles } from "../context/authRolesContext";
+import { useTranslation } from "../hooks/useTranslation";
 
-const YourLocations = () => {
+const YourLocations = ({onLanguageChange, currentLanguage}) => {
     const [userLocations, setUserLocations] = useState([]);
     const [editingLocation, setEditingLocation] = useState(null);
     const [name, setName] = useState("");
@@ -24,6 +25,9 @@ const YourLocations = () => {
     const router = useRouter();
     const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
 
+    const { t: tlocations } = useTranslation(currentLanguage, "YourLocations");
+    const { t: tcommon } = useTranslation(currentLanguage, "common");
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -34,9 +38,9 @@ const YourLocations = () => {
                 onValue(userRef, (snapshot) => {
                     const userData = snapshot.val();
                     if (userData?.banned) {
-                        const banReason = userData.banReason || "No reason provided";
-                        const banEndDate = userData.banEndDate || "Indefinite";
-                        setBannedMessage(`You are banned. Reason: ${banReason}. Ban expires on: ${banEndDate}`);
+                        const banReason = userData.banReason || tcommon("noReasons");
+                        const banEndDate = userData.banEndDate || tcommon("indefinite");
+                        setBannedMessage(tcommon("banned"), tcommon("reason"), banReason, tcommon("banExpires"), banEndDate);
                     }
                 });
             } else {
@@ -69,7 +73,7 @@ const YourLocations = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         if (!name || !address || !latitude || !longitude || !description || !website || !howToHelp) {
-            setError("All fields are required");
+            setError(tlocations(allFieldsRequired));
             return;
         }
         try {
@@ -117,92 +121,127 @@ const YourLocations = () => {
     return (
         <div>
             <Head>
-                <title>Your Locations - EcoBridge</title>
+                <title>{tlocations("yourLocations")} - EcoBridge</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Head>
-            <Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
+            <Navbar
+                isAuthenticated={isAuthenticated}
+                isAdmin={isAdmin}
+                handleSignOut={handleSignOut}
+                isTranslator={isTranslator}
+                onLanguageChange={onLanguageChange}
+                currentLanguage={currentLanguage}
+            />
             <div className="container">
-                <h1>Your Locations</h1>
+                <h1>{tlocations("yourLocations")}</h1>
                 {bannedMessage ? (
                     <p style={{ color: "red" }}>{bannedMessage}</p>
                 ) : isAuthenticated ? (
                     <div>
-                        <p><strong>Current UID:</strong> {uid}</p>
                         {userLocations.length > 0 ? (
                             userLocations.map(([id, location]) => (
                                 <div key={id} className="location">
                                     <h3>{location.Name}</h3>
-                                    <p><strong>Address:</strong> {location.Address}</p>
-                                    <p><strong>Latitude:</strong> {location.Latitude}</p>
-                                    <p><strong>Longitude:</strong> {location.Longitude}</p>
-                                    <p><strong>Description:</strong> {location.Description}</p>
-                                    <p><strong>Website:</strong> {location.Website !== "N/A" ? <a href={location.Website} target="_blank" rel="noopener noreferrer">{location.Website}</a> : "N/A"}</p>
-                                    <p><strong>How to Help:</strong> {location.HowToHelp || "N/A"}</p>
-                                    <button onClick={() => handleEdit([id, location])}>Edit</button>
-                                    <button onClick={() => handleDelete(id)}>Delete</button>
+                                    <p>
+                                        <strong>{tlocations("address")}:</strong> {location.Address}
+                                    </p>
+                                    <p>
+                                        <strong>{tlocations("latitude")}:</strong> {location.Latitude}
+                                    </p>
+                                    <p>
+                                        <strong>{tlocations("longitude")}:</strong> {location.Longitude}
+                                    </p>
+                                    <p>
+                                        <strong>{tlocations("description")}:</strong> {location.Description}
+                                    </p>
+                                    <p>
+                                        <strong>{tlocations("website")}:</strong>{" "}
+                                        {location.Website !== "N/A" ? (
+                                            <a
+                                                href={location.Website}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {location.Website}
+                                            </a>
+                                        ) : (
+                                            "N/A"
+                                        )}
+                                    </p>
+                                    <p>
+                                        <strong>{tlocations("howToHelp")}:</strong>{" "}
+                                        {location.HowToHelp || "N/A"}
+                                    </p>
+                                    <button onClick={() => handleEdit([id, location])}>
+                                        {tlocations("edit")}
+                                    </button>
+                                    <button onClick={() => handleDelete(id)}>
+                                        {tlocations("delete")}
+                                    </button>
                                 </div>
                             ))
                         ) : (
-                            <p>No locations submitted.</p>
+                            <p>{tlocations("noLocations")}</p>
                         )}
                         {editingLocation && (
                             <form onSubmit={handleUpdate} style={{ textAlign: "left", width: "100%" }}>
                                 <input
                                     type="text"
-                                    placeholder="Name"
+                                    placeholder={tlocations("name")}
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     required
                                 />
                                 <input
                                     type="text"
-                                    placeholder="Address"
+                                    placeholder={tlocations("address")}
                                     value={address}
                                     onChange={(e) => setAddress(e.target.value)}
                                     required
                                 />
                                 <input
                                     type="text"
-                                    placeholder="Latitude"
+                                    placeholder={tlocations("latitude")}
                                     value={latitude}
                                     onChange={(e) => setLatitude(e.target.value)}
                                     required
                                 />
                                 <input
                                     type="text"
-                                    placeholder="Longitude"
+                                    placeholder={tlocations("longitude")}
                                     value={longitude}
                                     onChange={(e) => setLongitude(e.target.value)}
                                     required
                                 />
                                 <textarea
-                                    placeholder="Description"
+                                    placeholder={tlocations("description")}
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     required
                                 />
                                 <input
                                     type="text"
-                                    placeholder="Website (optional)"
+                                    placeholder={tlocations("website")}
                                     value={website}
                                     onChange={(e) => setWebsite(e.target.value)}
                                 />
                                 <textarea
-                                    placeholder="How to Help"
+                                    placeholder={tlocations("howToHelp")}
                                     value={howToHelp}
                                     onChange={(e) => setHowToHelp(e.target.value)}
                                     required
                                 />
                                 {error && <p style={{ color: "red" }}>{error}</p>}
-                                <button type="submit">Update Location</button>
+                                <button type="submit">{tlocations("updateLocation") || "Update Location"}</button>
                             </form>
                         )}
                     </div>
                 ) : (
-                    <p>You need to be signed in to view your locations.</p>
+                    <p>{tlocations("signedIn")}</p>
                 )}
             </div>
         </div>
+
     );
 };
 

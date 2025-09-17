@@ -6,13 +6,17 @@ import Head from "next/head";
 import { app } from "../firebaseConfig";
 import Navbar from '../components/navBar';
 import { useAuthRoles } from "../context/authRolesContext";
+import { useTranslation } from "../hooks/useTranslation";
 
-const Inbox = () => {
+const Inbox = ({currentLanguage, onLanguageChange}) => {
 	const { isAuthenticated, isAdmin, isTranslator} = useAuthRoles();
 	const [inboxMessages, setInboxMessages] = useState([]);
 	const auth = getAuth(app);
 	const db = getDatabase(app);
 	const router = useRouter();
+
+	const { t: tcommon } = useTranslation(currentLanguage, "common");
+	const { t: tinbox } = useTranslation(currentLanguage, "inbox");
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -34,9 +38,9 @@ const Inbox = () => {
 					setInboxMessages((prevMessages) => [
 						{
 							id: "ban-notification",
-							message: "You have been banned.",
-							reason: userData.banReason || "No reason provided",
-							banEndDate: userData.banEndDate || "Indefinite",
+							message: tcommon("banned"),
+							reason: userData.banReason || tcommon("noReasons"),
+							banEndDate: userData.banEndDate || tcommon("indefinite"),
 							timestamp: new Date().toISOString(),
 						},
 						...prevMessages,
@@ -62,16 +66,16 @@ const Inbox = () => {
 
 			const adminInboxRef = ref(db, `adminInbox`);
 			await push(adminInboxRef, {
-				message: "Unban Appeal",
+				message: tinbox("unbanAppeal"),
 				appealMessage: appealMessage,
 				userId: auth.currentUser.uid,
 				username: userData.username || "Anonymous",
 				email: userData.email || "N/A",
 				timestamp: new Date().toISOString(),
 			});
-			alert("Your appeal has been sent to the admin.");
+			alert(tinbox("appealSent"));
 		} catch (error) {
-			alert("Failed to send appeal: " + error.message);
+			alert(tinbox("appealFailed") + error.message);
 		}
 	};
 
@@ -79,9 +83,9 @@ const Inbox = () => {
 		try {
 			const messageRef = ref(db, `users/${auth.currentUser.uid}/inbox/${messageId}`);
 			await remove(messageRef);
-			alert("Message deleted successfully.");
+			alert(tinbox("deleteSuccess"));
 		} catch (error) {
-			alert("Failed to delete message: " + error.message);
+			alert(tinbox("deleteFailed") + error.message);
 		}
 	};
 
@@ -91,40 +95,47 @@ const Inbox = () => {
 				<title>Inbox - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
+			<Navbar 
+				isAuthenticated={isAuthenticated}
+				isAdmin={isAdmin} 
+				handleSignOut={handleSignOut} 
+				isTranslator={isTranslator}
+				onLanguageChange={onLanguageChange}
+				currentLanguage={currentLanguage}
+			/>
 			<div className="container">
-				<h1>Your Inbox</h1>
+				<h1>{tinbox("yourInbox")}</h1>
 				{inboxMessages.length > 0 ? (
 					<ul>
 						{inboxMessages.map((message) => (
 							<li key={message.id} style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px", borderRadius: "5px" }}>
-								<p><strong>Message:</strong> {message.message}</p>
-								<p><strong>Reason:</strong> {message.reason}</p>
-								{message.banEndDate && <p><strong>Ban End Date:</strong> {new Date(message.banEndDate).toLocaleString()}</p>}
-								<p><strong>Timestamp:</strong> {new Date(message.timestamp).toLocaleString()}</p>
+								<p><strong>{tinbox("message")}:</strong> {message.message}</p>
+								<p><strong>{tinbox("reason")}:</strong> {message.reason}</p>
+								{message.banEndDate && <p><strong>{tinbox("banEndDate")}:</strong> {new Date(message.banEndDate).toLocaleString()}</p>}
+								<p><strong>{tinbox("timestamp")}:</strong> {new Date(message.timestamp).toLocaleString()}</p>
 								{message.id !== "ban-notification" && (
 									<button onClick={() => deleteMessage(message.id)} style={{ marginTop: "10px", backgroundColor: "red", color: "white" }}>
-										Delete Message
+										{tinbox("deleteMessage")}
 									</button>
 								)}
 							</li>
 						))}
 					</ul>
 				) : (
-					<p>No messages in your inbox.</p>
+					<p>{tinbox("noMessages")}</p>
 				)}
 
 				{/* Appeal for unban */}
 				{inboxMessages.some((msg) => msg.message === "You have been banned.") && (
 					<div>
-						<h2>Appeal for Unban</h2>
+						<h2>{tinbox("appealTitle")}</h2>
 						<textarea
 							placeholder="Write your appeal message here..."
 							id="appealMessage"
 							style={{ width: "100%", height: "100px", marginBottom: "10px" }}
 						></textarea>
 						<button onClick={() => sendUnbanAppeal(document.getElementById("appealMessage").value)}>
-							Send Appeal
+							{tinbox("sendAppeal")}
 						</button>
 					</div>
 				)}

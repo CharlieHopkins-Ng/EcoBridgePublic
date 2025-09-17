@@ -6,8 +6,9 @@ import Navbar from '../components/navBar';
 import Head from "next/head";
 import { app, db } from "../firebaseConfig";
 import { useAuthRoles } from "../context/authRolesContext";
+import { useTranslation } from "../hooks/useTranslation";
 
-const YourProfile = () => {
+const YourProfile = ({ currentLanguage, onLanguageChange }) => {
 	const [username, setUsername] = useState("");
 	const [newUsername, setNewUsername] = useState("");
 	const [email, setEmail] = useState("");
@@ -17,6 +18,8 @@ const YourProfile = () => {
 	const auth = getAuth(app);
 	const router = useRouter();
 
+	const { t: tprofile } = useTranslation(currentLanguage, "yourProfile");
+	const { t: tcommon } = useTranslation(currentLanguage, "common");
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -24,14 +27,33 @@ const YourProfile = () => {
 				setEmail(user.email);
 				fetchUsername(user.uid);
 			} else {
-				setUsername("");
-				setNewUsername("");
-				setEmail("");
 				setError("You must be logged in to access this page.");
 			}
 		});
 		return () => unsubscribe();
 	}, [auth, router]);
+
+	useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUid(user.uid);
+                fetchUserLocations(user.uid);
+
+                const userRef = ref(db, `users/${user.uid}`);
+                onValue(userRef, (snapshot) => {
+                    const userData = snapshot.val();
+                    if (userData?.banned) {
+                        const banReason = userData.banReason || tcommon("noReasons");
+                        const banEndDate = userData.banEndDate || tcommon("indefinite");
+                        setBannedMessage(tcommon("banned"), tcommon("reason"), banReason, tcommon("banExpires"), banEndDate);
+                    }
+                });
+            } else {
+                router.push("/login");
+            }
+        });
+        return () => unsubscribe();
+    }, [auth, router]);
 
 	const fetchUsername = (uid) => {
 		const userRef = ref(db, `users/${uid}`);
@@ -45,7 +67,7 @@ const YourProfile = () => {
 	const handleUpdateUsername = async (e) => {
 		e.preventDefault();
 		if (!newUsername) {
-			setError("Username cannot be empty");
+			setError(tprofile("usernameCannotBeEmpty"));
 			return;
 		}
 		try {
@@ -55,7 +77,7 @@ const YourProfile = () => {
 				onValue(usernameRef, (snap) => resolve(snap.exists()), { onlyOnce: true });
 			});
 			if (snapshot) {
-				setError("Username already exists. Please choose a different one.");
+				setError(tprofile("usernameTaken"));
 				return;
 			}
 
@@ -72,7 +94,7 @@ const YourProfile = () => {
 			await set(newUsernameRef, auth.currentUser.uid);
 
 			setUsername(newUsername);
-			alert("Username updated successfully");
+			alert(tprofile("usernameUpdated"));
 		} catch (error) {
 			setError(error.message);
 		}
@@ -81,12 +103,12 @@ const YourProfile = () => {
 	const handleUpdatePassword = async (e) => {
 		e.preventDefault();
 		if (!newPassword) {
-			setError("Password cannot be empty");
+			setError(tprofile("passwordCannotBeEmpty"));
 			return;
 		}
 		try {
 			await sendPasswordResetEmail(auth, email);
-			alert("Password reset email sent. Please check your inbox.");
+			alert(tprofile("passwordResetSent"));
 		} catch (error) {
 			setError(error.message);
 		}
@@ -103,14 +125,21 @@ const YourProfile = () => {
 				<title>Your Profile - EcoBridge</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			</Head>
-			<Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleSignOut={handleSignOut} isTranslator={isTranslator}/>
+			<Navbar 
+				isAuthenticated={isAuthenticated} 
+				isAdmin={isAdmin} 
+				handleSignOut={handleSignOut} 
+				isTranslator={isTranslator}
+				onLanguageChange={onLanguageChange}
+				currentLanguage={currentLanguage}
+			/>
 			<div className="container">
-				<h1>Your Profile</h1>
+				<h1>{tprofile("yourProfile")}</h1>
 				{isAuthenticated ? (
 					<div>
-						<p><strong>Current Username:</strong> {username}</p>
+						<p><strong>{tprofile("currentUsername")}:</strong> {username}</p>
 						<form onSubmit={handleUpdateUsername} style={{ textAlign: "left", width: "100%" }}>
-							<h2>Update Username</h2>
+							<h2>{tprofile("updateUsername")}</h2>
 							<input
 								type="text"
 								placeholder="New Username"
@@ -119,10 +148,10 @@ const YourProfile = () => {
 								required
 							/>
 							{error && <p style={{ color: "red" }}>{error}</p>}
-							<button type="submit">Update Username</button>
+							<button type="submit">{tprofile("updateUsername")}</button>
 						</form>
 						<form onSubmit={handleUpdatePassword} style={{ textAlign: "left", width: "100%" }}>
-							<h2>Update Password</h2>
+							<h2>{tprofile("updatePassword")}</h2>
 							<input
 								type="password"
 								placeholder="New Password"
@@ -131,7 +160,7 @@ const YourProfile = () => {
 								required
 							/>
 							{error && <p style={{ color: "red" }}>{error}</p>}
-							<button type="submit">Update Password</button>
+							<button type="submit">{tprofile("updatePassword")}</button>
 						</form>
 					</div>
 				) : (
