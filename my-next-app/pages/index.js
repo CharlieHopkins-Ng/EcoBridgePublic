@@ -225,11 +225,24 @@ const MapPage = ({ currentLanguage, onLanguageChange }) => {
                                 key={index}
                                 position={[cluster.Latitude, cluster.Longitude]}
                                 icon={icon}
-                                onClick={() => setSelectedMarker(cluster.UUID)}
-                                popupContent={<><strong>{cluster.Name}</strong><br />{cluster.Description}</>}
+                                onClick={() => {
+                                    setSelectedMarker(cluster.UUID);
+
+                                    // Update parent state → UpdateMapView will handle the map animation
+                                    setCenter([cluster.Latitude, cluster.Longitude]);
+                                    setZoomLevel(prevZoom => Math.min(prevZoom + 2, 18)); // zoom in closer, max 18
+                                }}
+                                popupContent={
+                                    <>
+                                        <strong>{cluster.Name}</strong>
+                                        <br />
+                                        {cluster.Description}
+                                    </>
+                                }
                             />
                         );
                     })}
+
                     {nonClusteredLocations.map((location, index) => (
                         <MemoizedMarker
                             key={index}
